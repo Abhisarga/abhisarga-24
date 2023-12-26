@@ -14,4 +14,4 @@ This the website for the annual event of Abhisarga'24.
 ### Important
 
 - All the merges from taskwise/member branches will be handled by either of the team leads.
-- Merging requires approval
+- Merging requires approval.

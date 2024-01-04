@@ -2,7 +2,7 @@
 
 This the website for the annual event of Abhisarga'24.
 
-## Contribution Rules:
+## Contribution Rules
 
 - Clone/fork the repo.
 - Create your own branch (the name of the branch can your name or your task name)

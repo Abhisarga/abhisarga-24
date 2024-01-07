@@ -1,4 +1,3 @@
-import ErrorHandler from "@handlers/error";
 import { prop } from "@typegoose/typegoose";
 import type { Time } from "@types_";
 import { IsDate } from "class-validator";
@@ -20,17 +19,4 @@ export class IMongoDocument {
         default: Date.now
     })
     createdAt!: Time
-}
-
-const handler = new ErrorHandler("completion")
-
-@ObjectType()
-export class CompletionInterface {
-    @Field(() => Boolean)
-    @prop({ required: handler.fieldRequired("isCompleted") })
-    isCompleted!: boolean
-
-    @Field(() => Date)
-    @prop({ required: handler.fieldRequired("endsAt") })
-    endsAt?: Time
 }

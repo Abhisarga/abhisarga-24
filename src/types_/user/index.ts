@@ -12,6 +12,7 @@ export enum UserTypes {
     participant = "participant",
     admin = "admin",
     clubLead = "club-lead",
+    
 }
 
 registerEnumType(UserTypes, {

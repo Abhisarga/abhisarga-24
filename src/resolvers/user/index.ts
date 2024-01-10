@@ -13,6 +13,6 @@ export default class UserResolver {
 
     @Query(() => IUser, { nullable: true })
     get() {
-        return { name: { first: "some"}}
+        return { name: "some"}
     }
 }

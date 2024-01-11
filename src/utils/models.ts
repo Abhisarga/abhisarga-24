@@ -1,5 +1,7 @@
 enum Models {
-    user = "user"
+    user = "user",
+    club = "club",
+    event = "event"
 }
 
 export default Models

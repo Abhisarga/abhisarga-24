@@ -7,8 +7,9 @@ import { buildSchema } from "type-graphql"
 import { DB_URL, PORT } from "./config"
 import { resolvers } from "@resolvers"
 import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
+import type { Express } from "express"
 
-const app = express()
+const app: Express = express()
 
 app.use(cors())
 app.use(compression())

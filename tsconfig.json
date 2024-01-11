@@ -27,10 +27,6 @@
       "@*": [
         "./src/*"
       ],
-      "@types/*": [
-        "./node_modules/@types/*",
-        "./src/types/*"
-      ]
     },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,

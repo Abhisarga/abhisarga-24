@@ -1,5 +1,5 @@
 import ErrorHandler from "@handlers/error";
-import { prop } from "@typegoose/typegoose";
+import { Ref, prop } from "@typegoose/typegoose";
 import { IMongoDocument } from "@types_/mongo";
 import Models from "@utils/models";
 import { Field, ObjectType } from "type-graphql";
@@ -12,7 +12,8 @@ const handler = new ErrorHandler(Models.club)
 export default class IClub extends IMongoDocument {
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("name")
+        required: handler.fieldRequired("name"),
+        type: () => String
     })
     name!: string
 
@@ -22,29 +23,44 @@ export default class IClub extends IMongoDocument {
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("description")
+        required: handler.fieldRequired("description"),
+        type: () => String
     })
     description!: string
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("logo")
+        required: handler.fieldRequired("logo"),
+        type: () => String
     })
     logo!: string
 
     @Field(() => Socials)
     @prop({
-        required: handler.fieldRequired("socials")
+        required: handler.fieldRequired("socials"),
+        type: () => String
     })
     socials!: Socials
 
     @Field(() => IPerson)
     @prop({
-        required: handler.fieldRequired("")
+        required: handler.fieldRequired("lead"),
+        type: () => String
     })
     lead!: IPerson
 
-    coLeads!: IPerson[]
+    @Field(() => [IPerson])
+    @prop({
+        default: [],
+        ref: () => IPerson
+    })
+    coLeads!: Ref<IPerson>[]
 
+    @Field(() => IPerson)
+    @prop({
+        ref: () => IPerson
+    })
     representative?: IPerson
 }
+
+export type ClubType = typeof IClub

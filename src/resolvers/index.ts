@@ -1,5 +1,7 @@
 import UserResolver from "./user";
+import AuthResolver from "./user/auth";
 
 export const resolvers = [
-    UserResolver
+    UserResolver,
+    AuthResolver
 ] as const

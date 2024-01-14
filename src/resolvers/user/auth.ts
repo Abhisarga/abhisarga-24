@@ -1,23 +1,17 @@
 import ErrorHandler from "@handlers/error"
 import User from "@models/user"
 import Session from "@models/user/session"
-import { IResponse } from "@types_/response"
-import Models from "@utils/models"
-import { IsEmail, isEmail } from "class-validator"
-import { timingSafeEqual } from "crypto"
-import { Arg, Field, InputType, Mutation, Resolver } from "type-graphql"
-import jwt from "jsonwebtoken"
 import { JWT_SECRET, JWT_SESSION_TIMEOUT } from "@server/config"
+import { IResponse } from "@types_/response"
+import IUser, { UserTypes } from "@types_/user"
+import Models from "@utils/models"
+import { isEmail } from "class-validator"
+import { timingSafeEqual } from "crypto"
+import jwt from "jsonwebtoken"
+import { Arg, Mutation, Resolver } from "type-graphql"
 
-@InputType()
-class LoginInput {
-    @IsEmail()
-    @Field(() => String)
-    email!: string
 
-    @Field(() => String)
-    password!: string
-}
+
 
 @Resolver()
 export default class AuthResolver {
@@ -57,5 +51,27 @@ export default class AuthResolver {
             return this.handler.error("Internal Server Error. Please try after sometime")
         }
         return this.handler.success(session)
+    }
+
+    @Mutation(() => IResponse)
+    async register(
+        @Arg("user", () => IUser) input: IUser
+    ) {
+        delete input._id
+        delete input.__v
+        if(!input.role) {
+            input.role = UserTypes.participant
+        }
+        else if(input.role === UserTypes.admin) {
+            return this.handler.error("Invalid Role.")
+        }
+
+        if (!isEmail(input.email)) {
+            return this.handler.error("Invalid email. Enter an email with valid format")
+        }
+        if((await User.findOne({ email: input.email }))) {
+            return this.handler.error("User already exists. Try to login")
+        }
+        const user = await User.create()
     }
 }

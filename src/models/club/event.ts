@@ -1,5 +1,5 @@
 import { getModelForClass } from "@typegoose/typegoose";
-import IClub, { ClubType } from "@types_/club";
+import IEvent, { EventType } from "@types_/club/event";
 
-const Event = getModelForClass<ClubType>(IClub)
+const Event = getModelForClass<EventType>(IEvent)
 export default Event

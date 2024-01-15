@@ -62,6 +62,7 @@ export class EventRound {
     organizers!: Ref<IPerson>[] // take the required details
 }
 
+
 @ObjectType()
 export default class IEvent extends IMongoDocument {
     @Field(() => String)

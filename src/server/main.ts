@@ -23,7 +23,8 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 mongoose.connect(DB_URL)
-    .then(async () => {
+.then(async () => {
+        console.log("Connected to the database")
         registerEnumType(UserTypes, {
             name: "UserTypes"
         })
@@ -51,7 +52,6 @@ mongoose.connect(DB_URL)
         })
         await server.start()
         server.applyMiddleware({ app })
-        console.log("Connected to the database")
         app.listen(PORT, () => {
             console.log("App listening on port:", PORT)
         })

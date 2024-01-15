@@ -19,6 +19,7 @@ export default class EventResolver {
     ) {
         delete input._id
         delete input.__v
+        
         const event = await Event.create(input)
         if(!event) {
             return this.handler.error("Bad Request! Please try again.")

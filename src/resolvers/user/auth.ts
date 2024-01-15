@@ -6,7 +6,7 @@ import { IResponse } from "@types_/response"
 import IUser, { UserTypes } from "@types_/user"
 import Models from "@utils/models"
 import { isEmail } from "class-validator"
-import { timingSafeEqual } from "crypto"
+import { timingSafeEqual } from "node:crypto"
 import jwt from "jsonwebtoken"
 import { Arg, Mutation, Resolver } from "type-graphql"
 
@@ -72,6 +72,24 @@ export default class AuthResolver {
         if((await User.findOne({ email: input.email }))) {
             return this.handler.error("User already exists. Try to login")
         }
-        const user = await User.create()
+        const user = await User.create(input)
+        if (!user) {
+            return this.handler.error("Invalid User. Please check the credentials")
+        }
+        const createdAt = Date.now()
+        const token = jwt.sign({
+            user: user._id.toString(),
+            createdAt
+        }, JWT_SECRET, { expiresIn: JWT_SESSION_TIMEOUT })
+        const session = await Session.create({
+            user: user._id,
+            createdAt,
+            token,
+            expiresAt: Date.now() + 7 * 86400 * 1000
+        })
+        if (!session) {
+            return this.handler.error("Internal Server Error. Please try after sometime")
+        }
+        return this.handler.success(session)
     }
 }

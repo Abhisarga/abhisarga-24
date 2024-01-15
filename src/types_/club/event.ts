@@ -5,7 +5,7 @@ import IClub from "@types_/club";
 import { IMongoDocument } from "@types_/mongo";
 import IPerson from "@types_/user/person";
 import Models from "@utils/models";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 export enum EventModes {
     online = "online",
@@ -15,6 +15,7 @@ export enum EventModes {
 
 const handler = new ErrorHandler(Models.event)
 
+@InputType("EventRoundInput")
 @ObjectType()
 export class EventRound {
     @Field(() => String)
@@ -33,11 +34,15 @@ export class EventRound {
     mode!: EventModes
 
     @Field(() => String)
-    @prop()
+    @prop({
+        type: () => String
+    })
     description?: string
 
     @Field(() => [String])
-    @prop()
+    @prop({
+        type: () => [String]
+    })
     rules!: string[]
 
     @Field(() => Date)
@@ -62,12 +67,14 @@ export class EventRound {
     organizers!: Ref<IPerson>[] // take the required details
 }
 
-
+@InputType("EventInput")
 @ObjectType()
 export default class IEvent extends IMongoDocument {
+
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("name")
+        required: handler.fieldRequired("name"),
+        type: () => String
     })
     name!: string
     
@@ -80,31 +87,36 @@ export default class IEvent extends IMongoDocument {
     
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("description")
+        required: handler.fieldRequired("description"),
+        type: () => String
     })
     description!: string
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("poster")
+        required: handler.fieldRequired("poster"),
+        type: () => String
     })
     poster!: string
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("registrationLink")
+        required: handler.fieldRequired("registrationLink"),
+        type: () => String
     })
     registrationLink!: string
 
     @Field(() => [EventRound])
     @prop({
-        required: handler.fieldRequired("rounds")
+        required: handler.fieldRequired("rounds"),
+        type: () => [EventRound]
     })
     rounds!: EventRound[]
 
     @Field(() => Number)
     @prop({
-        required: handler.fieldRequired("rounds")
+        required: handler.fieldRequired("rounds"),
+        type: () => Number
     })
     prizePool!: number
 }

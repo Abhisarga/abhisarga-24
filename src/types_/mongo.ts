@@ -12,7 +12,7 @@ export class IMongoDocument {
         default: () => new Types.ObjectId(),
         type: () => Types.ObjectId
     })
-    _id!: Types.ObjectId;
+    _id?: Types.ObjectId;
 
     @prop({ select: false, type: () => Number })
     __v?: number;

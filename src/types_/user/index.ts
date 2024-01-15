@@ -5,7 +5,7 @@ import { IMongoDocument } from "@types_/mongo";
 import Models from "@utils/models";
 import { IsPhone } from "@utils/validator";
 import { IsEmail, IsEnum } from "class-validator";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 const handler = new ErrorHandler(Models.user)
 
@@ -15,6 +15,7 @@ export enum UserTypes {
     clubLead = "club-lead",
 }
 
+@InputType("UserInput")
 @ObjectType()
 export default class IUser extends IMongoDocument {
     @Field(() => String)
@@ -57,7 +58,10 @@ export default class IUser extends IMongoDocument {
     college!: string
 
     @IsEnum(UserTypes)
-    @Field(() => UserTypes)
+    @Field(() => UserTypes, {
+        defaultValue: UserTypes.participant,
+        nullable: true
+    })
     @prop({
         default: UserTypes.participant,
         enum: Object.values(UserTypes),

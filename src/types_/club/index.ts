@@ -2,12 +2,13 @@ import ErrorHandler from "@handlers/error";
 import { Ref, prop } from "@typegoose/typegoose";
 import { IMongoDocument } from "@types_/mongo";
 import Models from "@utils/models";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import Socials from "../user/socials";
 import IPerson from "../user/person";
 
 const handler = new ErrorHandler(Models.club)
 
+@InputType("ClubInput")
 @ObjectType()
 export default class IClub extends IMongoDocument {
     @Field(() => String)

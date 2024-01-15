@@ -2,7 +2,7 @@ import ErrorHandler from "@handlers/error"
 import { prop } from "@typegoose/typegoose"
 import { IMongoDocument } from "@types_/mongo"
 import { IsEnum } from "class-validator"
-import { Field, ObjectType } from "type-graphql"
+import { Field, InputType, ObjectType } from "type-graphql"
 import Socials from "./socials"
 
 export enum PersonTypes {
@@ -25,10 +25,9 @@ export enum PersonTypes {
     techTeam = "Tech Team"
 }
 
-
-
 const handler = new ErrorHandler("person")
 
+@InputType("PersonInput")
 @ObjectType()
 export default class IPerson extends IMongoDocument {
     @Field(() => String)

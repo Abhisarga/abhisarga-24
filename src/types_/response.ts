@@ -13,7 +13,7 @@ const AnyScalar = new GraphQLScalarType({
     parseLiteral: (ast) => {
         switch (ast.kind) {
             case Kind.STRING:
-            return ast.value
+                return ast.value
             case Kind.LIST:
             case Kind.OBJECT:
                 return ast

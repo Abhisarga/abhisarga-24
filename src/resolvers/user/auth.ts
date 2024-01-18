@@ -7,7 +7,7 @@ import IUser, { UserTypes } from "@types_/user"
 import ISession from "@types_/user/session"
 import Models from "@utils/models"
 import { isEmail } from "class-validator"
-import { timingSafeEqual } from "crypto"
+import { timingSafeEqual } from "node:crypto"
 import jwt from "jsonwebtoken"
 import { Arg, Mutation, Resolver } from "type-graphql"
 

@@ -1,6 +1,6 @@
 import ErrorHandler from "@handlers/error";
 import { prop } from "@typegoose/typegoose";
-import { Field, ObjectType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 import { IMongoDocument } from "./mongo";
 
 export enum SponsorTypes {
@@ -23,6 +23,7 @@ export enum SponsorTypes {
 
 const handler = new ErrorHandler("sponsor")
 
+@InputType("SponsorInput")
 @ObjectType()
 export default class ISponsor extends IMongoDocument {
     @Field(() => String)

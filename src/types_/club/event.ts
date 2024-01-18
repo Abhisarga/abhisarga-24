@@ -1,55 +1,61 @@
-import { type Ref, prop } from "@typegoose/typegoose";
-import { type Time } from "@types_";
-import { IMongoDocument } from "@types_/mongo";
-import IClub from "@types_/club/club";
-import IPerson from "@types_/user/person";
-import { Field, ObjectType, registerEnumType } from "type-graphql";
 import ErrorHandler from "@handlers/error";
+import { prop, type Ref } from "@typegoose/typegoose";
+import { type Time } from "@types_";
+import IClub from "@types_/club";
+import { IMongoDocument } from "@types_/mongo";
+import IPerson from "@types_/user/person";
 import Models from "@utils/models";
+import { Field, InputType, ObjectType } from "type-graphql";
 
-enum EventModes {
+export enum EventModes {
     online = "online",
     offline = "offline",
     hybrid = "hybrid"
 }
 
-registerEnumType(EventModes, {
-    name: "EventMode"
-})
-
 const handler = new ErrorHandler(Models.event)
 
+@InputType("EventRoundInput")
 @ObjectType()
 export class EventRound {
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("round.number")
+        required: handler.fieldRequired("round.number"),
+        type: () => String
     })
     name!: string // Can be Round 1 or 1
 
     @Field(() => EventModes)
     @prop({
-        required: handler.fieldRequired("round.mode")
+        required: handler.fieldRequired("round.mode"),
+        type: () => String,
+        enum: Object.values(EventModes)
     })
     mode!: EventModes
 
     @Field(() => String)
-    @prop()
+    @prop({
+        type: () => String
+    })
     description?: string
 
     @Field(() => [String])
-    @prop()
+    @prop({
+        type: () => [String]
+    })
     rules!: string[]
 
     @Field(() => Date)
     @prop({
-        required: handler.fieldRequired("round.start")
+        required: handler.fieldRequired("round.start"),
+        type: () => String
     })
     start!: Time
 
     @Field(() => Date)
     @prop({
-        required: handler.fieldRequired("round.end")
+        required: handler.fieldRequired("round.end"),
+        type: () => String
     })
     end!: Time
 
@@ -61,11 +67,14 @@ export class EventRound {
     organizers!: Ref<IPerson>[] // take the required details
 }
 
+@InputType("EventInput")
 @ObjectType()
 export default class IEvent extends IMongoDocument {
+
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("name")
+        required: handler.fieldRequired("name"),
+        type: () => String
     })
     name!: string
     
@@ -78,31 +87,38 @@ export default class IEvent extends IMongoDocument {
     
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("description")
+        required: handler.fieldRequired("description"),
+        type: () => String
     })
     description!: string
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("poster")
+        required: handler.fieldRequired("poster"),
+        type: () => String
     })
     poster!: string
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("registrationLink")
+        required: handler.fieldRequired("registrationLink"),
+        type: () => String
     })
     registrationLink!: string
 
     @Field(() => [EventRound])
     @prop({
-        required: handler.fieldRequired("rounds")
+        required: handler.fieldRequired("rounds"),
+        type: () => [EventRound]
     })
     rounds!: EventRound[]
 
     @Field(() => Number)
     @prop({
-        required: handler.fieldRequired("rounds")
+        required: handler.fieldRequired("rounds"),
+        type: () => Number
     })
     prizePool!: number
 }
+
+export type EventType = typeof IEvent

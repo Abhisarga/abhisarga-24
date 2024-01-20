@@ -18,7 +18,9 @@ export default class ITheme extends IMongoDocument {
     name!: string
 
     @Field(() => String)
-    @prop()
+    @prop({
+        type: () => [String]
+    })
     images!: string[]
 }
 

@@ -35,21 +35,23 @@ export default class ISponsor extends IMongoDocument {
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("name"),
+        required: handler.fieldRequired("logo"),
         type: () => String
     })
     logo!: string
 
     @Field(() => SponsorTypes)
     @prop({
-        required: handler.fieldRequired("name"),
+        required: handler.fieldRequired("type"),
         enum: Object.values(SponsorTypes),
         type: () => String,
     })
     type!: SponsorTypes
 
     @Field(() => String, { nullable: true })
-    @prop()
+    @prop({
+        type: () => String
+    })
     url?: string
 }
 

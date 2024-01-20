@@ -1,9 +1,12 @@
 import ErrorHandler from "@handlers/error";
+import Person from "@models/user/person";
+import { IResponse } from "@types_/response";
 import IUser from "@types_/user";
 import Models from "@utils/models";
-import { Query, Resolver } from "type-graphql";
+import { Types } from "mongoose";
+import { Arg, Query, Resolver } from "type-graphql";
 
-@Resolver()
+@Resolver(() => IUser)
 export default class UserResolver {
     handler = new ErrorHandler(Models.user)
 
@@ -11,8 +14,18 @@ export default class UserResolver {
         this.handler = new ErrorHandler(Models.user)
     }
 
-    @Query(() => IUser, { nullable: true })
-    get() {
+    @Query(() => IResponse)
+    async User() {
         return { name: "some"}
+    }
+
+    @Query(() => IResponse)
+    async Person(
+        @Arg("id", () => String) id: Types.ObjectId
+    ) {
+        const person = await Person.findById(id)
+        if(!person) {
+            
+        }
     }
 }

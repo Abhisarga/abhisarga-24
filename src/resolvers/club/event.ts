@@ -3,6 +3,7 @@ import Event from "@models/club/event";
 import IEvent from "@types_/club/event";
 import { IResponse } from "@types_/response";
 import Models from "@utils/models";
+import { Types } from "mongoose";
 import { Arg, Mutation, Query, Resolver } from "type-graphql"
 
 @Resolver(_ => IEvent)
@@ -14,7 +15,7 @@ export default class EventResolver {
     }
 
     @Mutation(() => IResponse)
-    async createEvent(
+    async CreateEvent(
         @Arg("event", () => IEvent) input: IEvent
     ) {
         delete input._id
@@ -28,8 +29,8 @@ export default class EventResolver {
     }
 
     @Query(() => IResponse)
-    async findById(
-        @Arg("id", () => String) id: IEvent 
+    async Event(
+        @Arg("id", () => String) id: Types.ObjectId 
     ) {
         const event = await Event.findById(id)
         if(!event) {

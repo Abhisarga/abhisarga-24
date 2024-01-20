@@ -3,7 +3,8 @@ enum Models {
     club = "club",
     event = "event",
     session = "session",
-    theme = "theme"
+    theme = "theme",
+    sponsor = "sponsor"
 }
 
 export default Models

@@ -23,7 +23,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 
 mongoose.connect(DB_URL)
-.then(async () => {
+    .then(async () => {
         console.log("Connected to the database")
         registerEnumType(UserTypes, {
             name: "UserTypes"
@@ -46,12 +46,13 @@ mongoose.connect(DB_URL)
                 resolvers,
             }),
             plugins: [
-                ApolloServerPluginLandingPageGraphQLPlayground()
+                ApolloServerPluginLandingPageGraphQLPlayground({ endpoint: "/graphiQL" })
             ],
-            context: ({ req, res }: Context) => ({ req, res })
+            context: ({ req, res }: Context) => ({ req, res }),
+            
         })
         await server.start()
-        server.applyMiddleware({ app })
+        server.applyMiddleware({ app, path: "/graphiQL" })
         app.listen(PORT, () => {
             console.log("App listening on port:", PORT)
         })

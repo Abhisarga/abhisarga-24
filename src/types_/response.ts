@@ -32,10 +32,10 @@ export enum ResponseStatus {
 
 
 @ObjectType()
-export class IResponse {
+export class IResponse<T=any> {
     @Field(() => ResponseStatus)
     status!: ResponseStatus
 
     @Field(() => AnyScalar)
-    data!: ResponseType
+    data!: ResponseType|T
 }

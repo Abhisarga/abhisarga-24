@@ -45,9 +45,6 @@ mongoose.connect(DB_URL)
             schema: await buildSchema({
                 resolvers,
             }),
-            plugins: [
-                ApolloServerPluginLandingPageGraphQLPlayground({ endpoint: "/graphiQL" })
-            ],
             context: ({ req, res }: Context) => ({ req, res }),
             
         })

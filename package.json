@@ -11,6 +11,8 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
     "@nextui-org/react": "^2.2.9",
     "@react-three/fiber": "^8.15.13",
     "@typegoose/typegoose": "^12.0.0",

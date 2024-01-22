@@ -19,7 +19,9 @@ export default class IClub extends IMongoDocument {
     name!: string
 
     @Field(() => String, { nullable: true })
-    @prop()
+    @prop({
+        type: () => String
+    })
     abbreviation?: string
 
     @Field(() => String)
@@ -50,7 +52,7 @@ export default class IClub extends IMongoDocument {
     })
     lead!: IPerson
 
-    @Field(() => [IPerson])
+    @Field(() => [IPerson], { nullable: true })
     @prop({
         default: [],
         ref: () => IPerson

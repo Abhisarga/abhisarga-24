@@ -4,7 +4,6 @@ import { ResponseStatus } from "@types_/response"
 import { SponsorTypes } from "@types_/sponsor"
 import { UserTypes } from "@types_/user"
 import { PersonTypes } from "@types_/user/person"
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
 import { ApolloServer } from "apollo-server-express"
 import compression from "compression"
 import cors from "cors"
@@ -49,7 +48,7 @@ mongoose.connect(DB_URL)
             
         })
         await server.start()
-        server.applyMiddleware({ app, path: "/graphiQL" })
+        server.applyMiddleware({ app })
         app.listen(PORT, () => {
             console.log("App listening on port:", PORT)
         })

@@ -1,11 +1,11 @@
 import ErrorHandler from "@handlers/error"
 import { prop } from "@typegoose/typegoose"
 import { IMongoDocument } from "@types_/mongo"
-import { Field, ObjectType, registerEnumType } from "type-graphql"
 import { IsEnum } from "class-validator"
+import { Field, InputType, ObjectType } from "type-graphql"
 import Socials from "./socials"
 
-export enum PersonType {
+export enum PersonTypes {
     lead = "lead",
     coLead = "co-lead",
     representative = "representative",
@@ -25,48 +25,53 @@ export enum PersonType {
     techTeam = "Tech Team"
 }
 
-registerEnumType(PersonType, {
-    name: "PersonTypes"
-})
-
 const handler = new ErrorHandler("person")
 
+@InputType("PersonInput")
 @ObjectType()
 export default class IPerson extends IMongoDocument {
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("name")
+        required: handler.fieldRequired("name"),
+        type: () => String
     })
     name!: string
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("email")
+        required: handler.fieldRequired("email"),
+        type: () => String
     })
     email!: string
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("phone")
+        required: handler.fieldRequired("phone"),
+        type: () => String
     })
     phone!: string
 
-    @IsEnum(PersonType)
-    @Field(() => PersonType)
+    @IsEnum(PersonTypes)
+    @Field(() => PersonTypes)
     @prop({
-        enum: Object.values(PersonType)
+        enum: Object.values(PersonTypes),
+        type: () => String
     })
     type!: PersonType
 
     @Field(() => Socials)
     @prop({
-        required: handler.fieldRequired("socials")
+        required: handler.fieldRequired("socials"),
+        type: () => String
     })
     socials!: Socials
 
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("profilePhoto")
+        required: handler.fieldRequired("profilePhoto"),
+        type: () => String
     })
     profilePhoto!: string
 }
+
+export type PersonType = typeof IPerson

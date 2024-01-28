@@ -1,10 +1,11 @@
 import ErrorHandler from "@handlers/error";
-import { prop } from "@typegoose/typegoose";
+import { Ref, prop } from "@typegoose/typegoose";
+import IClub from "@types_/club";
 import { IMongoDocument } from "@types_/mongo";
 import Models from "@utils/models";
 import { IsPhone } from "@utils/validator";
 import { IsEmail, IsEnum } from "class-validator";
-import { Field, ObjectType, registerEnumType } from "type-graphql";
+import { Field, InputType, ObjectType } from "type-graphql";
 
 const handler = new ErrorHandler(Models.user)
 
@@ -12,18 +13,15 @@ export enum UserTypes {
     participant = "participant",
     admin = "admin",
     clubLead = "club-lead",
-    
 }
 
-registerEnumType(UserTypes, {
-    name: "UserType"
-})
-
+@InputType("UserInput")
 @ObjectType()
 export default class IUser extends IMongoDocument {
     @Field(() => String)
     @prop({
-        required: handler.fieldRequired("name")
+        required: handler.fieldRequired("name"),
+        type: () => String
     })
     name!: string
 
@@ -31,7 +29,8 @@ export default class IUser extends IMongoDocument {
     @Field(() => String)
     @prop({
         required: handler.fieldRequired("email"),
-        unique: true
+        unique: true,
+        type: () => String
     })
     email!: string
 
@@ -39,26 +38,42 @@ export default class IUser extends IMongoDocument {
     @Field(() => String)
     @prop({
         required: handler.fieldRequired("phone"),
-        unique: true
-
+        unique: true,
+        type: () => String
     })
     phone!: string
 
-    @Field(() => String)
-    @prop({ required: handler.fieldRequired("phone") })
+    @Field(() => String, { nullable: true })
+    @prop({
+        required: handler.fieldRequired("phone"),
+        type: () => String
+    })
     password!: string
 
     @Field(() => String)
-    @prop({ required: handler.fieldRequired("college") })
+    @prop({
+        required: handler.fieldRequired("college"),
+        type: () => String
+    })
     college!: string
 
     @IsEnum(UserTypes)
-    @Field(() => UserTypes)
+    @Field(() => UserTypes, {
+        defaultValue: UserTypes.participant,
+        nullable: true
+    })
     @prop({
         default: UserTypes.participant,
-        enum: Object.values(UserTypes)
+        enum: Object.values(UserTypes),
+        type: () => String
     })
-    type!: UserTypes
+    role?: UserTypes
+
+    @Field(() => IClub, { nullable: true})
+    @prop({
+        ref: () => IClub
+    })
+    club?: Ref<IClub>
 }
 
 export type UserType = typeof IUser

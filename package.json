@@ -4,17 +4,19 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev:client": "vite",
+    "dev:server": "nodemon",
+    "dev": "concurrently \"npm:dev:*\" --kill-others",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
     "preview": "vite preview"
   },
   "dependencies": {
-    "@fortawesome/free-brands-svg-icons": "^6.5.1",
-    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
+    "@fortawesome/free-brands-svg-icons": "^6.5.1",
+    "@fortawesome/react-fontawesome": "github:fortawesome/react-fontawesome",
     "@gsap/react": "^2.1.0",
     "@nextui-org/react": "^2.2.9",
     "@react-three/fiber": "^8.15.13",
@@ -42,6 +44,9 @@
     "uuid4": "^2.0.3"
   },
   "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/multer": "^1.4.11",
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react-swc": "^3.5.0",
@@ -49,8 +54,11 @@
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
+    "nodemon": "^3.0.3",
     "sass": "^1.70.0",
     "tailwindcss": "^3.4.1",
+    "tsconfig-paths": "^4.2.0",
+    "tsx": "^4.7.0",
     "vite": "^5.0.8"
   }
 }

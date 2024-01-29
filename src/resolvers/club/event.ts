@@ -4,7 +4,19 @@ import IEvent from "@types_/club/event";
 import { IResponse } from "@types_/response";
 import Models from "@utils/models";
 import { Types } from "mongoose";
-import { Arg, Mutation, Query, Resolver } from "type-graphql"
+import { Arg, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql"
+
+@ObjectType()
+class EventResponse extends IResponse {
+    @Field(() => IEvent, { nullable: true })
+    declare data: IEvent;
+}
+
+@ObjectType()
+class MultiEventResponse extends IResponse {
+    @Field(() => [IEvent])
+    declare data: IEvent[];
+}
 
 @Resolver(_ => IEvent)
 export default class EventResolver {
@@ -14,7 +26,7 @@ export default class EventResolver {
         this.handler = new ErrorHandler(Models.event)
     }
 
-    @Mutation(() => IResponse)
+    @Mutation(() => EventResponse)
     async CreateEvent(
         @Arg("event", () => IEvent) input: IEvent
     ) {
@@ -23,28 +35,24 @@ export default class EventResolver {
 
         const event = await Event.create(input)
         if(!event) {
-            return this.handler.error("Bad Request! Please try again.")
+            return this.handler.error(null)
         }
         return this.handler.success(event)
     }
 
-    @Query(() => IResponse)
+    @Query(() => EventResponse)
     async Event(
         @Arg("id", () => String) id: Types.ObjectId
     ) {
         const event = await Event.findById(id)
         if(!event) {
-            return this.handler.error("Bad Request! Please try again.")
+            return this.handler.error(null)
         }
         return this.handler.success(event)
     }
 
-    @Query(() => [IResponse])
+    @Query(() => MultiEventResponse)
     async AllEvents() {
-        const events = await Event.find()
-        if(!events) {
-            return this.handler.error("No events found.")
-        }
-        return this.handler.success(events)
+        return this.handler.success((await Event.find()) || [])
     }
 }

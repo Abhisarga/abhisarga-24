@@ -1,37 +1,32 @@
 import express, { Request, Response } from "express";
-import multer from "multer";
-import { v4 as uuidv4 } from "uuid";
-import path from "path";
-
+import Multer from "multer";
+import { verifyToken } from "./middleware/auth";
+import ISession from "@types_/user/session";
+import ErrorHandler from "@handlers/error";
+import Hash from "@utils/hash";
+import { downloadFile } from "@utils/file";
 const router = express.Router();
 
-// Multer configuration
-const storage = multer.diskStorage({
-  destination: (req, file, cb) => {
-    // Set the destination folder based on user or default
-    const folder = req.user && req.user.club ? req.user.club.name : "unclub";
-    const uploadPath = path.join(__dirname, `uploads/${folder}`);
-    cb(null, uploadPath);
-  },
-  filename: (req, file, cb) => {
-    // Add a unique timestamp to the file name
-    const uniqueFilename = `${uuidv4()}${path.extname(file.originalname)}`;
-    cb(null, uniqueFilename);
-  },
-});
+const multer = Multer();
+const handler = new ErrorHandler("fileUpload")
 
-const upload = multer({ storage });
-
-// File upload endpoint
-router.post("/upload", upload.single("file"), (req: Request, res: Response) => {
-  res.json({ message: "File uploaded successfully" });
-});
-
-// File serving endpoint
-router.get("/:fileName", (req: Request, res: Response) => {
-  const fileName = req.params.fileName;
-  const filePath = path.join(__dirname, `uploads/${fileName}`);
-  res.sendFile(filePath);
+router.post("/upload", multer.single("file"), verifyToken(), async (req: Request, res: Response) => {
+    const { session } = res.locals as {
+        session: ISession
+    }
+    const user = session.user
+    const file = req.file as Express.Multer.File
+    if (!file) {
+        return res.status(422).send(handler.error("Invalid file!"))
+    }
+    const originalName = file!.originalname.split(".")
+    const mimeType = originalName.pop()
+    const fileName = Hash.create(user + "--" + originalName.join(".")).replace(/\//g, "--")
+    const url = await downloadFile(`${fileName}.${mimeType}`, user._id.toString(), file!.buffer) as string
+    if (!url) {
+        return res.status(422).send(handler.error("Error downloading file. Please upload the correct file"))
+    }
+    return res.status(200).send(handler.success(url))
 });
 
 export default router;

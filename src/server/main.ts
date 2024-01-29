@@ -14,6 +14,11 @@ import { buildSchema, registerEnumType } from "type-graphql"
 import { DB_URL, PORT } from "./config"
 import Context from "@types_/context"
 import filesRouter from "./files";
+import { join as joinPath, dirname } from "node:path"
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app: Express = express()
 
@@ -22,6 +27,8 @@ app.use(compression())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use("/files", filesRouter);
+
+app.use("/static/files", express.static(joinPath(__dirname, "..", "..", "public")))
 
 mongoose.connect(DB_URL)
     .then(async () => {

@@ -31,11 +31,20 @@ export default class ThemeResolver {
     ) {
         delete input._id
         delete input.__v
-        
+
         const theme = await Theme.create(input)
         if(!theme) {
             return this.handler.error("Bad Request! Please try again.")
         }
         return this.handler.success(theme)
+    }
+
+    @Query(() => [IResponse])
+    async AllThemes() {
+        const themes = await Theme.find()
+        if (!themes) {
+            return this.handler.error("No themes found.")
+        }
+        return this.handler.success(themes)
     }
 }

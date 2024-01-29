@@ -20,7 +20,7 @@ export default class EventResolver {
     ) {
         delete input._id
         delete input.__v
-        
+
         const event = await Event.create(input)
         if(!event) {
             return this.handler.error("Bad Request! Please try again.")
@@ -30,12 +30,21 @@ export default class EventResolver {
 
     @Query(() => IResponse)
     async Event(
-        @Arg("id", () => String) id: Types.ObjectId 
+        @Arg("id", () => String) id: Types.ObjectId
     ) {
         const event = await Event.findById(id)
         if(!event) {
             return this.handler.error("Bad Request! Please try again.")
         }
         return this.handler.success(event)
+    }
+
+    @Query(() => [IResponse])
+    async AllEvents() {
+        const events = await Event.find()
+        if(!events) {
+            return this.handler.error("No events found.")
+        }
+        return this.handler.success(events)
     }
 }

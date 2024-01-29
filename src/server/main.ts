@@ -14,6 +14,7 @@ import mongoose from "mongoose"
 import { buildSchema, registerEnumType } from "type-graphql"
 import { DB_URL, PORT } from "./config"
 import Context from "@types_/context"
+import filesRouter from "./files";
 
 const app: Express = express()
 
@@ -21,6 +22,7 @@ app.use(cors())
 app.use(compression())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use("/files", filesRouter);
 
 mongoose.connect(DB_URL)
     .then(async () => {
@@ -46,7 +48,7 @@ mongoose.connect(DB_URL)
                 resolvers,
             }),
             context: ({ req, res }: Context) => ({ req, res }),
-            
+
         })
         await server.start()
         server.applyMiddleware({ app, path: "/graphiQL" })

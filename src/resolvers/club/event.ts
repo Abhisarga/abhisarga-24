@@ -14,7 +14,7 @@ class EventResponse extends IResponse {
 
 @ObjectType()
 class MultiEventResponse extends IResponse {
-    @Field(() => [IEvent])
+    @Field(() => [IEvent], { defaultValue: [] })
     declare data: IEvent[];
 }
 
@@ -34,7 +34,7 @@ export default class EventResolver {
         delete input.__v
 
         const event = await Event.create(input)
-        if(!event) {
+        if (!event) {
             return this.handler.error(null)
         }
         return this.handler.success(event)
@@ -45,7 +45,7 @@ export default class EventResolver {
         @Arg("id", () => String) id: Types.ObjectId
     ) {
         const event = await Event.findById(id)
-        if(!event) {
+        if (!event) {
             return this.handler.error(null)
         }
         return this.handler.success(event)

@@ -45,7 +45,7 @@ export default class IUser extends IMongoDocument {
 
     @Field(() => String, { nullable: true })
     @prop({
-        required: handler.fieldRequired("phone"),
+        required: handler.fieldRequired("password"),
         type: () => String
     })
     password!: string

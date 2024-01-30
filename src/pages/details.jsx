@@ -1,14 +1,14 @@
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Header from "../components/header";
 import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
-import Header from "@components/header";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   Card,
-  CardFooter,
-  Image,
-  Button,
   CardBody,
   CardHeader,
+  Image
 } from "@nextui-org/react";
+
+
 function Details() {
   return (
     <>

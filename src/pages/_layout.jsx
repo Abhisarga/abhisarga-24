@@ -1,19 +1,15 @@
-import {Providers} from "./_providers.tsx";
-import { selectSession } from "@client/components/auth/authSlice";
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
 import { useLocation, useNavigate } from "react-router-dom";
-import Header from "./components/header";
+import { Providers } from "./_providers";
 
-export default function Layout({children, data}) {
-  const navigate = useNavigate()
+export default function Layout({ children, data }) {
+    const navigate = useNavigate()
     // const session = useSelector(selectSession)
     // console.log("session", session)
     const loc = useLocation()
     const freePaths = [
         "/",
-        "/signin",
-        "/signup"
+        "/login",
+        "/register"
     ]
     // useEffect(() => {
     //     if (!freePaths.includes(loc.pathname) && session === null) {
@@ -37,17 +33,17 @@ export default function Layout({children, data}) {
             data.hasHeader = true
         }
     }
-  return (
-    <html lang="en" className='dark'>
-      <body>
-        <Providers>
-            {/* {data.hasHeader && <Header />} */}
-            <main>
-                {children}
-            </main>
-            {/* {data.hasFooter && <Footer />} */}
-        </Providers>
-      </body>
-    </html>
-  );
+    return (
+        <html lang="en" className='dark'>
+            <body>
+                <Providers>
+                    {/* {data.hasHeader && <Header />} */}
+                    <main>
+                        {children}
+                    </main>
+                    {/* {data.hasFooter && <Footer />} */}
+                </Providers>
+            </body>
+        </html>
+    );
 }

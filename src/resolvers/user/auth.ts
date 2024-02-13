@@ -3,7 +3,7 @@ import User from "@models/user"
 import Session from "@models/user/session"
 import { JWT_SECRET, JWT_SESSION_TIMEOUT } from "@server/config"
 import { IResponse } from "@types_/response"
-import IUser, { UserTypes } from "@types_/user"
+import IUser, { UserInput, UserTypes } from "@types_/user"
 import ISession from "@types_/user/session"
 import Models from "@utils/models"
 import { isEmail } from "class-validator"
@@ -57,7 +57,7 @@ export default class AuthResolver {
 
     @Mutation(() => IResponse)
     async Register(
-        @Arg("user", () => IUser) input: IUser
+        @Arg("user", () => UserInput) input: IUser
     ) {
         delete input._id
         delete input.__v

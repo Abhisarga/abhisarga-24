@@ -39,12 +39,6 @@ export class EventRound {
     })
     description?: string
 
-    @Field(() => [String])
-    @prop({
-        type: () => [String]
-    })
-    rules!: string[]
-
     @Field(() => Date)
     @prop({
         required: handler.fieldRequired("round.start"),
@@ -59,9 +53,10 @@ export class EventRound {
     })
     end!: Time
 
-    @Field(() => IPerson)
+    @Field(() => [IPerson])
     @prop({
         ref: () => IPerson,
+        type:() => [IPerson],
         required: handler.fieldRequired("round.organizers")
     })
     organizers!: Ref<IPerson>[] // take the required details
@@ -77,14 +72,14 @@ export default class IEvent extends IMongoDocument {
         type: () => String
     })
     name!: string
-    
+
     @Field(() => IClub)
     @prop({
         ref: () => IClub,
         required: handler.fieldRequired("club")
     })
     club!: Ref<IClub>
-    
+
     @Field(() => String)
     @prop({
         required: handler.fieldRequired("description"),

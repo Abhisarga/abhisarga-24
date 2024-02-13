@@ -5,8 +5,14 @@ import { IMongoDocument } from "@types_/mongo";
 import Models from "@utils/models";
 import { Field, ObjectType } from "type-graphql";
 import IUser from ".";
+import { JwtPayload } from "jsonwebtoken";
 
 const handler = new ErrorHandler(Models.session)
+
+export interface Payload extends JwtPayload {
+    user: string
+    createdAt: Time
+}
 
 @ObjectType()
 export default class ISession extends IMongoDocument {

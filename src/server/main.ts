@@ -4,7 +4,6 @@ import { ResponseStatus } from "@types_/response"
 import { SponsorTypes } from "@types_/sponsor"
 import { UserTypes } from "@types_/user"
 import { PersonTypes } from "@types_/user/person"
-import { ApolloServerPluginLandingPageGraphQLPlayground } from "apollo-server-core"
 import { ApolloServer } from "apollo-server-express"
 import compression from "compression"
 import cors from "cors"
@@ -14,6 +13,12 @@ import mongoose from "mongoose"
 import { buildSchema, registerEnumType } from "type-graphql"
 import { DB_URL, PORT } from "./config"
 import Context from "@types_/context"
+import filesRouter from "./files";
+import { join as joinPath, dirname } from "node:path"
+import { fileURLToPath } from "node:url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 const app: Express = express()
 
@@ -21,6 +26,9 @@ app.use(cors())
 app.use(compression())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
+app.use("/files", filesRouter);
+
+app.use("/static/files", express.static(joinPath(__dirname, "..", "..", "public")))
 
 mongoose.connect(DB_URL)
     .then(async () => {
@@ -46,10 +54,10 @@ mongoose.connect(DB_URL)
                 resolvers,
             }),
             context: ({ req, res }: Context) => ({ req, res }),
-            
+
         })
         await server.start()
-        server.applyMiddleware({ app, path: "/graphiQL" })
+        server.applyMiddleware({ app })
         app.listen(PORT, () => {
             console.log("App listening on port:", PORT)
         })

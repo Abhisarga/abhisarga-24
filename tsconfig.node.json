@@ -7,18 +7,14 @@
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "allowSyntheticDefaultImports": true,
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "forceConsistentCasingInFileNames": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true,
     "paths": {
       "@*": ["./src/*"]
     },
   },
   "include": [
-    "vite.config.mts",
+    "vite.config.mjs", 
+    "src/server/main.ts",
+    "config.ts", 
     "src", 
     "test.ts",
     "globals.d.ts"

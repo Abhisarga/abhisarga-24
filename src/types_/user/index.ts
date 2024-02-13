@@ -15,7 +15,6 @@ export enum UserTypes {
     clubLead = "club-lead",
 }
 
-@InputType("UserInput")
 @ObjectType()
 export default class IUser extends IMongoDocument {
     @Field(() => String)
@@ -45,7 +44,7 @@ export default class IUser extends IMongoDocument {
 
     @Field(() => String, { nullable: true })
     @prop({
-        required: handler.fieldRequired("phone"),
+        required: handler.fieldRequired("password"),
         type: () => String
     })
     password!: string
@@ -69,11 +68,17 @@ export default class IUser extends IMongoDocument {
     })
     role?: UserTypes
 
-    @Field(() => IClub, { nullable: true})
+    @Field(() => IClub, { nullable: true })
     @prop({
         ref: () => IClub
     })
     club?: Ref<IClub>
+}
+
+@InputType()
+export class UserInput extends IUser {
+    @Field(() => String, { nullable: true })
+    declare club?: Ref<IClub>;
 }
 
 export type UserType = typeof IUser

@@ -16,6 +16,7 @@
     "allowImportingTsExtensions": true,
     "resolveJsonModule": true,
     "noEmit": true,
+    "esModuleInterop": true,
     "jsx": "react-jsx",
     /* Linting */
     "strict": true,
@@ -32,7 +33,7 @@
   },
   "include": [
     "src",
-    "vite.config.mts",
+    "vite.config.mjs",
     "globals.d.ts"
   ],
   "references": [

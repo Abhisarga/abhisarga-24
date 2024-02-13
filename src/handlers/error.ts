@@ -1,10 +1,11 @@
 import { prop } from "@typegoose/typegoose";
 import ResponseHandler from "./response";
+import Models from "@utils/models";
 
 
-export class ErrorHandler extends ResponseHandler {
+export default class ErrorHandler extends ResponseHandler {
     modelName: string
-    constructor(modelName: string) {
+    constructor(modelName: Models|string) {
         super()
         this.modelName = modelName
     }

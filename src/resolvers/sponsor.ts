@@ -37,4 +37,13 @@ export default class SponsorResolver {
         }
         return this.handler.success(sponsor)
     }
+
+    @Query(() => [IResponse])
+    async AllSponsors() {
+        const sponsors = await Sponsor.find()
+        if (!sponsors) {
+            return this.handler.error("No sponsors found.")
+        }
+        return this.handler.success(sponsors)
+    }
 }

@@ -16,3 +16,4 @@ export const PORT = +(process.env.PORT || 6969)
 export const JWT_SECRET = process.env.JWT_SECRET || ""
 export const JWT_SESSION_TIMEOUT = process.env.JWT_SESSION_TIMEOUT || "1 mon"
 export const NODE_ENV = process.env.NODE_ENV || "development"
+export const SERVER_PATH = "http://localhost:"+PORT

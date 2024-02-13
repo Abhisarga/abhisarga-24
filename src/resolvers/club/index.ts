@@ -31,11 +31,20 @@ export default class ClubResolver {
     ) {
         delete input._id
         delete input.__v
-        
+
         const club = await Club.create(input)
         if(!club) {
             return this.handler.error("Bad Request! Please try again.")
         }
         return this.handler.success(club)
+    }
+
+    @Query(() => [IResponse])
+    async AllClubs() {
+        const clubs = await Club.find()
+        if (!clubs) {
+            return this.handler.error("No clubs found.")
+        }
+        return this.handler.success(clubs)
     }
 }

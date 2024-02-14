@@ -52,17 +52,26 @@ export class EventRound {
         type: () => String
     })
     end!: Time
-
-    @Field(() => [IPerson])
-    @prop({
-        ref: () => IPerson,
-        type:() => [IPerson],
-        required: handler.fieldRequired("round.organizers")
-    })
-    organizers!: Ref<IPerson>[] // take the required details
 }
 
-@InputType("EventInput")
+@InputType("EventOrganizerInput")
+@ObjectType()
+export class EventOrganizer {
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("organizer.name"),
+        type: () => String
+    })
+    name!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("organizer.phone"),
+        type: () => String
+    })
+    phone!: string
+}
+
 @ObjectType()
 export default class IEvent extends IMongoDocument {
 
@@ -114,6 +123,74 @@ export default class IEvent extends IMongoDocument {
         type: () => Number
     })
     prizePool!: number
+
+    @Field(() => [EventOrganizer])
+    @prop({
+        type:() => [EventOrganizer],
+        required: handler.fieldRequired("round.organizers")
+    })
+    organizers!: Ref<IPerson>[] // take the required details
+}
+
+
+@InputType()
+export class EventInput extends IMongoDocument {
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("name"),
+        type: () => String
+    })
+    name!: string
+
+    @Field(() => String)
+    @prop({
+        ref: () => IClub,
+        required: handler.fieldRequired("club")
+    })
+    club!: Ref<IClub> | string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("description"),
+        type: () => String
+    })
+    description!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("poster"),
+        type: () => String
+    })
+    poster!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("registrationLink"),
+        type: () => String
+    })
+    registrationLink!: string
+
+    @Field(() => [EventRound])
+    @prop({
+        required: handler.fieldRequired("rounds"),
+        type: () => [EventRound]
+    })
+    rounds!: EventRound[]
+
+    @Field(() => Number)
+    @prop({
+        required: handler.fieldRequired("rounds"),
+        type: () => Number
+    })
+    prizePool!: number
+
+    @Field(() => [EventOrganizer])
+    @prop({
+        type:() => [EventOrganizer],
+        required: handler.fieldRequired("event.organizers")
+    })
+    organizers!: Ref<IPerson>[] | string // take the required details
 }
 
 export type EventType = typeof IEvent

@@ -15,7 +15,6 @@ export enum UserTypes {
     clubLead = "club-lead",
 }
 
-@InputType("UserInput")
 @ObjectType()
 export default class IUser extends IMongoDocument {
     @Field(() => String)
@@ -74,6 +73,67 @@ export default class IUser extends IMongoDocument {
         ref: () => IClub
     })
     club?: Ref<IClub>
+}
+
+
+@InputType("UserInput")
+export class UserInput extends IMongoDocument {
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("name"),
+        type: () => String
+    })
+    name!: string
+
+    @IsEmail({}, { message: handler.fieldInvalid("email") })
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("email"),
+        unique: true,
+        type: () => String
+    })
+    email!: string
+
+    @IsPhone({ message: handler.fieldInvalid("phone") })
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("phone"),
+        unique: true,
+        type: () => String
+    })
+    phone!: string
+
+    @Field(() => String, { nullable: true })
+    @prop({
+        required: handler.fieldRequired("password"),
+        type: () => String
+    })
+    password!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("college"),
+        type: () => String
+    })
+    college!: string
+
+    @IsEnum(UserTypes)
+    @Field(() => UserTypes, {
+        defaultValue: UserTypes.participant,
+        nullable: true
+    })
+    @prop({
+        default: UserTypes.participant,
+        enum: Object.values(UserTypes),
+        type: () => String
+    })
+    role?: UserTypes
+
+    @Field(() => String, { nullable: true })
+    @prop({
+        ref: () => IClub
+    })
+    club?: Ref<IClub> | string
 }
 
 export type UserType = typeof IUser

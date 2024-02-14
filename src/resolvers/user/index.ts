@@ -38,7 +38,7 @@ export default class UserResolver {
         return this.handler.success(person)
     }
 
-    @Mutation(() => IPerson)
+    @Mutation(() => IResponse)
     async CreatePerson(
         @Arg("person", () => IPerson) input: IPerson) {
         delete input._id

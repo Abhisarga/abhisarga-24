@@ -17,11 +17,11 @@ export default class ITheme extends IMongoDocument {
     })
     name!: string
 
-    @Field(() => String)
+    @Field(() => [String], { defaultValue: [], nullable: true })
     @prop({
         type: () => [String]
     })
-    images!: string[]
+    images!: string[] | string
 }
 
 export type ThemeType = typeof ITheme

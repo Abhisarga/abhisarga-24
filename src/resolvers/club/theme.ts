@@ -31,8 +31,9 @@ export default class ThemeResolver {
     ) {
         delete input._id
         delete input.__v
+        delete input.createdAt
 
-        const theme = await Theme.create(input)
+        const theme = await Theme.create({...input, images: JSON.stringify(input.images)})
         if(!theme) {
             return this.handler.error("Bad Request! Please try again.")
         }
@@ -45,6 +46,6 @@ export default class ThemeResolver {
         if (!themes) {
             return this.handler.error("No themes found.")
         }
-        return this.handler.success(themes)
+        return this.handler.success(themes.map((e) => ({...e, images: JSON.parse(e.images as string)})))
     }
 }

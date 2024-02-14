@@ -59,10 +59,10 @@ export default class IPerson extends IMongoDocument {
     })
     type!: PersonType
 
-    @Field(() => Socials)
+    @Field(() => Socials, { nullable: true })
     @prop({
         required: handler.fieldRequired("socials"),
-        type: () => String
+        type: () => Socials
     })
     socials!: Socials
 

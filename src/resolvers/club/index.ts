@@ -4,7 +4,7 @@ import Models from "@utils/models";
 import { Types } from "mongoose";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import Club from "@models/club"
-import IClub from "@types_/club";
+import IClub, { ClubInput } from "@types_/club";
 
 @Resolver(() => IClub)
 export default class ClubResolver {
@@ -27,12 +27,17 @@ export default class ClubResolver {
 
     @Mutation(() => IResponse)
     async CreateClub(
-        @Arg("input", () => IClub) input: IClub
+        @Arg("input", () => ClubInput) input: IClub
     ) {
         delete input._id
         delete input.__v
+        delete input.createdAt
+        // delete input.lead._id
+        // delete input.coLead._id
+    
 
-        const club = await Club.create(input)
+        console.log(input)
+        const club = await Club.create({...input, socials: JSON.stringify(input.socials)})
         if(!club) {
             return this.handler.error("Bad Request! Please try again.")
         }

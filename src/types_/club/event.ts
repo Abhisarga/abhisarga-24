@@ -3,7 +3,6 @@ import { prop, type Ref } from "@typegoose/typegoose";
 import { type Time } from "@types_";
 import IClub from "@types_/club";
 import { IMongoDocument } from "@types_/mongo";
-import IPerson from "@types_/user/person";
 import Models from "@utils/models";
 import { Field, InputType, ObjectType } from "type-graphql";
 
@@ -52,17 +51,26 @@ export class EventRound {
         type: () => String
     })
     end!: Time
-
-    @Field(() => [IPerson])
-    @prop({
-        ref: () => IPerson,
-        type:() => [IPerson],
-        required: handler.fieldRequired("round.organizers")
-    })
-    organizers!: Ref<IPerson>[] // take the required details
 }
 
-@InputType("EventInput")
+@InputType("EventOrganizerInput")
+@ObjectType()
+export class EventOrganizer {
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("organizer.name"),
+        type: () => String
+    })
+    name!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("organizer.phone"),
+        type: () => String
+    })
+    phone!: string
+}
+
 @ObjectType()
 export default class IEvent extends IMongoDocument {
 
@@ -104,6 +112,67 @@ export default class IEvent extends IMongoDocument {
     @Field(() => [EventRound])
     @prop({
         required: handler.fieldRequired("rounds"),
+        type: () => String
+    })
+    rounds!: EventRound[] | string
+
+    @Field(() => Number)
+    @prop({
+        required: handler.fieldRequired("rounds"),
+        type: () => Number
+    })
+    prizePool!: number
+
+    @Field(() => [EventOrganizer])
+    @prop({
+        type: () => String,
+        required: handler.fieldRequired("organizers")
+    })
+    organizers!: EventOrganizer[] | string
+}
+
+
+@InputType()
+export class EventInput extends IMongoDocument {
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("name"),
+        type: () => String
+    })
+    name!: string
+
+    @Field(() => String)
+    @prop({
+        ref: () => IClub,
+        required: handler.fieldRequired("club")
+    })
+    club!: Ref<IClub> | string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("description"),
+        type: () => String
+    })
+    description!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("poster"),
+        type: () => String
+    })
+    poster!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("registrationLink"),
+        type: () => String
+    })
+    registrationLink!: string
+
+    @Field(() => [EventRound])
+    @prop({
+        required: handler.fieldRequired("rounds"),
         type: () => [EventRound]
     })
     rounds!: EventRound[]
@@ -114,6 +183,13 @@ export default class IEvent extends IMongoDocument {
         type: () => Number
     })
     prizePool!: number
+
+    @Field(() => [EventOrganizer])
+    @prop({
+        type: () => [EventOrganizer],
+        required: handler.fieldRequired("event.organizers")
+    })
+    organizers!: EventOrganizer[] | string // take the required details
 }
 
 export type EventType = typeof IEvent

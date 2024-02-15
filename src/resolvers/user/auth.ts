@@ -57,7 +57,7 @@ export default class AuthResolver {
 
     @Mutation(() => IResponse)
     async Register(
-        @Arg("user", () => IUser) input: IUser
+        @Arg("user", () => UserInput) input: IUser
     ) {
         delete input._id
         delete input.__v

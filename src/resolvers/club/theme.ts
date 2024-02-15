@@ -37,7 +37,10 @@ export default class ThemeResolver {
         if(!theme) {
             return this.handler.error("Bad Request! Please try again.")
         }
-        return this.handler.success(theme)
+        return this.handler.success({
+            ...theme["_doc"] as ITheme,
+            images: JSON.parse(theme.images as string) as string[]
+        })
     }
 
     @Query(() => [IResponse])

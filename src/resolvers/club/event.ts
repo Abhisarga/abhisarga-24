@@ -1,6 +1,6 @@
 import ErrorHandler from "@handlers/error";
 import Event from "@models/club/event";
-import IEvent, { EventInput } from "@types_/club/event";
+import IEvent, { EventInput, EventOrganizer, EventRound } from "@types_/club/event";
 import { IResponse } from "@types_/response";
 import Models from "@utils/models";
 import { Types } from "mongoose";
@@ -32,12 +32,21 @@ export default class EventResolver {
     ) {
         delete input._id
         delete input.__v
-        console.log(input)
-        const event = await Event.create(input)
+        delete input.createdAt
+
+        const event = await Event.create({
+            ...input,
+            rounds: JSON.stringify(input.rounds),
+            organizers: JSON.stringify(input.organizers),
+        })
         if (!event) {
             return this.handler.error(null)
         }
-        return this.handler.success(event)
+        return this.handler.success({
+            ...event["_doc"] as IEvent,
+            rounds: JSON.parse(event.rounds as string) as EventRound[],
+            organizers: JSON.parse(event.organizers as string) as EventOrganizer[]
+        } as IEvent)
     }
 
     @Query(() => EventResponse)
@@ -48,11 +57,19 @@ export default class EventResolver {
         if (!event) {
             return this.handler.error(null)
         }
-        return this.handler.success(event)
+        return this.handler.success({
+            ...event["_doc"] as IEvent,
+            rounds: JSON.parse(event.rounds as string) as EventRound[],
+            organizers: JSON.parse(event.organizers as string) as EventOrganizer[]
+        } as IEvent)
     }
 
     @Query(() => MultiEventResponse)
     async AllEvents() {
-        return this.handler.success((await Event.find()) || [])
+        return this.handler.success((await Event.find()).map(event => ({
+            ...event, 
+            rounds: JSON.parse(event.rounds as string) as EventRound[],
+            organizers: JSON.parse(event.organizers as string) as EventOrganizer[]
+        })) || [])
     }
 }

@@ -3,7 +3,6 @@ import { prop, type Ref } from "@typegoose/typegoose";
 import { type Time } from "@types_";
 import IClub from "@types_/club";
 import { IMongoDocument } from "@types_/mongo";
-import IPerson from "@types_/user/person";
 import Models from "@utils/models";
 import { Field, InputType, ObjectType } from "type-graphql";
 
@@ -113,9 +112,9 @@ export default class IEvent extends IMongoDocument {
     @Field(() => [EventRound])
     @prop({
         required: handler.fieldRequired("rounds"),
-        type: () => [EventRound]
+        type: () => String
     })
-    rounds!: EventRound[]
+    rounds!: EventRound[] | string
 
     @Field(() => Number)
     @prop({
@@ -126,10 +125,10 @@ export default class IEvent extends IMongoDocument {
 
     @Field(() => [EventOrganizer])
     @prop({
-        type:() => [EventOrganizer],
-        required: handler.fieldRequired("round.organizers")
+        type: () => String,
+        required: handler.fieldRequired("organizers")
     })
-    organizers!: Ref<IPerson>[] // take the required details
+    organizers!: EventOrganizer[] | string
 }
 
 
@@ -187,10 +186,10 @@ export class EventInput extends IMongoDocument {
 
     @Field(() => [EventOrganizer])
     @prop({
-        type:() => [EventOrganizer],
+        type: () => [EventOrganizer],
         required: handler.fieldRequired("event.organizers")
     })
-    organizers!: Ref<IPerson>[] | string // take the required details
+    organizers!: EventOrganizer[] | string // take the required details
 }
 
 export type EventType = typeof IEvent

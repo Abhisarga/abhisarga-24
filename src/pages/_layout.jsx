@@ -34,16 +34,10 @@ export default function Layout({ children, data }) {
         }
     }
     return (
-        <html lang="en" className='dark'>
-            <body>
-                <Providers>
-                    {/* {data.hasHeader && <Header />} */}
-                    <main>
-                        {children}
-                    </main>
-                    {/* {data.hasFooter && <Footer />} */}
-                </Providers>
-            </body>
-        </html>
+        <Providers>
+            <main>
+                {children}
+            </main>
+        </Providers>
     );
 }

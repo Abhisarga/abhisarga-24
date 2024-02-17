@@ -5,6 +5,7 @@ import { useParams } from "react-router-dom";
 import Header from "../../components/Header";
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
+import { Link } from "react-router-dom";
 
 
 function Details() {
@@ -22,16 +23,18 @@ function Details() {
                     <CardBody className="w-full flex flex-col sm:flex-row gap-2">
                         <div className="w-full sm:w-1/2 flex flex-col p-4">
                             <Card className="h-full mb-4">
-                                <CardBody></CardBody>
+                                <CardBody>
+                                    <img src={`/Logos/${clubDetails?.logo}`} />
+                                </CardBody>
                             </Card>
                         </div>
 
                         <div className="w-full sm:w-1/2 p-4 flex flex-col gap-4">
                             <div className="flex justify-center sm:justify-start">
-                                <h1 className="font-bold text-3xl sm:text-4xl">{clubDetails.name}</h1>
+                                <h1 className="font-bold text-3xl sm:text-4xl">{clubDetails?.name}</h1>
                             </div>
                             <div className="flex justify-center sm:justify-start">
-                                <h1 className="text-sm sm:text-base">{clubDetails.abbreviation}</h1>
+                                <h1 className="text-sm sm:text-base">{clubDetails?.abbreviation}</h1>
                             </div>
 
                             <Card className="m-4">
@@ -44,11 +47,11 @@ function Details() {
                             <Card className="m-4">
                                 <CardBody>
                                     <div className="flex flex-col gap-2">
-                                        <p>Email: {clubDetails?.socials?.email}</p>
+                                        <p>Email: <Link to={`mailto:${clubDetails?.socials?.email}`}>{clubDetails?.socials?.email}</Link></p>
                                         <div className="flex flex-row items-center gap-2">
                                             <p className="m-0">Follow Us:</p>
-                                            <FontAwesomeIcon icon={faInstagram} />
-                                            <FontAwesomeIcon icon={faLinkedin} />
+                                            <Link to={clubDetails?.socials?.instagram}><FontAwesomeIcon icon={faInstagram} /></Link>
+                                            <Link to={clubDetails?.socials?.linkedin}><FontAwesomeIcon icon={faLinkedin} /></Link>
                                         </div>
                                     </div>
                                 </CardBody>

@@ -5,6 +5,7 @@ import { Types } from "mongoose";
 import { Arg, Mutation, Query, Resolver } from "type-graphql";
 import Club from "@models/club"
 import IClub, { ClubInput } from "@types_/club";
+import ITheme from "@types_/club/theme";
 
 @Resolver(() => IClub)
 export default class ClubResolver {
@@ -18,11 +19,18 @@ export default class ClubResolver {
     async Club(
         @Arg("id", () => String) id: Types.ObjectId
     ) {
-        const club = await Club.findById(id)
+        const club = await Club.findById(id).populate(["lead", "coLead", "representative", "theme"]).exec()
         if(!club) {
             return this.handler.error("Bad Request! Please try again!")
         }
-        return this.handler.success(club)
+        return this.handler.success({
+            ...club["_doc"] as IClub,
+            socials: JSON.parse(club.socials as string) as IClub["socials"],
+            theme: {
+                ...club.theme["_doc"] as ITheme,
+                images: JSON.parse(club.theme.images as string) as string[]
+            }
+        } as IClub)
     }
 
     @Mutation(() => IResponse)

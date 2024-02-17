@@ -1,27 +1,43 @@
-/* eslint-disable react/no-unknown-property */
-import { Canvas } from '@react-three/fiber';
-import { useLoader } from '@react-three/fiber';
-import { Suspense } from 'react';
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
+import Layout from "../../pages/_layout";
+import { getLocation } from "../../utils/react";
+import { Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import Loading from "../loading";
+import Head from "./head";
 
-
-const Model = () => {
-    const gltf = useLoader(GLTFLoader, "../../assets/models/terrain.glb");
-    gltf.scene.position.set(...[0, -1, 0]);
-    gltf.scene.scale.set(0.5);
-    // if (rotation) {
-    //     gltf.scene.rotation.set(...rotation);
-    // }
-
+export default function Router() {
+    const slots = import.meta.glob("/src/pages/**/(?!_)*.jsx", { eager: true })
+    const pages = []
+    for (const page in slots) {
+        const slot = slots[page]
+        const location = getLocation(page)
+        if (!location) {
+            continue
+        }
+        pages.push((
+            <Route
+                key={location}
+                path={location}
+                element={(
+                    <Suspense fallback={<Loading />}>
+                        {slot?.head && <Head head={slot?.head} key={location} />}
+                        {slot?.layout ? (
+                            <Layout data={slot?.layout}>
+                                <slot.default />
+                            </Layout>
+                        ) : (
+                            <Layout>
+                                <slot.default />
+                            </Layout>
+                        )}
+                    </Suspense>
+                )}
+            />
+        ))
+    }
     return (
-        <Canvas>
-            <ambientLight intensity={0.5} />
-            <pointLight position={[10, 10, 10]} intensity={0.5} />
-            <Suspense fallback={null}>
-                <primitive object={gltf.scene} />
-            </Suspense>
-        </Canvas>
-    );
-};
-
-export default Model;
+        <Routes>
+            {pages}
+        </Routes>
+    )
+}

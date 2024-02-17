@@ -9,10 +9,8 @@ export default function Router() {
     const slots = import.meta.glob("/src/pages/**/(?!_)*.jsx", { eager: true })
     const pages = []
     for (const page in slots) {
-        console.log(page)
         const slot = slots[page]
         const location = getLocation(page)
-        console.log(location)
         if (!location) {
             continue
         }

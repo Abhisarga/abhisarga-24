@@ -25,11 +25,15 @@ export default defineConfig(async ({ command }) => {
             plugins: [react(), restart({ restart: "src" })],
             resolve: {
                 alias
-            }
+            },
+            assetsInclude: [
+                `**/*.glb`
+            ]
         }
     }
     return {
-        plugins: [react()]
+        plugins: [react()],
+        assetsInclude: [`**/*.glb`]
     }
 })
 

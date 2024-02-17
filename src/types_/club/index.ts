@@ -43,7 +43,7 @@ export default class IClub extends IMongoDocument {
         required: handler.fieldRequired("socials"),
         type: () => String
     })
-    socials!: Socials
+    socials!: Socials | string
 
     @Field(() => IPerson)
     @prop({

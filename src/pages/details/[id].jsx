@@ -12,6 +12,8 @@ function Details() {
     const { data, mutation, isLoading, isValidating } = useGetRequest(schema.queries.club.getById, {
         clubId: id
     })
+    const clubDetails = data?.Club?.data
+    console.log(clubDetails)
     return (
         <>
             <Header />
@@ -26,23 +28,23 @@ function Details() {
 
                         <div className="w-full sm:w-1/2 p-4 flex flex-col gap-4">
                             <div className="flex justify-center sm:justify-start">
-                                <h1 className="font-bold text-3xl sm:text-4xl">Club Name</h1>
+                                <h1 className="font-bold text-3xl sm:text-4xl">{clubDetails.name}</h1>
                             </div>
                             <div className="flex justify-center sm:justify-start">
-                                <h1 className="text-sm sm:text-base">Abbreviation</h1>
+                                <h1 className="text-sm sm:text-base">{clubDetails.abbreviation}</h1>
                             </div>
 
                             <Card className="m-4">
                                 <CardHeader>Description</CardHeader>
                                 <CardBody>
-                                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero inventore odit laudantium, repellat cum ea, architecto soluta blanditiis eos ipsa similique, sint repudiandae ut optio. Nihil cupiditate illo expedita ut.
+                                    {clubDetails?.description}
                                 </CardBody>
                             </Card>
 
                             <Card className="m-4">
                                 <CardBody>
                                     <div className="flex flex-col gap-2">
-                                        <p>Email: xyz@gmail.com</p>
+                                        <p>Email: {clubDetails?.socials?.email}</p>
                                         <div className="flex flex-row items-center gap-2">
                                             <p className="m-0">Follow Us:</p>
                                             <FontAwesomeIcon icon={faInstagram} />

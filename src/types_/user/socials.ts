@@ -20,4 +20,11 @@ export default class Socials {
         type: () => String
     })
     linkedin!: string
+
+    @Field(() => String)
+    @prop({
+        required: handler.fieldRequired("email"),
+        type: () => String
+    })
+    email!: string
 }

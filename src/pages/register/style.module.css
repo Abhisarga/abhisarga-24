@@ -13,7 +13,7 @@
 .loginForm {
   display: flex;
   flex-direction: column;
-  padding: 10rem;
+  padding: 5rem;
   align-items: center;
   gap: 2rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
@@ -26,7 +26,9 @@
 }
 
 .loginForm > input {
-  padding: 0.5rem;
+  padding: 0.7rem;
+  border: #d4a7f0 solid;
+  border-radius: 1rem;
 }
 
 .loginForm > button {

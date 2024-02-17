@@ -1,5 +1,5 @@
 import React from "react";
-import classes from "../../assets/styles/login.module.css";
+import classes from "./style.module.css";
 import { Link } from "react-router-dom";
 
 const login = () => {

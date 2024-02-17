@@ -6,7 +6,7 @@ const createRequest = () => {
     return axios.create()
 }
 
-const serverPath = "http://localhost:6969/graphiQL"
+const serverPath = "http://localhost:6969/graphql"
 
 export function useGetter<T>(schema: string, data: T) {
     const request = createRequest()

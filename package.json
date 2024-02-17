@@ -43,9 +43,10 @@
     "react-dom": "^18",
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.21.3",
+    "react-three-fiber": "^6.0.13",
     "reflect-metadata": "^0.2.1",
     "swr": "^2.2.4",
-    "three": "^0.160.0",
+    "three": "^0.160.1",
     "type-graphql": "^1.1.1",
     "uuid4": "^2.0.3"
   },

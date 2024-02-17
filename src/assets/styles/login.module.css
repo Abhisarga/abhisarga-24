@@ -1,0 +1,53 @@
+.loginContainer {
+  all: initial;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  background-color: #eeebe5;
+  width: 100vw;
+  height: 100vh;
+  font-family: "PP Neue Montreal", sans-serif;
+}
+
+.loginForm {
+  display: flex;
+  flex-direction: column;
+  padding: 10rem;
+  align-items: center;
+  gap: 2rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  justify-items: center;
+  align-items: center;
+  max-width: 25rem;
+  border-radius: 2.5rem;
+  background-color: white;
+  margin-bottom: 6rem;
+}
+
+.loginForm > input {
+  padding: 0.5rem;
+}
+
+.loginForm > button {
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 0.6rem;
+  border-radius: 1rem;
+  background-color: #9e00ff;
+  font-weight: bold;
+  font-family: "PP Neue Montreal", sans-serif;
+  width: 5rem;
+}
+
+.loginHeading {
+  text-align: center;
+}
+
+.registerLink {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.rlink {
+  color: #9e00ff;
+}

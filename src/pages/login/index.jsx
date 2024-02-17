@@ -1,41 +1,25 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import classes from "../../assets/styles/login.module.css";
+import { Link } from "react-router-dom";
 
-const Login = () => {
-    const handleSignIn = (e) => {
-        e.preventDefault();
-        // Handle sign-in logic here
-    };
-
-    return (
-        <div>
-            <h1>Sign In</h1>
-            <form onSubmit={handleSignIn}>
-                <div>
-                    <label htmlFor="email">Email:</label>
-                    <input type="email" id="email" name="email" required />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input type="password" id="password" name="password" required />
-                </div>
-                <div>
-                    <button type="submit">Sign In</button>
-                </div>
-            </form>
-            <div>
-                <p>Don't have an account?{' '}</p>
-                <Link to="/signup">
-                    <p>Sign Up</p>
-                </Link>
-            </div>
-            <div>
-                <Link to="/forgot-password">
-                    <p>Forgot Password?</p>
-                </Link>
-            </div>
-        </div>
-    );
+const login = () => {
+  return (
+    <div className={classes.loginContainer}>
+      <div>
+        <form method="post" action="/login" className={classes.loginForm}>
+          <input type="email" placeholder="email..."></input>
+          <input type="password" placeholder="password..."></input>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+      <div className={classes.registerLink}>
+        <p>New here?</p>
+        <Link to="/register" className={classes.rlink}>
+          register now!
+        </Link>
+      </div>
+    </div>
+  );
 };
 
-export default Login;
+export default login;

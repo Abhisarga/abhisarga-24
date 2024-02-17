@@ -1,9 +1,26 @@
-import Header from "../components/header";
+import { useEditable } from "@chakra-ui/react";
+import Header from "../../components/Header";
 import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
+import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+
 
 function Details() {
+  const id = useParams().id;
+
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch(`http://localhost:6969/clubDetails/${id}`);
+      const data = await response.json();
+      console.log(data);
+    }
+    fetchData();
+  }
+  , [id]);
   return (
     <>
       <Header />

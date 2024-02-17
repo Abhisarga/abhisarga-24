@@ -1,7 +1,11 @@
 import { Card, CardBody, CardHeader, Button } from "@nextui-org/react";
+import Header from "../../components/Header";
+import { useParams } from "react-router-dom";
 
 function Event() {
-    return (
+    const id = useParams().id;
+    return (<>
+        <Header />
         <section className="p-4">
 
             <Card className="px-2 bg-gray-800 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">
@@ -10,8 +14,10 @@ function Event() {
 
                     <div className="w-full sm:w-1/2 min-h-[400px] flex flex-col p-4">
                         <Card className="h-full mb-4">
-                            <CardBody></CardBody>
-                            {/* <Image /> */}
+                            <CardBody className="justify-center">
+
+                            <img src="/FStops/Logo_fstops.jpg"/>
+                            </CardBody>
                         </Card>
 
                         <Button color="secondary" className="w-full">
@@ -31,6 +37,7 @@ function Event() {
                             <CardHeader>Description</CardHeader>
                             <CardBody>
                                 Lorem ipsum dolor sit amet consectetur adipisicing elit. Libero inventore odit laudantium, repellat cum ea, architecto soluta blanditiis eos ipsa similique, sint repudiandae ut optio. Nihil cupiditate illo expedita ut.
+                                {id}
                             </CardBody>
                         </Card>
 
@@ -66,7 +73,7 @@ function Event() {
             </Card>
             
         </section>
-    );
+    </>);
 }
 
 export default Event;

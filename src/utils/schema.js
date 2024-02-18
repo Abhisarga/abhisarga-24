@@ -1,27 +1,25 @@
 const schema = {
-    queries: {
-        club: {
-            getById: `
+  queries: {
+    club: {
+      getById: `
                 query Club($clubId: String!) {
                     Club(id: $clubId) {
                         data
                         status
                     }
                 }
-            `
-        },
-        allclubs: {
-            getAll : `
+            `,
+      getAll: `
             query AllClubs {
                 AllClubs {
                   status
                   data
                 }
               }
-              `
-        },
-        event: {
-            getById: `
+              `,
+    },
+    event: {
+      getById: `
             query Event($eventId: String!) {
                 Event(id: $eventId) {
                   data {
@@ -103,22 +101,18 @@ const schema = {
                   status
                 }
               }
-            `
-        },
-        allEvents: {
-            getAll: `
-            query AllEvents {
-                AllEvents {
-                  status
-                  data
-                }
-              }
-            `
-        },
+            `,
+      all: `
+          query AllEvents {
+            AllEvents {
+              status
+              data
+            }
+          }
+      `,
     },
-    mutations: {
-        
-    }
-}
+  },
+  mutations: {},
+};
 
-export default schema
+export default schema;

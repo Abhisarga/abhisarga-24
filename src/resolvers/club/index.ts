@@ -52,12 +52,13 @@ export default class ClubResolver {
         return this.handler.success(club)
     }
 
-    @Query(() => [IResponse])
+    @Query(() => IResponse)
     async AllClubs() {
         const clubs = await Club.find()
         if (!clubs) {
             return this.handler.error("No clubs found.")
         }
+        console.log(clubs)
         return this.handler.success(clubs)
     }
 }

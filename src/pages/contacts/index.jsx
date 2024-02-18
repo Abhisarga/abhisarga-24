@@ -42,28 +42,11 @@ export default function ContactForm() {
     };
 
     return (
-        <>
-            <div className="box1">
-                <div className="box-content">
-                    <h3 className="contact">Contact us anytime!</h3>
-                </div>
-                <div className="box-content2">
-                    <h3 className="email">Email</h3>
-                    <input type="email" className="email" placeholder="Enter your email" value="XXXXXX" />
-                    <br></br><input type="email" className="email" placeholder="Confirm your email" value="XXXXXX" />
-
-                </div>
-                <div className="box-content3">
-                    <h3 className="email">Phone</h3>
-                    <input type="tel" className="email" placeholder="Enter your phone no." value="XXXXXX" />
-                    <br></br><input type="tel" className="email" placeholder="Enter your phone no." value="XXXXXX" />
-                </div>
-                <div className="box-content4">
-                    <h3 className="email">Drop in a message</h3>
-                    <textarea name="msg" id="" cols="30" rows="5">Your msg goes here ... </textarea>
-                </div>
-                <div className="box-content5">
-                    <h3 className="email">Abhisarga Socials</h3>
+        <section className='w-[80%] md:w-[500px] mx-auto flex flex-col gap-8 p-2'>
+            <div className='w-full rounded-lg flex flex-col gap-4 justify-center items-center min-h-fit border border-black py-10'>
+                <h2 className='text-3xl sm:text-5xl pb-10'>Contact us anytime!</h2>
+                <p className='font-thin'>Abhisarga socials</p>
+                <div className='w-1/2 flex flex-row justify-around'>
                     <a href="#" className="social-icon">
                         <InstagramIcon />
                     </a>
@@ -76,21 +59,47 @@ export default function ContactForm() {
                     <a href="#" className="social-icon">
                         <YouTubeIcon />
                     </a>
-
                 </div>
             </div>
-            <div className="bg-slate-100 flex flex-col">
-                {error &&
-                    error.map((e, index) => (
-                        <div
-                            key={index}
-                            className={`${success ? "text-green-800" : "text-red-600"
-                                } px-5 py-2`}
-                        >
-                            {e}
-                        </div>
-                    ))}
-            </div>
-        </>
+
+            <form className='w-full rounded-lg min-h-fit flex flex-col md:flex-row flex-wrap gap-8' onSubmit={handleSubmit}>
+                <div className='w-full md:w-[46%] flex flex-col'>
+                    <label className='font-thin' htmlFor="fullname">Full Name:</label>
+                    <input
+                        type="text"
+                        id="fullname"
+                        value={fullname}
+                        className='border border-black rounded-md p-2'
+                        onChange={(e) => setFullname(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className='w-full md:w-[46%] flex flex-col'>
+                    <label className='font-thin' htmlFor="email">Email:</label>
+                    <input
+                        type="email"
+                        id="email"
+                        value={email}
+                        className='border border-black rounded-md p-2'
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                    />
+                </div>
+                <div className='w-full flex flex-col'>
+                    <label className='font-thin' htmlFor="message">Message:</label>
+                    <textarea
+                        id="message"
+                        value={message}
+                        className='border border-black rounded-md p-2'
+                        onChange={(e) => setMessage(e.target.value)}
+                        required
+                    ></textarea>
+                </div>
+                {error && <p style={{ color: "red" }}>{error}</p>}
+                {success && <p style={{ color: "green" }}>Message sent successfully!</p>}
+                <button type="submit" className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded shadow mx-auto">Submit</button>
+            </form>
+
+        </section>
     );
 }

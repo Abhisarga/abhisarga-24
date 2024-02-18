@@ -10,7 +10,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const Cards = () => {
   const ref = useRef();
-  const TOTAL_CARDS_PER_CLUB = 4;
+  const MIN_SCALE_VAR = 4;
 
   const [scrollPosition, setScrollPosition] = useState(0);
   const handleScroll = () => {
@@ -18,14 +18,24 @@ const Cards = () => {
     setScrollPosition(position);
   };
 
-  const { data: clubData, mutation : clubMutation, isLoading: clubisLoading, isValidating: clubIsValidating } = useGetRequest(schema.queries.allclubs.getAll)
-  const clubDetails = clubData?.AllClubs?.data
+  const {
+    data: clubData,
+    mutation: clubMutation,
+    isLoading: clubisLoading,
+    isValidating: clubIsValidating,
+  } = useGetRequest(schema.queries.club.getAll);
+  const clubDetails = clubData?.AllClubs?.data;
 
-  const { data: eventData, mutation, isLoading, isValidating } = useGetRequest(schema.queries.allEvents.getAll)
-  const eventDetails = eventData?.AllEvents?.data
+  const {
+    data: eventData,
+    mutation,
+    isLoading,
+    isValidating,
+  } = useGetRequest(schema.queries.event.all);
+  const eventDetails = eventData?.AllEvents?.data;
 
-  console.log(clubDetails)
-  console.log(eventDetails)
+  console.log(eventData);
+  console.log(clubData);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -43,29 +53,17 @@ const Cards = () => {
 
   const data = [
     {
-      clubName: "club1",
+      clubName: "Hey, there!",
       id: 1,
       cards: [
         {
           id: 1,
           image: "https://source.unsplash.com/random/200x200",
-          number: 1,
         },
         {
           id: 2,
           image: "https://source.unsplash.com/random/200x200",
-          number: 2,
         },
-        // {
-        //   id: 3,
-        //   image: "https://source.unsplash.com/random/200x200",
-        //   number: 3,
-        // },
-        // {
-        //   id: 4,
-        //   image: "https://source.unsplash.com/random/200x200",
-        //   number: 4,
-        // },
       ],
     },
     {
@@ -75,22 +73,22 @@ const Cards = () => {
         {
           id: 5,
           image: "https://source.unsplash.com/random/200x200",
-          number: 1,
         },
         {
           id: 6,
           image: "https://source.unsplash.com/random/200x200",
-          number: 2,
         },
         {
           id: 7,
           image: "https://source.unsplash.com/random/200x200",
-          number: 3,
         },
         {
           id: 8,
           image: "https://source.unsplash.com/random/200x200",
-          number: 4,
+        },
+        {
+          id: 9,
+          image: "https://source.unsplash.com/random/200x200",
         },
       ],
     },
@@ -121,8 +119,8 @@ const Cards = () => {
           ease: "power2.inOut",
         });
 
-        club.cards.forEach((card) => {
-          const direction = card.number % 2 === 0 ? "right" : "left";
+        club.cards.forEach((card, index) => {
+          const direction = index % 2 === 0 ? "left" : "right";
           tl.to(
             `#card-${card.id}`,
             {
@@ -147,7 +145,7 @@ const Cards = () => {
     <div id="root" ref={ref}>
       <div
         id="cards"
-        className="min-h-screen relative bg-gradient-to-b from-black to-color1"
+        className="min-h-screen relative bg-gradient-to-b from-black to-gray-800"
       >
         {data.map((club) => (
           <div
@@ -168,15 +166,15 @@ const Cards = () => {
                   key={card.id}
                   id={`card-${card.id}`}
                   className={`items-center justify-center w-10 h-10 absolute flex rounded-sm ${
-                    card.id % 2 !== 0
-                      ? "card-left left-1/3 bg-green-400"
-                      : "card-right right-1/3 bg-red-400"
+                    index % 2 === 0
+                      ? "left-1/3 bg-pink-500"
+                      : "right-1/3 bg-blue-500"
                   }`}
                   style={{
                     transform: `scale(${
-                      (TOTAL_CARDS_PER_CLUB - (index + 1)) * 3 + 2
+                      (MIN_SCALE_VAR - (index + 1)) * 3 + 2
                     })`,
-                    zIndex: TOTAL_CARDS_PER_CLUB - (index + 1),
+                    zIndex: club.cards.length - (index + 1),
                   }}
                 >
                   <img

@@ -61,7 +61,6 @@ export default class EventResolver {
         if (!event) {
             return this.handler.error(null)
         }
-        console.log(event.club)
         return this.handler.success({
             ...event["_doc"] as IEvent,
             club: {
@@ -84,7 +83,7 @@ export default class EventResolver {
         } as IEvent)
     }
 
-    @Query(() => MultiEventResponse)
+    @Query(() => IResponse)
     async AllEvents() {
         return this.handler.success((await Event.find()).map(event => ({
             ...event, 

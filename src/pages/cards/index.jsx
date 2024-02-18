@@ -18,11 +18,14 @@ const Cards = () => {
     setScrollPosition(position);
   };
 
-  // const { Cdata, mutation, isLoading, isValidating } = useGetRequest(schema.queries.allclubs.getAll, {
+  const { data: clubData, mutation : clubMutation, isLoading: clubisLoading, isValidating: clubIsValidating } = useGetRequest(schema.queries.allclubs.getAll)
+  const clubDetails = clubData?.AllClubs?.data
 
-  // })
-  // const clubDetails = Cdata
-  // console.log(Cdata)
+  const { data: eventData, mutation, isLoading, isValidating } = useGetRequest(schema.queries.allEvents.getAll)
+  const eventDetails = eventData?.AllEvents?.data
+
+  console.log(clubDetails)
+  console.log(eventDetails)
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });

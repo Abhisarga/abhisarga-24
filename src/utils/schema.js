@@ -10,6 +10,16 @@ const schema = {
                 }
             `
         },
+        allclubs: {
+            getAll : `
+            query AllClubs {
+                AllClubs {
+                  status
+                  data
+                }
+              }
+              `
+        },
         event: {
             getById: `
             query Event($eventId: String!) {
@@ -91,6 +101,16 @@ const schema = {
                     }
                   }
                   status
+                }
+              }
+            `
+        },
+        allEvents: {
+            getAll: `
+            query AllEvents {
+                AllEvents {
+                  status
+                  data
                 }
               }
             `

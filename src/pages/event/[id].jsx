@@ -35,7 +35,7 @@ function Event() {
                     <div className="w-full sm:w-1/2 p-4 flex flex-col gap-4">
 
                         <div className="flex flex-col sm:flex-row justify-center sm:justify-between">
-                            <h2 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl mb-2">{eventDetails.name}</h2>
+                            <h2 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl mb-2">{eventDetails?.name}</h2>
                             <h3 className="hidden sm:block w-[1px] bg-slate-300"></h3>
                             <h3 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl">35000/-</h3>
                         </div>

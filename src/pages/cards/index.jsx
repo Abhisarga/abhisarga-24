@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-
+import { useGetRequest } from "../../hooks/fetcher";
+import schema from "../../utils/schema";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
 
@@ -16,6 +17,12 @@ const Cards = () => {
     const position = window.scrollY;
     setScrollPosition(position);
   };
+
+  const { Cdata, mutation, isLoading, isValidating } = useGetRequest(schema.queries.allclubs.getAll, {
+    
+  })
+  const clubDetails = Cdata
+  console.log(Cdata)
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });

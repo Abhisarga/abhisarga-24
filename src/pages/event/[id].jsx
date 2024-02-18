@@ -1,9 +1,16 @@
 import { Card, CardBody, CardHeader, Button } from "@nextui-org/react";
 import Header from "../../components/Header";
 import { useParams } from "react-router-dom";
+import { useGetRequest } from "../../hooks/fetcher";
+import schema from "../../utils/schema";
 
 function Event() {
     const id = useParams().id;
+    const { data, mutation, isLoading, isValidating } = useGetRequest(schema.queries.event.getById, {
+        eventId: id
+    })
+    const eventDetails = data?.Event?.data
+    console.log(eventDetails)
     return (<>
         <Header />
         <section className="p-4">
@@ -28,7 +35,7 @@ function Event() {
                     <div className="w-full sm:w-1/2 p-4 flex flex-col gap-4">
 
                         <div className="flex flex-col sm:flex-row justify-center sm:justify-between">
-                            <h2 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl mb-2">Event #1</h2>
+                            <h2 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl mb-2">{eventDetails.name}</h2>
                             <h3 className="hidden sm:block w-[1px] bg-slate-300"></h3>
                             <h3 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl">35000/-</h3>
                         </div>

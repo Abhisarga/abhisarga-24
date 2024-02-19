@@ -86,7 +86,7 @@ export default class EventResolver {
     @Query(() => IResponse)
     async AllEvents() {
         return this.handler.success((await Event.find()).map(event => ({
-            ...event, 
+            ...event["_doc"] as IEvent, 
             rounds: JSON.parse(event.rounds as string) as EventRound[],
             organizers: JSON.parse(event.organizers as string) as EventOrganizer[]
         })) || [])

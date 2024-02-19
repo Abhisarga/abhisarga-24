@@ -1,12 +1,11 @@
-import classes from "./style.module.css";
-import { Link } from "react-router-dom";
-import { Input, Button } from "@nextui-org/react";
-import { usePostRequest } from "../../hooks/fetcher";
-import schema from "../../utils/schema";
+import { Button, Input } from "@nextui-org/react";
 import { useFormik } from "formik";
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { usePostRequest } from "../../hooks/fetcher";
 import Hash from "../../utils/hash-client";
-import { useNavigate } from "react-router-dom";
+import schema from "../../utils/schema";
+import classes from "./style.module.css";
 
 const Register = () => {
   const navigate = useNavigate();

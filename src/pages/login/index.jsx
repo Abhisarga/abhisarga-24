@@ -1,15 +1,29 @@
 import { Button, Input } from "@nextui-org/react";
 import { useFormik } from "formik";
-import React from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { usePostRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
 import classes from "./style.module.css";
-import { useEffect } from "react";
 
 const Login = () => {
+  const navigate = useNavigate();
   const { data, trigger } = usePostRequest(schema.mutations.auth.login);
-  useEffect(() => {}, [data]);
+  const [errorText, setErrorText] = useState("");
+
+  useEffect(() => {
+    if (data) {
+      if (data?.data?.Login?.status === "success") {
+        formik.resetForm();
+        navigate("/");
+      } else {
+        console.log(data);
+        setErrorText(data?.data?.Login?.data);
+        formik.setValues((prev) => ({ ...prev, password: "" }));
+        formik.setFieldTouched("password", false);
+      }
+    }
+  }, [data]);
 
   const validate = (values) => {
     const errors = {};
@@ -62,6 +76,7 @@ const Login = () => {
           label="Email"
           value={formik.values.email}
           onChange={formik.handleChange}
+          autoComplete="email"
         />
 
         <Input
@@ -71,13 +86,14 @@ const Login = () => {
           name="password"
           value={formik.values.password}
           onChange={formik.handleChange}
+          autoComplete="password"
         />
 
         <Button type="submit" radius="full" size="lg">
           Login
         </Button>
         <p className={classes.errorMessage}>
-          {formik.errors.email || formik.errors.password || " "}
+          {formik.errors.email || formik.errors.password || errorText || " "}
         </p>
       </form>
 

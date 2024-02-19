@@ -8,6 +8,7 @@ import {
 import { useState, useEffect } from "react";
 import logo from "../../assets/SponsorLogos/logo.png";
 import Header from "../../components/Header";
+import { SimpleGrid } from "@chakra-ui/react";
 
 const PlatinumSponsorCards = [
   {
@@ -25,13 +26,51 @@ const PlatinumSponsorCards = [
   {
     photo: logo,
     title: "Title",
-  },
+  }
 ];
+
+const GoldSponsorCards = [
+  {
+    photo: logo,
+    title: "Title",
+  },
+  {
+    photo: logo,
+    title: "Title",
+  },
+  {
+    photo: logo,
+    title: "Title",
+  },
+  {
+    photo: logo,
+    title: "Title",
+  }
+]
+
+const SilverponsorCards = [
+  {
+    photo: logo,
+    title: "Title",
+  },
+  {
+    photo: logo,
+    title: "Title",
+  },
+  {
+    photo: logo,
+    title: "Title",
+  },
+  {
+    photo: logo,
+    title: "Title",
+  }
+]
 
 const SponsorCard = ({ photo, title }) => {
   return (
     <div className={`sponsor-card`}>
-      <Card className="py-4" style={{width:"300px"}}>
+      <Card className="py-4">
         <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
           <p className="text-tiny uppercase font-bold">Sponsor Title</p>
         </CardHeader>
@@ -49,28 +88,17 @@ const SponsorCard = ({ photo, title }) => {
 };
 
 export default function Sponsors() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex(
-        (prevIndex) => (prevIndex + 1) % PlatinumSponsorCards.length
-      );
-    }, 1000);
-
-    return () => clearInterval(intervalId);
-  }, []);
 
   return (
     <>
-    <Header/>
-      <section className="container mx-auto mt-8 flex justify-center items-center">
+      <Header />
+      <section className="container mx-auto mt-8 flex justify-center items-center flex-wrap">
         <div>
           <h1 className="text-4xl justify-center items-center">
             Abhisarga'24 <br /> Sponsors
           </h1>{" "}
         </div>
-        <div className="bg-white p-8 mt-4 rounded-md m-12 flex justify-end ml-40 flex-col items-center gap-2 padding-20 bg-color:#fff">
+        <div className="bg-white p-8 mt-4 rounded-md m-12 flex justify-end ml-40 flex-col items-center gap-2 padding-20 bg-[#eeebe5] rounded-md">
           <Card className="py-4">
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
               <p className="text-tiny uppercase font-bold">Sponsor Title</p>
@@ -89,35 +117,53 @@ export default function Sponsors() {
           </h1>
         </div>
       </section>
-      <section className="container mx-auto mt-8 flex justify-center items-center flex flex-col gap-4">
-        <div className="flex flex-row justify-center items-center gap-2 cards overflowx-scroll w-70">
+      <section className="container mx-auto mt-8 flex justify-center items-center flex flex-col gap-4 w-full">
+      <div className="bg-gray-100 p-8 items-center flex flex-col bg-[#eeebe5]">
+        <SimpleGrid
+          spacing={4}
+          columns={{ base: 1, md: 4 }}
+          className="w-full"
+        >
           {PlatinumSponsorCards.map((card, index) => (
             <SponsorCard key={index} photo={card.photo} title={card.title} />
           ))}
-        </div>
-        <h1 className="text-4xl font-bold justify-center items-center">
+        </SimpleGrid>
+        <h1 className="text-4xl font-bold justify-center items-center mt-4">
           Platinum Sponsors
         </h1>
+      </div>
       </section>
-      <section className="container mx-auto mt-8 flex justify-center items-center flex flex-col gap-4">
-        <div className="flex flex-row justify-center items-center gap-2 cards overflowx-scroll w-70">
-          {PlatinumSponsorCards.map((card, index) => (
+      <section className="container mx-auto mt-8 flex justify-center items-center flex flex-col gap-4 w-full">
+      <div className="bg-gray-100 p-8 items-center flex flex-col bg-[#eeebe5]">
+        <SimpleGrid
+          spacing={4}
+          columns={{ base: 1, md: 4 }}
+          className="w-full"
+        >
+          {GoldSponsorCards.map((card, index) => (
             <SponsorCard key={index} photo={card.photo} title={card.title} />
           ))}
-        </div>
-        <h1 className="text-4xl font-bold justify-center items-center">
+        </SimpleGrid>
+        <h1 className="text-4xl font-bold justify-center items-center mt-4">
           Gold Sponsors
         </h1>
+      </div>
       </section>
-      <section className="container mx-auto mt-8 flex justify-center items-center flex flex-col gap-4">
-        <div className="flex flex-row justify-center items-center gap-2 cards overflowx-scroll w-70">
-          {PlatinumSponsorCards.map((card, index) => (
+      <section className="container mx-auto mt-8 flex justify-center items-center flex flex-col gap-4 w-full">
+      <div className="bg-gray-100 p-8 items-center flex flex-col bg-[#eeebe5]">
+        <SimpleGrid
+          spacing={4}
+          columns={{ base: 1, md: 4 }}
+          className="w-full"
+        >
+          {SilverponsorCards.map((card, index) => (
             <SponsorCard key={index} photo={card.photo} title={card.title} />
           ))}
-        </div>
-        <h1 className="text-4xl font-bold justify-center items-center">
+        </SimpleGrid>
+        <h1 className="text-4xl font-bold justify-center items-center mt-4">
           Silver Sponsors
         </h1>
+      </div>
       </section>
     </>
   );

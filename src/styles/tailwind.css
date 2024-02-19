@@ -1255,6 +1255,10 @@ video {
   width: 2rem;
 }
 
+.w-80 {
+  width: 20rem;
+}
+
 .w-9 {
   width: 2.25rem;
 }
@@ -2309,6 +2313,11 @@ video {
 
 .bg-foreground\/10 {
   background-color: hsl(var(--nextui-foreground) / 0.1);
+}
+
+.bg-gray-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(31 41 55 / var(--tw-bg-opacity));
 }
 
 .bg-gray-500 {

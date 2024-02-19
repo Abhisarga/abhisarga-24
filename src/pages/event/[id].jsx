@@ -22,7 +22,7 @@ function Event() {
       <Header />
       <section className="p-4 bg-color1 relative">
         <ImgElements />
-        <Card className="px-2 bg-color3 opacity-90 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">
+        <Card className="px-2 bg-color3 bg-opacity-90 border-red-900 border-2 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">
           <CardBody className="w-full flex flex-col-reverse sm:flex-row gap-2">
 
             <div className="w-full sm:w-1/2 h-[650px] flex flex-col p-4 justify-between">

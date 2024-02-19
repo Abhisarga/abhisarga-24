@@ -97,12 +97,20 @@ const Cards = () => {
         },
       });
 
+      tl.to("#abhisarga", {
+        opacity: 0,
+      });
+
       clubAndEventData?.AllClubs?.data?.forEach((club) => {
-        tl.to(`#club-${club._id}`, {
-          opacity: 1,
-          scale: 1,
-          ease: "power2.inOut",
-        });
+        tl.to(
+          `#club-${club._id}`,
+          {
+            opacity: 1,
+            scale: 1,
+            ease: "power2.inOut",
+          },
+          "<"
+        );
 
         tl.to(`#club-heading-${club._id}`, {
           opacity: 0,
@@ -128,6 +136,10 @@ const Cards = () => {
           });
         });
       });
+
+      tl.to("#abhisarga", {
+        opacity: 1,
+      });
     },
     { scope: ref }
   );
@@ -138,6 +150,14 @@ const Cards = () => {
         id="cards"
         className="min-h-screen relative bg-gradient-to-b from-black to-gray-800"
       >
+        <div
+          className="absolute h-screen w-screen flex items-center justify-center -z-10"
+          id="abhisarga"
+        >
+          <h1 className="text-white text-8xl font-extrabold">
+            A B H I S A R G A
+          </h1>
+        </div>
         {clubAndEventData?.AllClubs?.data?.map((club) => (
           <div
             key={club._id}
@@ -169,8 +189,8 @@ const Cards = () => {
                   }}
                 >
                   <img
-                    src={card.poster}
-                    // alt="img"
+                    src={`/posters/${card.poster}`}
+                    alt="img"
                     className="p-[0.1px] rounded-sm"
                   />
                 </div>

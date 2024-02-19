@@ -1,5 +1,5 @@
 import ErrorHandler from "@handlers/error";
-import ITheme from "@types_/club/theme";
+import ITheme, { ThemeImage } from "@types_/club/theme";
 import { IResponse } from "@types_/response";
 import Models from "@utils/models";
 import { Types } from "mongoose";
@@ -39,7 +39,7 @@ export default class ThemeResolver {
         }
         return this.handler.success({
             ...theme["_doc"] as ITheme,
-            images: JSON.parse(theme.images as string) as string[]
+            images: JSON.parse(theme.images as string) as ThemeImage[]
         })
     }
 

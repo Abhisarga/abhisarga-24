@@ -17,12 +17,12 @@ function Details() {
     }
   );
   const clubDetails = data?.Club?.data;
-  console.log(clubDetails);
+  // console.log(clubDetails);
   return (
     <>
       <Header />
       <section className="w-full min-h-screen my-auto mx-auto py-4 px-16 flex flex-col gap-10 bg-color1">
-        <ImgElements />
+        <ImgElements theme={clubDetails?.theme} />
         <Card className="px-2 bg-color3 opacity-90">
           <CardBody className="w-full flex flex-col sm:flex-row gap-2">
             <div className="w-full sm:w-1/2 flex flex-col p-4">

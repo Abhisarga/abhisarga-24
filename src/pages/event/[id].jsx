@@ -16,12 +16,11 @@ function Event() {
     }
   );
   const eventDetails = data?.Event?.data;
-  console.log(data?.Event);
   return (
     <>
       <Header />
       <section className="p-4 bg-color1 relative">
-        <ImgElements />
+        <ImgElements  theme={eventDetails?.club?.theme} />
         <Card className="px-2 bg-color3 opacity-90 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">
           <CardBody className="w-full flex flex-col sm:flex-row gap-2 h-90">
             <div className="w-full sm:w-1/2 min-h-[400px] flex flex-col p-4 justify-between">

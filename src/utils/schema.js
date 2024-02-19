@@ -1,120 +1,84 @@
 const schema = {
-    queries: {
-        club: {
-            getById: `query Club($clubId: String!) {
-                Club(id: $clubId) {
-                    data
-                    status
-                }
-            }`,
-            all: `query AllClubs {
-                AllClubs {
-                    status
-                    data
-                }
-            }`,
-        },
-        event: {
-            getById: `query Event($eventId: String!) {
-                Event(id: $eventId) {
-                    data {
+  queries: {
+    club: {
+        getById: `query Club($clubId: String!) {
+            Club(id: $clubId) {
+                data
+                status
+            }
+        }`,
+        all: `query AllClubs {
+            AllClubs {
+                status
+                data
+            }
+        }`,
+    },
+    event: {
+        getById: `query Event($eventId: String!) {
+            Event(id: $eventId) {
+                data {
+                    _id
+                    createdAt
+                    name
+                    club {
                         _id
-                        createdAt
-                        name
-                        club {
-                        _id
-                        name
-                        abbreviation
-                        description
-                        logo
-                        socials {
-                            instagram
-                            linkedin
-                            email
-                        }
-                        lead {
-                            _id
-                            name
-                            email
-                            phone
-                            type
-                            socials {
-                            instagram
-                            linkedin
-                            email
-                            }
-                            profilePhoto
-                        }
-                        coLead {
-                            _id
-                            name
-                            email
-                            phone
-                            type
-                            socials {
-                            instagram
-                            linkedin
-                            email
-                            }
-                            profilePhoto
-                        }
-                        representative {
-                            _id
-                            name
-                            email
-                            phone
-                            type
-                            socials {
-                            instagram
-                            linkedin
-                            email
-                            }
-                            profilePhoto
-                        }
                         theme {
                             _id
+                            images {
+                                position
+                                url
+                            }
                             name
-                            images
                         }
-                        }
-                        description
-                        poster
-                        registrationLink
-                        rounds {
+                        name
+                    }
+                    description
+                    poster
+                    registrationLink
+                    rounds {
                         name
                         mode
                         description
                         start
                         end
-                        }
-                        prizePool
-                        organizers {
+                    }
+                    prizePool
+                    organizers {
                         name
                         phone
-                        }
                     }
-                    status
                 }
-            }`,
-            all: `query AllEvents {
-                AllEvents {
-                    status
-                    data
-                }
-            }`,
-        },
-        allEventsAndClubs: `query AllEvents {
+                status
+            }
+        }`,
+        all: `query AllEvents {
             AllEvents {
-              status
-              data
+                status
+                data
             }
-            AllClubs {
-              data
-              status
-            }
-        }`
+        }`,
     },
-    mutations: {},
+    allEventsAndClubs: `query AllEvents {
+        AllEvents {
+            status
+            data
+        }
+        AllClubs {
+            data
+            status
+        }
+    }`,
+    theme: {
+        getById: `query Theme($themeId: String!) {
+            Theme(id: $themeId) {
+              status
+              data
+            }
+        }`,
+    },
+  },
+  mutations: {},
 };
 
 export default schema;

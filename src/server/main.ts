@@ -1,5 +1,7 @@
 import { resolvers } from "@resolvers"
 import { EventModes } from "@types_/club/event"
+import { ImagePosition } from "@types_/club/theme"
+import Context from "@types_/context"
 import { ResponseStatus } from "@types_/response"
 import { SponsorTypes } from "@types_/sponsor"
 import { UserTypes } from "@types_/user"
@@ -10,12 +12,11 @@ import cors from "cors"
 import type { Express } from "express"
 import express from "express"
 import mongoose from "mongoose"
+import { dirname, join as joinPath } from "node:path"
+import { fileURLToPath } from "node:url"
 import { buildSchema, registerEnumType } from "type-graphql"
 import { DB_URL, PORT } from "./config"
-import Context from "@types_/context"
-import filesRouter from "./files";
-import { join as joinPath, dirname } from "node:path"
-import { fileURLToPath } from "node:url";
+import filesRouter from "./files"
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -47,6 +48,9 @@ mongoose.connect(DB_URL)
         })
         registerEnumType(SponsorTypes, {
             name: "SponsorTypes"
+        })
+        registerEnumType(ImagePosition, {
+            name: "ImagePosition"
         })
         console.log("Registered enum types")
         const server = new ApolloServer({

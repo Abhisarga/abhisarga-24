@@ -6,6 +6,32 @@ import { Field, InputType, ObjectType } from "type-graphql";
 
 const handler = new ErrorHandler(Models.theme)
 
+export enum ImagePosition {
+    topLeft = "top-left",
+    topRight = "top-right",
+    bottomLeft = "bottom-left",
+    bottomRight = "bottom-right"
+}
+
+@InputType("ThemeImageInput")
+@ObjectType()
+export class ThemeImage {
+    @Field(() => String)
+    @prop({
+        type: () => String,
+        required: handler.fieldRequired("theme.url")
+    })
+    url: string
+
+    @Field(() => ImagePosition)
+    @prop({
+        type: () => String,
+        enum: Object.values(ImagePosition),
+        required: handler.fieldRequired("theme.position")
+    })
+    position: ImagePosition
+}
+
 @InputType("ThemeInput")
 @ObjectType()
 export default class ITheme extends IMongoDocument {
@@ -17,7 +43,7 @@ export default class ITheme extends IMongoDocument {
     })
     name!: string
 
-    @Field(() => [String], { defaultValue: [], nullable: true })
+    @Field(() => [ThemeImage], { defaultValue: [], nullable: true })
     @prop({
         type: () => [String]
     })

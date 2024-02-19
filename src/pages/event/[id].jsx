@@ -23,10 +23,10 @@ function Event() {
       <section className="p-4 bg-color1 relative">
         <ImgElements />
         <Card className="px-2 bg-color3 opacity-90 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">
-          <CardBody className="w-full flex flex-col-reverse sm:flex-row gap-2">
+          <CardBody className="w-full flex flex-col sm:flex-row gap-2 h-90">
             <div className="w-full sm:w-1/2 min-h-[400px] flex flex-col p-4 justify-between">
               <Card className="mb-4 bg-red-300 flex align-center justify-center">
-                <Image src="/Logos/Logo_fstops.jpg" />
+                <Image src={`/posters/`+eventDetails?.poster} />
               </Card>
 
               <Button color="secondary" className="w-full">
@@ -34,7 +34,7 @@ function Event() {
               </Button>
             </div>
 
-            <div className="w-full sm:w-1/2 p-4 flex flex-col gap-3">
+            <div className="w-full sm:w-1/2 p-4 flex flex-col gap-3 ">
               <div className="flex flex-col sm:flex-row justify-center sm:justify-between">
                 <h2 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl mb-2 font-bold text-wrap">
                   {eventDetails?.name}
@@ -74,21 +74,23 @@ function Event() {
                 </Card>
               </div>
 
-              <Card className="mx-4 p-2">
+              <Card className="mx-4 p-2 ">
                 <CardHeader>Organisers</CardHeader>
                 <CardBody>
                   {eventDetails?.organizers?.map((organiser, index) => (
-                    <Card key={index} className="m-1 w-32 h-32">
-                      <CardBody className="flex flex-col gap-1">
+                    <Card key={index} className="m-1 w-90 h-17 ">
+                      <CardBody className="flex flex-row gap-2">
                         <img
                           src={TestUserImg}
                           alt="img"
-                          className="w-12 h-12 rounded-full mx-auto"
+                          className="w-12 h-12 rounded-full"
                         />
-                        <h3 className="font-bold text-wrap w-full text-center">
-                          {organiser.name}
-                        </h3>
-                        <p className="text-xs text-center">{organiser.phone}</p>
+                        <div className="flex flex-col text-left align-center">
+                          <h3 className="font-bold text-wrap w-full text-center">
+                            {organiser.name}
+                          </h3>
+                          <p className="text-xs text-left">{organiser.phone}</p>
+                        </div>                      
                       </CardBody>
                     </Card>
                   ))}

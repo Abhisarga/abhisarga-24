@@ -42,9 +42,6 @@ export default class ClubResolver {
         delete input.createdAt
         // delete input.lead._id
         // delete input.coLead._id
-    
-
-        console.log(input)
         const club = await Club.create({...input, socials: JSON.stringify(input.socials)})
         if(!club) {
             return this.handler.error("Bad Request! Please try again.")
@@ -58,7 +55,6 @@ export default class ClubResolver {
         if (!clubs) {
             return this.handler.error("No clubs found.")
         }
-        console.log(clubs)
         return this.handler.success(clubs)
     }
 }

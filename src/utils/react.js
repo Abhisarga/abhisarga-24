@@ -5,6 +5,5 @@ export function getLocation(path) {
         return null
     }
     const normalized = fileName.replace(/\[/g, ":").replace(/\]/g, "").replace(/\/(index|page(?!s))/, "")
-    console.log(normalized)
     return (fileName === "index")?"/":`/${normalized}`
 }

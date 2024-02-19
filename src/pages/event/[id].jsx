@@ -16,7 +16,7 @@ function Event() {
     }
   );
   const eventDetails = data?.Event?.data;
-  console.log(eventDetails);
+  console.log(data?.Event);
   return (
     <>
       <Header />
@@ -37,39 +37,24 @@ function Event() {
             <div className="w-full sm:w-1/2 p-4 flex flex-col gap-3">
               <div className="flex flex-col sm:flex-row justify-center sm:justify-between">
                 <h2 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl mb-2 font-bold text-wrap">
-                  {eventDetails?.name}wijefbuiwebfuwebfuiwbefuiwbe
+                  {eventDetails?.name}
                 </h2>
                 <h3 className="hidden sm:block w-[1px] bg-slate-300"></h3>
                 <h3 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl font-bold">
-                  35000/-
+                  {eventDetails?.prizePool}/-
                 </h3>
               </div>
 
-              <Card className="mx-4 p-2">
-                <CardHeader>Description</CardHeader>
+              <Card className="mx-4 p-1">
+                <CardHeader className="text-xl font-bold">
+                  Description
+                </CardHeader>
                 <CardBody className="h-48 p-3">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: `Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Cupiditate dolorum mollitia odit
-                  assumenda eos tempora ad in ut inventore. Mollitia,
-                  consequuntur voluptatem. Lorem ipsum dolor sit amet
-                  consectetur, adipisicing elit. Molestiae quam voluptas totam
-                  facere dolores quae, error aperiam modi reiciendis non! Lorem
-                  ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-                  sequi blanditiis repellendus repudiandae placeat consectetur
-                  nemo. Reprehenderit ex corrupti esse!`,
+                      __html: `${eventDetails?.description}`,
                     }}
-                  />
-                  {/* {eventDetails?.description} Lorem ipsum dolor sit amet
-                  consectetur adipisicing elit. Cupiditate dolorum mollitia odit
-                  assumenda eos tempora ad in ut inventore. Mollitia,
-                  consequuntur voluptatem. Lorem ipsum dolor sit amet
-                  consectetur, adipisicing elit. Molestiae quam voluptas totam
-                  facere dolores quae, error aperiam modi reiciendis non! Lorem
-                  ipsum dolor sit amet consectetur adipisicing elit. Doloribus
-                  sequi blanditiis repellendus repudiandae placeat consectetur
-                  nemo. Reprehenderit ex corrupti esse! */}
+                  />              
                 </CardBody>
               </Card>
 

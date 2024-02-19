@@ -33,12 +33,10 @@
 
 .loginForm > button {
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  padding: 0.6rem;
-  border-radius: 1rem;
+
   background-color: #9e00ff;
-  font-weight: bold;
+
   font-family: "PP Neue Montreal", sans-serif;
-  width: 5rem;
 }
 
 .loginHeading {
@@ -52,4 +50,13 @@
 
 .rlink {
   color: #9e00ff;
+}
+
+.errorMessage {
+  color: red;
+  font-size: small;
+  width: 15rem;
+  min-height: 1rem;
+  max-height: 1rem;
+  text-align: left;
 }

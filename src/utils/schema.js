@@ -1,19 +1,33 @@
 const schema = {
-    queries: {
-        club: {
-            getById: `
+  queries: {
+    club: {
+      getById: `
                 query Club($clubId: String!) {
                     Club(id: $clubId) {
                         data
                         status
                     }
                 }
-            `
-        }
+            `,
     },
-    mutations: {
-        
-    }
-}
+  },
+  mutations: {
+    auth: {
+      login: `mutation Login($password: String!, $email: String!) {
+        Login(password: $password, email: $email) {
+            data
+            status
+            }
+        }`,
+      register: `mutation Login($user: UserInput!) {
+        Register(user: $user) {
+          status
+          data
+        }
+      } 
+        `,
+    },
+  },
+};
 
-export default schema
+export default schema;

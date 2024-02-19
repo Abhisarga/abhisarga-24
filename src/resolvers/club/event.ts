@@ -1,5 +1,6 @@
 import ErrorHandler from "@handlers/error";
 import Event from "@models/club/event";
+import IClub from "@types_/club";
 import IEvent, { EventInput, EventOrganizer, EventRound } from "@types_/club/event";
 import { IResponse } from "@types_/response";
 import Models from "@utils/models";
@@ -53,18 +54,36 @@ export default class EventResolver {
     async Event(
         @Arg("id", () => String) id: Types.ObjectId
     ) {
-        const event = await Event.findById(id)
+        const event = await Event.findById(id).populate([{
+            path: "club",
+            populate: ["lead", "coLead", "representative", "theme"]
+        }]).exec()
         if (!event) {
             return this.handler.error(null)
         }
         return this.handler.success({
             ...event["_doc"] as IEvent,
-            rounds: JSON.parse(event.rounds as string) as EventRound[],
-            organizers: JSON.parse(event.organizers as string) as EventOrganizer[]
+            club: {
+                ...event.club["_doc"] as IClub,
+                socials: JSON.parse((event.club as IClub).socials as string),
+                theme: {
+                    ...((event.club as IClub).theme)["_doc"] as IClub["theme"],
+                    images: JSON.parse((((event.club as IClub).theme) as IClub["theme"]).images as string),
+                    createdAt: new Date((event.club as IClub).theme.createdAt).toISOString()
+                },
+                createdAt: new Date((event.club as IClub).createdAt).toISOString()
+            },
+            rounds: (JSON.parse(event.rounds as string) as EventRound[]).map(e => ({
+                ...e,
+                start: new Date(e.start),
+                end: new Date(e.end)
+            })),
+            organizers: JSON.parse(event.organizers as string) as EventOrganizer[],
+            createdAt: new Date(event.createdAt)
         } as IEvent)
     }
 
-    @Query(() => MultiEventResponse)
+    @Query(() => IResponse)
     async AllEvents() {
         return this.handler.success((await Event.find()).map(event => ({
             ...event, 

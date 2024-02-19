@@ -21,19 +21,21 @@ function Details() {
   return (
     <>
       <Header />
-      <section className="w-full min-h-screen my-auto mx-auto py-4 px-16 flex flex-col gap-10 bg-color1">
+      <section className="w-full min-h-fit my-auto mx-auto py-4 px-16 flex flex-col gap-10 bg-color1">
         <ImgElements />
+
         <Card className="px-2 bg-color3 opacity-90">
+        
           <CardBody className="w-full flex flex-col sm:flex-row gap-2">
-            <div className="w-full sm:w-1/2 flex flex-col p-4">
+            <div className="w-full sm:w-1/2 flex flex-col h-[400px] sm:h-[650px] p-4">
               <Card className="h-full mb-4">
                 <CardBody>
-                  <img src={`/Logos/${clubDetails?.logo}`} />
+                  <img src={`/Logos/${clubDetails?.logo}`} className="w-full h-full object-cover"/>
                 </CardBody>
               </Card>
             </div>
 
-            <div className="w-full sm:w-1/2 p-4 flex flex-col gap-5">
+            <div className="w-full sm:w-1/2 p-4 h-[620px] overflow-y-auto flex flex-col gap-5">
               <div className="flex justify-center sm:justify-start">
                 <h1 className="font-bold text-3xl sm:text-4xl">
                   {clubDetails?.name}
@@ -45,12 +47,12 @@ function Details() {
                 </h1>
               </div>
 
-              <Card className="mx-4">
+              <Card className="mx-4 min-h-[200px]">
                 <CardHeader>Description</CardHeader>
-                <CardBody className="h-36">{clubDetails?.description}</CardBody>
+                <CardBody className="">{clubDetails?.description}</CardBody>
               </Card>
 
-              <Card className="mx-4">
+              <Card className="mx-4 min-h-[100px]">
                 <CardBody>
                   <div className="flex flex-col gap-2">
                     <p>
@@ -165,6 +167,7 @@ function Details() {
             </CardBody>
           </Card>
         </div>
+
       </section>
     </>
   );

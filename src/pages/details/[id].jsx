@@ -1,4 +1,12 @@
-import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import {
+  faDropbox,
+  faGoogle,
+  faInstagram,
+  faLinkedin,
+  faMailchimp,
+  faSquareLetterboxd,
+  faYahoo,
+} from "@fortawesome/free-brands-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
@@ -47,82 +55,53 @@ function Details() {
 
               <Card className="mx-4 min-h-[200px]">
                 <CardHeader>Description</CardHeader>
-                <CardBody className="">{clubDetails?.description}</CardBody>
+                <CardBody className="h-36">{clubDetails?.description}</CardBody>
               </Card>
 
-              <Card className="mx-4 min-h-[100px]">
+              <Card className="mx-4">
                 <CardBody>
-                  <div className="flex flex-col gap-2">
-                    <p>
-                      Email:{" "}
-                      <Link to={`mailto:${clubDetails?.socials?.email}`}>
-                        {clubDetails?.socials?.email}
-                      </Link>
-                    </p>
-                    <div className="flex flex-row items-center gap-2">
-                      <p className="m-0">Follow Us:</p>
-                      <Link to={clubDetails?.socials?.instagram}>
-                        <FontAwesomeIcon icon={faInstagram} />
-                      </Link>
-                      <Link to={clubDetails?.socials?.linkedin}>
-                        <FontAwesomeIcon icon={faLinkedin} />
-                      </Link>
-                    </div>
-                  </div>
+                  <Card className="m-1 w-90 h-17 ">
+                    <CardBody className="flex flex-row gap-2">
+                      <Image
+                        src={"/images/hero-card-complete.jpeg"}
+                        alt="img"
+                        className="w-12 h-12 rounded-full"
+                      />
+                      <div className="flex flex-col text-left align-center w-full">
+                        <div className="flex justify-end">
+                          <h3 className="font-bold text-wrap w-full">
+                            {clubDetails?.lead?.name}
+                          </h3>
+                          <p className="w-20 text-right">Lead</p>
+                        </div>
+                        <p className="text-xs text-left">
+                          {clubDetails?.lead?.phone}
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
+                  <Card className="m-1 w-90 h-17 ">
+                    <CardBody className="flex flex-row gap-2">
+                      <Image
+                        src={"/images/hero-card-complete.jpeg"}
+                        alt="img"
+                        className="w-12 h-12 rounded-full"
+                      />
+                      <div className="flex flex-col text-left align-center w-full">
+                        <div className="flex justify-end">
+                          <h3 className="font-bold text-wrap w-full">
+                            {clubDetails?.coLead?.name}
+                          </h3>
+                          <p className="w-20 text-right">Co Lead</p>
+                        </div>
+                        <p className="text-xs text-left">
+                          {clubDetails?.coLead?.phone}
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
                 </CardBody>
               </Card>
-
-              {/* lead and co-lead details*/}
-              <div className="mx-4 flex justify-evenly">
-                <Card className="py-2 w-1/2 mr-4 box-border">
-                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-center sm:items-start">
-                    <p className="text-xs uppercase font-bold">Lead</p>
-                    <h4 className="font-bold text-lg">
-                      {clubDetails?.lead?.name}
-                    </h4>
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <small className="text-default-500">
-                        {clubDetails?.lead?.email}
-                      </small>
-                      <small className="text-default-500">
-                        {clubDetails?.lead?.phone}
-                      </small>
-                    </div>
-                  </CardHeader>
-                  <CardBody className="overflow-visible py-2 flex items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl"
-                      src={"/images/hero-card-complete.jpeg"}
-                      width={190}
-                    />
-                  </CardBody>
-                </Card>
-                <Card className="py-2 w-1/2 ml-4 box-border">
-                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-center sm:items-start">
-                    <p className="text-xs uppercase font-bold">Co Lead</p>
-                    <h4 className="font-bold text-lg">
-                      {clubDetails?.coLead?.name}
-                    </h4>
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <small className="text-default-500">
-                        {clubDetails?.coLead?.email}
-                      </small>
-                      <small className="text-default-500">
-                        {clubDetails?.coLead?.phone}
-                      </small>
-                    </div>
-                  </CardHeader>
-                  <CardBody className="overflow-visible py-2 flex items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl"
-                      src="/images/hero-card-complete.jpeg"
-                      width={190}
-                    />
-                  </CardBody>
-                </Card>
-              </div>
             </div>
           </CardBody>
         </Card>

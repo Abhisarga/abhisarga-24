@@ -1,12 +1,13 @@
 import {
-  faDropbox,
   faGoogle,
   faInstagram,
   faLinkedin,
-  faMailchimp,
-  faSquareLetterboxd,
-  faYahoo,
 } from "@fortawesome/free-brands-svg-icons";
+
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import MailIcon from '@mui/icons-material/Mail';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
@@ -35,10 +36,10 @@ function Details() {
           <CardBody className="w-full flex flex-col sm:flex-row gap-2">
             <div className="w-full sm:w-1/2 flex flex-col h-[400px] sm:h-[650px] p-4">
               <Card className="h-full mb-4">
-                <CardBody>
+                <CardBody className="p-0">
                   <img
                     src={`/Logos/${clubDetails?.logo}`}
-                    className="w-full h-full object-cover"
+                    className="w-full h-[400px] sm:h-[650px] object-cover"
                   />
                 </CardBody>
               </Card>
@@ -60,25 +61,25 @@ function Details() {
                 </div>
                 <div className="flex flex-row items-center gap-3">
                   <Link to={`mailto:${clubDetails?.socials?.email}`}>
-                    <FontAwesomeIcon icon={faGoogle} className="text-3xl" />
+                    <MailIcon />
                   </Link>
                   <Link to={clubDetails?.socials?.instagram}>
-                    <FontAwesomeIcon icon={faInstagram} className="text-3xl" />
+                    <InstagramIcon />
                   </Link>
                   <Link to={clubDetails?.socials?.linkedin}>
-                    <FontAwesomeIcon icon={faLinkedin} className="text-3xl" />
+                    <LinkedInIcon />
                   </Link>
                 </div>
               </div>
 
               <Card className="mx-4 p-1 h-[218px]">
-                <CardHeader>Description</CardHeader>
-                <CardBody className="h-52">{clubDetails?.description}</CardBody>
+                <CardHeader className="font-bold">Description</CardHeader>
+                <CardBody className="h-52 scrollbar-hide">{clubDetails?.description}</CardBody>
               </Card>
 
               {/* lead and co-lead details*/}
-              <Card className="mx-4 p-2 ">
-                <CardHeader>Club Members</CardHeader>
+              <Card className="mx-4 p-2 scrollbar-hide">
+                <CardHeader className="font-bold">Club Members</CardHeader>
                 <CardBody>
                   <Card className="m-1 w-90 h-17 ">
                     <CardBody className="flex flex-row gap-2">

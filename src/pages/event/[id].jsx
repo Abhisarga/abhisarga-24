@@ -35,7 +35,7 @@ function Event() {
                 <h2 className="text-left sm:w-2/5 text-xl sm:text-3xl font-bold text-wrap">
                   {eventDetails?.name}
                 </h2>
-                <h3 className="hidden sm:block w-[1px] bg-slate-300"></h3>
+                {/* <h3 className="hidden sm:block w-[1px] bg-slate-300"></h3> */}
                 {/* <h3 className="text-right sm:w-2/5 text-xl sm:text-2xl font-bold">
                   {eventDetails?.prizePool}/-
                 </h3> */}
@@ -50,7 +50,7 @@ function Event() {
                 <CardHeader className="font-bold text-xl">
                   Description
                 </CardHeader>
-                <CardBody className="p-3">
+                <CardBody className="p-3 scrollbar-hide">
                   <div
                     dangerouslySetInnerHTML={{
                       __html: `${eventDetails?.description}`,
@@ -62,10 +62,10 @@ function Event() {
               <div className="flex flex-col sm:flex-row justify-between p-2 min-h-[150px]">
                 <Card className="w-full p-2 sm:w-1/2 m-2">
                   <CardHeader className="font-bold text-xl">
-                    Team Size
+                    Number of rounds
                   </CardHeader>
                   <CardBody>
-                    <p className="text-xl overflow-hidden">4-6</p>
+                    <p className="text-xl overflow-hidden">{roundsDetails.length}</p>
                   </CardBody>
                 </Card>
 
@@ -85,7 +85,7 @@ function Event() {
                 <p className="font-bold mb-4 text-xl">Stages and Timelines</p>
                 {roundsDetails?.map((round, index) => (
                   <Card key={index} className=" w-90 h-[200px] mb-4 p-2">
-                    <CardBody className="flex flex-row gap-2">
+                    <CardBody className="flex flex-row gap-2 scrollbar-hide">
                       <div
                         key={index}
                         className="flex flex-col text-left align-center"
@@ -115,7 +115,7 @@ function Event() {
                 <CardBody>
                   {eventDetails?.organizers?.map((organiser, index) => (
                     <Card key={index} className="m-1 w-90 h-17 ">
-                      <CardBody className="flex flex-row gap-2">
+                      <CardBody className="flex flex-row gap-2 scrollbar-hide">
                         <img
                           src={TestUserImg}
                           alt="img"

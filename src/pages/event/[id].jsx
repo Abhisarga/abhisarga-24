@@ -24,7 +24,7 @@ function Event() {
         <ImgElements theme={eventDetails?.club?.theme} />
         <Card className="px-2 bg-color3 bg-opacity-90 border-red-900 border-2 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">
           <CardBody className="w-full flex flex-col-reverse sm:flex-row gap-2">
-            <div className="w-full sm:w-1/2 min-h-[650px] flex flex-col p-4 justify-between">
+            <div className="w-full sm:w-1/2 min-h-[650px] flex align-center justify-center flex-col p-4">
               <Card className="mb-4 bg-red-300 flex align-center justify-center">
                 <Image src={`/posters/` + eventDetails?.poster} />
               </Card>

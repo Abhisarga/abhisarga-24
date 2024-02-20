@@ -36,7 +36,10 @@ function Details() {
             <div className="w-full sm:w-1/2 flex flex-col h-[400px] sm:h-[650px] p-4">
               <Card className="h-full mb-4">
                 <CardBody>
-                  <img src={`/Logos/${clubDetails?.logo}`} className="w-full h-full object-cover"/>
+                  <img
+                    src={`/Logos/${clubDetails?.logo}`}
+                    className="w-full h-full object-cover"
+                  />
                 </CardBody>
               </Card>
             </div>
@@ -68,7 +71,7 @@ function Details() {
                 </div>
               </div>
 
-              <Card className="mx-4 min-h-[200px]">
+              <Card className="mx-4 p-1 h-[218px]">
                 <CardHeader>Description</CardHeader>
                 <CardBody className="h-52">{clubDetails?.description}</CardBody>
               </Card>
@@ -123,7 +126,7 @@ function Details() {
           </CardBody>
         </Card>
 
-        <div className="w-full flex flex-col sm:flex-row mx-auto justify-center sm:justify-evenly ">
+        {/* <div className="w-full flex flex-col sm:flex-row mx-auto justify-center sm:justify-evenly ">
           <Card className="py-4">
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-center sm:items-start">
               <p className="text-xs uppercase font-bold">Club Lead</p>
@@ -160,8 +163,7 @@ function Details() {
               />
             </CardBody>
           </Card>
-        </div>
-
+        </div> */}
       </section>
     </>
   );

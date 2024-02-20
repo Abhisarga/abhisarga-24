@@ -29,14 +29,14 @@ function Details() {
   return (
     <>
       <Header />
-      <section className="w-full min-h-screen my-auto mx-auto py-4 px-16 flex flex-col gap-10 bg-color1">
+      <section className="w-full min-h-fit my-auto mx-auto py-4 px-16 flex flex-col gap-10 bg-color1">
         <ImgElements theme={clubDetails?.theme} />
-        <Card className="px-2 bg-color3 opacity-90">
+        <Card className="px-2 bg-color3 bg-opacity-90">
           <CardBody className="w-full flex flex-col sm:flex-row gap-2">
-            <div className="w-full sm:w-1/2 flex flex-col p-4">
+            <div className="w-full sm:w-1/2 flex flex-col h-[400px] sm:h-[650px] p-4">
               <Card className="h-full mb-4">
                 <CardBody>
-                  <img src={`/Logos/${clubDetails?.logo}`} />
+                  <img src={`/Logos/${clubDetails?.logo}`} className="w-full h-full object-cover"/>
                 </CardBody>
               </Card>
             </div>
@@ -68,7 +68,7 @@ function Details() {
                 </div>
               </div>
 
-              <Card className="mx-4">
+              <Card className="mx-4 min-h-[200px]">
                 <CardHeader>Description</CardHeader>
                 <CardBody className="h-52">{clubDetails?.description}</CardBody>
               </Card>
@@ -161,6 +161,7 @@ function Details() {
             </CardBody>
           </Card>
         </div>
+
       </section>
     </>
   );

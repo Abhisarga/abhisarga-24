@@ -8,14 +8,14 @@ const getRandom = (array) => {
 }
 
 const ImgElement = ({ theme }) => {
-  console.log(theme?.images?.filter(e => e.position === "top-left"))
-  console.log(getRandom(theme?.images?.filter(e => e.position === "top-left")))
+  // console.log(theme?.images?.filter(e => e.position === "top-left"))
+  // console.log(getRandom(theme?.images?.filter(e => e.position === "top-left")))
   const topLeft = "/src/assets/BackgroundImages/" +getRandom(theme?.images?.filter(e => (e.position === "top-left") || (e.position === "topLeft")))?.url;
   const topRight = "/src/assets/BackgroundImages/" +getRandom(theme?.images?.filter(e => (e.position === "top-right") || (e.position === "topRight")))?.url;
   const bottomLeft = "/src/assets/BackgroundImages/" +getRandom(theme?.images?.filter(e => (e.position === "bottom-left") || (e.position === "bottomLeft")))?.url;
   const bottomRight = "/src/assets/BackgroundImages/" +getRandom(theme?.images?.filter(e => (e.position === "bottom-right") || (e.position === "bottomRight")))?.url;
   
-  console.log(topLeft, topRight, bottomLeft, bottomRight);
+  // console.log(topLeft, topRight, bottomLeft, bottomRight);
 
   return (
     <>

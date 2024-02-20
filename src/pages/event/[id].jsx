@@ -16,7 +16,25 @@ function Event() {
     }
   );
   const eventDetails = data?.Event?.data;
-  const roundsDetails = data?.Event?.data?.rounds;
+  // const roundsDetails = data?.Event?.data?.rounds;
+  console.log(eventDetails?.rounds?.length);  
+  const roundsDetails = [
+    {
+      name: "Round 1",
+      mode: "Solo",
+      description: "This is the first round",
+    },
+    {
+      name: "Round 2",
+      mode: "Team",
+      description: "This is the second round",
+    },
+    {
+      name: "Round 3",
+      mode: "Solo",
+      description: "This is the third round",
+    },
+  ]
   return (
     <>
       <Header />
@@ -65,7 +83,7 @@ function Event() {
                     Number of rounds
                   </CardHeader>
                   <CardBody>
-                    <p className="text-xl overflow-hidden">{roundsDetails.length}</p>
+                    <p className="text-xl overflow-hidden">{eventDetails?.rounds?.length}</p>
                   </CardBody>
                 </Card>
 
@@ -83,7 +101,7 @@ function Event() {
 
               <Card className="mx-4 p-4 min-h-[500px]">
                 <p className="font-bold mb-4 text-xl">Stages and Timelines</p>
-                {roundsDetails?.map((round, index) => (
+                {eventDetails?.rounds?.map((round, index) => (
                   <Card key={index} className=" w-90 h-[200px] mb-4 p-2">
                     <CardBody className="flex flex-row gap-2 scrollbar-hide">
                       <div

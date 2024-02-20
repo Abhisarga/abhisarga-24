@@ -41,24 +41,41 @@ function Details() {
               </Card>
             </div>
 
-            <div className="w-full sm:w-1/2 p-4 h-[620px] overflow-y-auto flex flex-col gap-5">
-              <div className="flex justify-center sm:justify-start">
-                <h1 className="font-bold text-3xl sm:text-4xl">
-                  {clubDetails?.name}
-                </h1>
-              </div>
-              <div className="flex justify-center sm:justify-start">
-                <h1 className="text-sm sm:text-base">
-                  {clubDetails?.abbreviation}
-                </h1>
+            <div className="w-full sm:w-1/2 p-4 flex flex-col gap-5">
+              <div className="m-4 flex justify-between">
+                <div>
+                  <div className="flex justify-center sm:justify-start">
+                    <h1 className="font-bold text-3xl sm:text-4xl">
+                      {clubDetails?.name}
+                    </h1>
+                  </div>
+                  <div className="flex justify-center sm:justify-start">
+                    <h1 className="text-sm sm:text-base">
+                      {clubDetails?.abbreviation}
+                    </h1>
+                  </div>
+                </div>
+                <div className="flex flex-row items-center gap-3">
+                  <Link to={`mailto:${clubDetails?.socials?.email}`}>
+                    <FontAwesomeIcon icon={faGoogle} className="text-3xl" />
+                  </Link>
+                  <Link to={clubDetails?.socials?.instagram}>
+                    <FontAwesomeIcon icon={faInstagram} className="text-3xl" />
+                  </Link>
+                  <Link to={clubDetails?.socials?.linkedin}>
+                    <FontAwesomeIcon icon={faLinkedin} className="text-3xl" />
+                  </Link>
+                </div>
               </div>
 
               <Card className="mx-4 min-h-[200px]">
                 <CardHeader>Description</CardHeader>
-                <CardBody className="h-36">{clubDetails?.description}</CardBody>
+                <CardBody className="h-52">{clubDetails?.description}</CardBody>
               </Card>
 
-              <Card className="mx-4">
+              {/* lead and co-lead details*/}
+              <Card className="mx-4 p-2 ">
+                <CardHeader>Club Members</CardHeader>
                 <CardBody>
                   <Card className="m-1 w-90 h-17 ">
                     <CardBody className="flex flex-row gap-2">

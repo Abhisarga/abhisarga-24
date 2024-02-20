@@ -33,7 +33,7 @@ function Event() {
               </Button>
             </div>
 
-            <div className="w-full h-[630px] overflow-y-auto sm:w-1/2 p-4 flex flex-col gap-3">
+            <div className="w-full h-90 overflow-y-auto sm:w-1/2 p-4 flex flex-col gap-3">
               <div className="flex flex-col sm:flex-row justify-center sm:justify-between">
                 <h2 className="text-center w-full sm:w-2/5 text-xl sm:text-2xl mb-2 font-bold text-wrap">
                   {eventDetails?.name}
@@ -49,7 +49,7 @@ function Event() {
                 <CardBody className="p-3">
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: `${eventDetails?.description}`,
+                      __html: `${eventDetails?.description}Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita labore soluta reiciendis aut, molestiae nihil quo dignissimos perferendis doloremque assumenda temporibus ipsa, aliquam eos reprehenderit repudiandae vel rerum. Tempora, dignissimos!  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita labore soluta reiciendis aut, molestiae nihil quo dignissimos perferendis doloremque assumenda temporibus ipsa, aliquam eos reprehenderit repudiandae vel rerum. Tempora, dignissimos! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita labore soluta reiciendis aut, molestiae nihil quo dignissimos perferendis doloremque assumenda temporibus ipsa, aliquam eos reprehenderit repudiandae vel rerum. Tempora, dignissimos! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita labore soluta reiciendis aut, molestiae nihil quo dignissimos perferendis doloremque assumenda temporibus ipsa, aliquam eos reprehenderit repudiandae vel rerum. Tempora, dignissimos! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Expedita labore soluta reiciendis aut, molestiae nihil quo dignissimos perferendis doloremque assumenda temporibus ipsa, aliquam eos reprehenderit repudiandae vel rerum. Tempora, dignissimos! `,
                     }}
                   />              
                 </CardBody>

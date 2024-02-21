@@ -21,14 +21,14 @@ const Cards = () => {
   const { data: clubAndEventData } = useGetRequest(
     schema.queries.allEventsAndClubs
   );
-  console.log(clubAndEventData);
+  // console.log(clubAndEventData);
 
   clubAndEventData?.AllClubs?.data?.forEach((club) => {
     club.cards = clubAndEventData?.AllEvents?.data?.filter(
       (event) => event.club === club._id
     );
   });
-  console.log("Modified clubs :", clubAndEventData?.AllClubs?.data);
+  // console.log("Modified clubs :", clubAndEventData?.AllClubs?.data);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -43,48 +43,48 @@ const Cards = () => {
     }
   }, [scrollPosition]);
 
-  const data = [
-    {
-      clubName: "Hey, there!",
-      id: 1,
-      cards: [
-        {
-          id: 1,
-          image: "https://source.unsplash.com/random/200x200",
-        },
-        {
-          id: 2,
-          image: "https://source.unsplash.com/random/200x200",
-        },
-      ],
-    },
-    {
-      clubName: "club2",
-      id: 2,
-      cards: [
-        {
-          id: 5,
-          image: "https://source.unsplash.com/random/200x200",
-        },
-        {
-          id: 6,
-          image: "https://source.unsplash.com/random/200x200",
-        },
-        {
-          id: 7,
-          image: "https://source.unsplash.com/random/200x200",
-        },
-        {
-          id: 8,
-          image: "https://source.unsplash.com/random/200x200",
-        },
-        {
-          id: 9,
-          image: "https://source.unsplash.com/random/200x200",
-        },
-      ],
-    },
-  ];
+  // const data = [
+  //   {
+  //     clubName: "Hey, there!",
+  //     id: 1,
+  //     cards: [
+  //       {
+  //         id: 1,
+  //         image: "https://source.unsplash.com/random/200x200",
+  //       },
+  //       {
+  //         id: 2,
+  //         image: "https://source.unsplash.com/random/200x200",
+  //       },
+  //     ],
+  //   },
+  //   {
+  //     clubName: "club2",
+  //     id: 2,
+  //     cards: [
+  //       {
+  //         id: 5,
+  //         image: "https://source.unsplash.com/random/200x200",
+  //       },
+  //       {
+  //         id: 6,
+  //         image: "https://source.unsplash.com/random/200x200",
+  //       },
+  //       {
+  //         id: 7,
+  //         image: "https://source.unsplash.com/random/200x200",
+  //       },
+  //       {
+  //         id: 8,
+  //         image: "https://source.unsplash.com/random/200x200",
+  //       },
+  //       {
+  //         id: 9,
+  //         image: "https://source.unsplash.com/random/200x200",
+  //       },
+  //     ],
+  //   },
+  // ];
 
   useGSAP(
     () => {
@@ -102,7 +102,7 @@ const Cards = () => {
         opacity: 0,
       });
 
-      clubAndEventData?.AllClubs?.data?.forEach((club) => {
+      clubAndEventData?.AllClubs?.data?.forEach((club, index) => {
         tl.to(
           `#club-${club._id}`,
           {
@@ -136,6 +136,15 @@ const Cards = () => {
             [direction]: "15%",
           });
         });
+
+        tl.to(
+          `#club-${club._id}`,
+          {
+            zIndex:
+              (clubAndEventData?.AllClubs?.data?.length - (index + 1)) * -1,
+          },
+          "<"
+        );
       });
 
       tl.to("#abhisarga", {
@@ -159,16 +168,19 @@ const Cards = () => {
             A B H I S A R G A
           </h1>
         </div>
-        {clubAndEventData?.AllClubs?.data?.map((club) => (
+        {clubAndEventData?.AllClubs?.data?.map((club, index) => (
           <div
             key={club._id}
             id={`club-${club._id}`}
             className="flex items-center min-h-screen absolute opacity-0 min-w-[100vw]"
-            style={{ transform: "scale(0.5)" }}
+            style={{
+              transform: "scale(0.5)",
+              zIndex: clubAndEventData?.AllClubs?.data?.length - (index + 1),
+            }}
           >
             <h1
               id={`club-heading-${club._id}`}
-              className="text-7xl text-color2 font-extrabold rounded-sm py-6 px-12 m-auto z-10"
+              className="text-7xl text-color2 font-extrabold rounded-sm py-6 px-12 m-auto z-10 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
             >
               {club.name}
             </h1>

@@ -73,13 +73,13 @@ function Details() {
               </div>
 
               <Card className="mx-4 p-1 h-[218px]">
-                <CardHeader className="font-bold">Description</CardHeader>
+                <CardHeader className="font-semibold">Description</CardHeader>
                 <CardBody className="h-52 scrollbar-hide">{clubDetails?.description}</CardBody>
               </Card>
 
               {/* lead and co-lead details*/}
               <Card className="mx-4 p-2 scrollbar-hide">
-                <CardHeader className="font-bold">Club Members</CardHeader>
+                <CardHeader className="font-semibold">Club Members</CardHeader>
                 <CardBody>
                   <Card className="m-1 w-90 h-17 ">
                     <CardBody className="flex flex-row gap-2">
@@ -90,7 +90,7 @@ function Details() {
                       />
                       <div className="flex flex-col text-left align-center w-full">
                         <div className="flex justify-end">
-                          <h3 className="font-bold text-wrap w-full">
+                          <h3 className="font-semibold text-wrap w-full">
                             {clubDetails?.lead?.name}
                           </h3>
                           <p className="w-20 text-right">Lead</p>
@@ -110,7 +110,7 @@ function Details() {
                       />
                       <div className="flex flex-col text-left align-center w-full">
                         <div className="flex justify-end">
-                          <h3 className="font-bold text-wrap w-full">
+                          <h3 className="font-semibold text-wrap w-full">
                             {clubDetails?.coLead?.name}
                           </h3>
                           <p className="w-20 text-right">Co Lead</p>

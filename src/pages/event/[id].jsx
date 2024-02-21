@@ -16,7 +16,25 @@ function Event() {
     }
   );
   const eventDetails = data?.Event?.data;
-  const roundsDetails = data?.Event?.data?.rounds;
+  // const roundsDetails = data?.Event?.data?.rounds;
+  console.log(eventDetails?.rounds?.length);  
+  const roundsDetails = [
+    {
+      name: "Round 1",
+      mode: "Solo",
+      description: "This is the first round",
+    },
+    {
+      name: "Round 2",
+      mode: "Team",
+      description: "This is the second round",
+    },
+    {
+      name: "Round 3",
+      mode: "Solo",
+      description: "This is the third round",
+    },
+  ]
   return (
     <>
       <Header />
@@ -24,7 +42,7 @@ function Event() {
         <ImgElements theme={eventDetails?.club?.theme} />
         <Card className="px-2 bg-color3 bg-opacity-90 border-red-900 border-2 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">
           <CardBody className="w-full flex flex-col-reverse sm:flex-row gap-2">
-            <div className="w-full sm:w-1/2 min-h-[650px] flex flex-col p-4 justify-between">
+            <div className="w-full sm:w-1/2 min-h-[650px] flex align-center justify-center flex-col p-4">
               <Card className="mb-4 bg-red-300 flex align-center justify-center">
                 <Image src={`/posters/` + eventDetails?.poster} />
               </Card>
@@ -32,14 +50,14 @@ function Event() {
 
             <div className="w-full h-[630px] overflow-y-auto sm:w-1/2 p-4 flex flex-col gap-3">
               <div className="flex flex-col sm:flex-row justify-center sm:justify-between m-4">
-                <h2 className="text-left sm:w-2/5 text-xl sm:text-3xl font-bold text-wrap">
+                <h2 className="text-left sm:w-4/5 text-xl sm:text-3xl font-bold text-wrap">
                   {eventDetails?.name}
                 </h2>
                 {/* <h3 className="hidden sm:block w-[1px] bg-slate-300"></h3> */}
                 {/* <h3 className="text-right sm:w-2/5 text-xl sm:text-2xl font-bold">
                   {eventDetails?.prizePool}/-
                 </h3> */}
-                <Link to={eventDetails?.registrationLink}>
+                <Link to={eventDetails?.registrationLink} className="flex items-center">
                   <Button color="secondary" className="px-8 font-bold">
                     Register
                   </Button>
@@ -65,7 +83,7 @@ function Event() {
                     Number of rounds
                   </CardHeader>
                   <CardBody>
-                    <p className="text-xl overflow-hidden">{roundsDetails.length}</p>
+                    <p className="text-xl overflow-hidden">{eventDetails?.rounds?.length}</p>
                   </CardBody>
                 </Card>
 
@@ -83,7 +101,7 @@ function Event() {
 
               <Card className="mx-4 p-4 min-h-[500px]">
                 <p className="font-bold mb-4 text-xl">Stages and Timelines</p>
-                {roundsDetails?.map((round, index) => (
+                {eventDetails?.rounds?.map((round, index) => (
                   <Card key={index} className=" w-90 h-[200px] mb-4 p-2">
                     <CardBody className="flex flex-row gap-2 scrollbar-hide">
                       <div

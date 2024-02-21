@@ -1,7 +1,7 @@
 import Img1 from "../../assets/BackgroundImages/Screenshot 2023-11-08 094030.png";
 import Img2 from "../../assets/BackgroundImages/WaveofKanagawa 2.png";
 import Img3 from "../../assets/BackgroundImages/Bird on tree 1.png";
-
+  
 const getRandom = (array) => {
   if(!array) return null;
   return array[Math.floor(Math.random() * array?.length)];
@@ -20,17 +20,17 @@ const ImgElement = ({ theme }) => {
   return (
     <>
       <div className={"h-auto w-auto overflow-visible fixed top-16 left-0 max-width-25 max-height-25"}>
-        <img src={topLeft || Img3} alt="" width="100%" height="100%"/>
+        <img src={theme?topLeft : Img3} alt="" width="100%" height="100%"/>
       </div>
       <div className={"h-auto w-auto overflow-visible fixed bottom-0 left-0"}>
-        <img src={bottomLeft || Img2} alt="" width={400} />
+        <img src={theme? bottomLeft :Img2} alt="" width={400} />
       </div>
       <div
         className={
           "h-auto w-auto overflow-visible fixed bottom-0 right-0 float-right flex justify-end"
         }
       >
-        <img src={bottomRight || Img1} alt="" width={180} />
+        <img src={theme? bottomRight : Img1} alt="" width={180} />
       </div>
     </>
   );

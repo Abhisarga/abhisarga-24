@@ -50,14 +50,14 @@ function Event() {
 
             <div className="w-full h-[630px] overflow-y-auto sm:w-1/2 p-4 flex flex-col gap-3">
               <div className="flex flex-col sm:flex-row justify-center sm:justify-between m-4">
-                <h2 className="text-left sm:w-2/5 text-xl sm:text-3xl font-bold text-wrap">
+                <h2 className="text-left sm:w-4/5 text-xl sm:text-3xl font-bold text-wrap">
                   {eventDetails?.name}
                 </h2>
                 {/* <h3 className="hidden sm:block w-[1px] bg-slate-300"></h3> */}
                 {/* <h3 className="text-right sm:w-2/5 text-xl sm:text-2xl font-bold">
                   {eventDetails?.prizePool}/-
                 </h3> */}
-                <Link to={eventDetails?.registrationLink}>
+                <Link to={eventDetails?.registrationLink} className="flex items-center">
                   <Button color="secondary" className="px-8 font-bold">
                     Register
                   </Button>

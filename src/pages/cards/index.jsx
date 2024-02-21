@@ -5,9 +5,10 @@ import { useEffect, useRef, useState } from "react";
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
 import { Link } from "@nextui-org/react";
+import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
-
+ 
 const Cards = () => {
   const ref = useRef(null);
   const MIN_SCALE_VAR = 4;
@@ -16,19 +17,19 @@ const Cards = () => {
     const position = window.scrollY;
     setScrollPosition(position);
   };
+  const navigate = useNavigate();
   // const { data: clubData } = useGetRequest(schema.queries.club.all);
   // const { data: eventData } = useGetRequest(schema.queries.event.all);
-  const { data: clubAndEventData } = useGetRequest(
+  const { data: clubAndEventData , isLoading} = useGetRequest(
     schema.queries.allEventsAndClubs
   );
-  // console.log(clubAndEventData);
+  
 
   clubAndEventData?.AllClubs?.data?.forEach((club) => {
     club.cards = clubAndEventData?.AllEvents?.data?.filter(
       (event) => event.club === club._id
     );
   });
-  // console.log("Modified clubs :", clubAndEventData?.AllClubs?.data);
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -43,48 +44,6 @@ const Cards = () => {
     }
   }, [scrollPosition]);
 
-  // const data = [
-  //   {
-  //     clubName: "Hey, there!",
-  //     id: 1,
-  //     cards: [
-  //       {
-  //         id: 1,
-  //         image: "https://source.unsplash.com/random/200x200",
-  //       },
-  //       {
-  //         id: 2,
-  //         image: "https://source.unsplash.com/random/200x200",
-  //       },
-  //     ],
-  //   },
-  //   {
-  //     clubName: "club2",
-  //     id: 2,
-  //     cards: [
-  //       {
-  //         id: 5,
-  //         image: "https://source.unsplash.com/random/200x200",
-  //       },
-  //       {
-  //         id: 6,
-  //         image: "https://source.unsplash.com/random/200x200",
-  //       },
-  //       {
-  //         id: 7,
-  //         image: "https://source.unsplash.com/random/200x200",
-  //       },
-  //       {
-  //         id: 8,
-  //         image: "https://source.unsplash.com/random/200x200",
-  //       },
-  //       {
-  //         id: 9,
-  //         image: "https://source.unsplash.com/random/200x200",
-  //       },
-  //     ],
-  //   },
-  // ];
 
   useGSAP(
     () => {
@@ -158,14 +117,14 @@ const Cards = () => {
     <div id="root" ref={ref}>
       <div
         id="cards"
-        className="min-h-screen relative bg-gradient-to-b from-black to-gray-800"
+        className="min-h-screen relative bg-gradient-to-b from-color1 to-color3"
       >
         <div
           className="absolute h-screen w-screen flex items-center justify-center -z-10"
           id="abhisarga"
         >
           <h1 className="text-white text-8xl font-extrabold">
-            A B H I S A R G A
+            <img src="/Logos/AbhisargaLogo.png" alt="Abhisarga"/>
           </h1>
         </div>
         {clubAndEventData?.AllClubs?.data?.map((club, index) => (
@@ -201,7 +160,7 @@ const Cards = () => {
                     zIndex: club?.cards?.length - (index + 1),
                   }}
                 >
-                  <Link to={`/event/${card._id}`}>
+                  <Link onClick={()=> navigate(`/event/${card._id}`)}>
                     <img
                       src={`/posters/${card.poster}`}
                       alt="img"

@@ -10,7 +10,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
-import Header from "../../components/Header";
+
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
 import { Link } from "react-router-dom";
@@ -28,7 +28,6 @@ function Details() {
   // console.log(clubDetails);
   return (
     <>
-      <Header />
       <section className="w-full min-h-fit my-auto mx-auto py-4 px-16 flex flex-col gap-10 bg-color1">
         <ImgElements theme={clubDetails?.theme} />
         <Card className="px-2 bg-color3 bg-opacity-90">

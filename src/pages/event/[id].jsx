@@ -1,5 +1,5 @@
 import { Card, CardBody, CardHeader, Button, Image } from "@nextui-org/react";
-import Header from "../../components/Header";
+
 import { Link, useParams } from "react-router-dom";
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
@@ -19,7 +19,6 @@ function Event() {
   const roundsDetails = data?.Event?.data?.rounds;
   return (
     <>
-      <Header />
       <section className="p-4 bg-color1 relative">
         <ImgElements theme={eventDetails?.club?.theme} />
         <Card className="px-2 bg-color3 bg-opacity-90 border-red-900 border-2 w-full sm:max-w-[90%] min-h-[400px] sm:min-h-[600px] mx-auto">

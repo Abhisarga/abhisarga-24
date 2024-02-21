@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useEffect, useRef, useState } from "react";
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
+import { Link } from "@nextui-org/react";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -188,11 +189,13 @@ const Cards = () => {
                     zIndex: club?.cards?.length - (index + 1),
                   }}
                 >
-                  <img
-                    src={`/posters/${card.poster}`}
-                    alt="img"
-                    className="p-[0.1px] rounded-sm"
-                  />
+                  <Link to={`/event/${card._id}`}>
+                    <img
+                      src={`/posters/${card.poster}`}
+                      alt="img"
+                      className="p-[0.1px] rounded-sm"
+                    />
+                  </Link>
                 </div>
               );
             })}

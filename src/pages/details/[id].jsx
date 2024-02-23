@@ -1,4 +1,13 @@
-import { faInstagram, faLinkedin } from "@fortawesome/free-brands-svg-icons";
+import {
+  faGoogle,
+  faInstagram,
+  faLinkedin,
+} from "@fortawesome/free-brands-svg-icons";
+
+import InstagramIcon from '@mui/icons-material/Instagram';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import MailIcon from '@mui/icons-material/Mail';
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Card, CardBody, CardHeader, Image } from "@nextui-org/react";
 import { useParams } from "react-router-dom";
@@ -27,107 +36,98 @@ function Details() {
           <CardBody className="w-full flex flex-col sm:flex-row gap-2">
             <div className="w-full sm:w-1/2 flex flex-col h-[400px] sm:h-[650px] p-4">
               <Card className="h-full mb-4">
-                <CardBody>
-                  <img src={`/Logos/${clubDetails?.logo}`} className="w-full h-full object-cover"/>
+                <CardBody className="p-0">
+                  <img
+                    src={`/Logos/${clubDetails?.logo}`}
+                    className="w-full h-[400px] sm:h-[650px] object-cover"
+                  />
                 </CardBody>
               </Card>
             </div>
 
-            <div className="w-full sm:w-1/2 p-4 h-[620px] overflow-y-auto flex flex-col gap-5">
-              <div className="flex justify-center sm:justify-start">
-                <h1 className="font-bold text-3xl sm:text-4xl">
-                  {clubDetails?.name}
-                </h1>
-              </div>
-              <div className="flex justify-center sm:justify-start">
-                <h1 className="text-sm sm:text-base">
-                  {clubDetails?.abbreviation}
-                </h1>
-              </div>
-
-              <Card className="mx-4 min-h-[200px]">
-                <CardHeader>Description</CardHeader>
-                <CardBody className="">{clubDetails?.description}</CardBody>
-              </Card>
-
-              <Card className="mx-4 min-h-[100px]">
-                <CardBody>
-                  <div className="flex flex-col gap-2">
-                    <p>
-                      Email:{" "}
-                      <Link to={`mailto:${clubDetails?.socials?.email}`}>
-                        {clubDetails?.socials?.email}
-                      </Link>
-                    </p>
-                    <div className="flex flex-row items-center gap-2">
-                      <p className="m-0">Follow Us:</p>
-                      <Link to={clubDetails?.socials?.instagram}>
-                        <FontAwesomeIcon icon={faInstagram} />
-                      </Link>
-                      <Link to={clubDetails?.socials?.linkedin}>
-                        <FontAwesomeIcon icon={faLinkedin} />
-                      </Link>
-                    </div>
+            <div className="w-full sm:w-1/2 p-4 flex flex-col gap-5">
+              <div className="m-4 flex justify-between">
+                <div>
+                  <div className="flex justify-center sm:justify-start">
+                    <h1 className="font-bold text-3xl sm:text-4xl">
+                      {clubDetails?.name}
+                    </h1>
                   </div>
-                </CardBody>
+                  <div className="flex justify-center sm:justify-start">
+                    <h1 className="text-sm sm:text-base">
+                      {clubDetails?.abbreviation}
+                    </h1>
+                  </div>
+                </div>
+                <div className="flex flex-row items-center gap-3">
+                  <Link to={`mailto:${clubDetails?.socials?.email}`}>
+                    <MailIcon />
+                  </Link>
+                  <Link to={clubDetails?.socials?.instagram}>
+                    <InstagramIcon />
+                  </Link>
+                  <Link to={clubDetails?.socials?.linkedin}>
+                    <LinkedInIcon />
+                  </Link>
+                </div>
+              </div>
+
+              <Card className="mx-4 p-1 h-[218px]">
+                <CardHeader className="font-semibold">Description</CardHeader>
+                <CardBody className="h-52 scrollbar-hide">{clubDetails?.description}</CardBody>
               </Card>
 
               {/* lead and co-lead details*/}
-              <div className="mx-4 flex justify-evenly">
-                <Card className="py-2 w-1/2 mr-4 box-border">
-                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-center sm:items-start">
-                    <p className="text-xs uppercase font-bold">Lead</p>
-                    <h4 className="font-bold text-lg">
-                      {clubDetails?.lead?.name}
-                    </h4>
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <small className="text-default-500">
-                        {clubDetails?.lead?.email}
-                      </small>
-                      <small className="text-default-500">
-                        {clubDetails?.lead?.phone}
-                      </small>
-                    </div>
-                  </CardHeader>
-                  <CardBody className="overflow-visible py-2 flex items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl"
-                      src={"/images/hero-card-complete.jpeg"}
-                      width={190}
-                    />
-                  </CardBody>
-                </Card>
-                <Card className="py-2 w-1/2 ml-4 box-border">
-                  <CardHeader className="pb-0 pt-2 px-4 flex-col items-center sm:items-start">
-                    <p className="text-xs uppercase font-bold">Co Lead</p>
-                    <h4 className="font-bold text-lg">
-                      {clubDetails?.coLead?.name}
-                    </h4>
-                    <div className="flex flex-row justify-between items-center w-full">
-                      <small className="text-default-500">
-                        {clubDetails?.coLead?.email}
-                      </small>
-                      <small className="text-default-500">
-                        {clubDetails?.coLead?.phone}
-                      </small>
-                    </div>
-                  </CardHeader>
-                  <CardBody className="overflow-visible py-2 flex items-center">
-                    <Image
-                      alt="Card background"
-                      className="object-cover rounded-xl"
-                      src="/images/hero-card-complete.jpeg"
-                      width={190}
-                    />
-                  </CardBody>
-                </Card>
-              </div>
+              <Card className="mx-4 p-2 scrollbar-hide">
+                <CardHeader className="font-semibold">Club Members</CardHeader>
+                <CardBody>
+                  <Card className="m-1 w-90 h-17 ">
+                    <CardBody className="flex flex-row gap-2">
+                      <Image
+                        src={"/images/hero-card-complete.jpeg"}
+                        alt="img"
+                        className="w-12 h-12 rounded-full"
+                      />
+                      <div className="flex flex-col text-left align-center w-full">
+                        <div className="flex justify-end">
+                          <h3 className="font-semibold text-wrap w-full">
+                            {clubDetails?.lead?.name}
+                          </h3>
+                          <p className="w-20 text-right">Lead</p>
+                        </div>
+                        <p className="text-xs text-left">
+                          {clubDetails?.lead?.phone}
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
+                  <Card className="m-1 w-90 h-17 ">
+                    <CardBody className="flex flex-row gap-2">
+                      <Image
+                        src={"/images/hero-card-complete.jpeg"}
+                        alt="img"
+                        className="w-12 h-12 rounded-full"
+                      />
+                      <div className="flex flex-col text-left align-center w-full">
+                        <div className="flex justify-end">
+                          <h3 className="font-semibold text-wrap w-full">
+                            {clubDetails?.coLead?.name}
+                          </h3>
+                          <p className="w-20 text-right">Co Lead</p>
+                        </div>
+                        <p className="text-xs text-left">
+                          {clubDetails?.coLead?.phone}
+                        </p>
+                      </div>
+                    </CardBody>
+                  </Card>
+                </CardBody>
+              </Card>
             </div>
           </CardBody>
         </Card>
 
-        <div className="w-full flex flex-col sm:flex-row mx-auto justify-center sm:justify-evenly ">
+        {/* <div className="w-full flex flex-col sm:flex-row mx-auto justify-center sm:justify-evenly ">
           <Card className="py-4">
             <CardHeader className="pb-0 pt-2 px-4 flex-col items-center sm:items-start">
               <p className="text-xs uppercase font-bold">Club Lead</p>
@@ -164,8 +164,7 @@ function Details() {
               />
             </CardBody>
           </Card>
-        </div>
-
+        </div> */}
       </section>
     </>
   );

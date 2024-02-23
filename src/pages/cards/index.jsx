@@ -24,7 +24,6 @@ const Cards = () => {
     schema.queries.allEventsAndClubs
   );
   
-
   clubAndEventData?.AllClubs?.data?.forEach((club) => {
     club.cards = clubAndEventData?.AllEvents?.data?.filter(
       (event) => event.club === club._id
@@ -43,8 +42,7 @@ const Cards = () => {
       window.scrollTo(0, 0);
     }
   }, [scrollPosition]);
-
-    
+  
   useGSAP(
     () => {
       const tl = gsap.timeline({

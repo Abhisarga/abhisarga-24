@@ -7,7 +7,7 @@ import {
 } from "@nextui-org/react";
 import { useState, useEffect } from "react";
 import logo from "../../assets/SponsorLogos/logo.png";
-import Header from "../../components/Header";
+
 import { SimpleGrid } from "@chakra-ui/react";
 
 const PlatinumSponsorCards = [
@@ -91,7 +91,6 @@ export default function Sponsors() {
 
   return (
     <>
-      <Header />
       <section className="container mx-auto mt-8 flex justify-center items-center flex-wrap">
         <div>
           <h1 className="text-4xl justify-center items-center">

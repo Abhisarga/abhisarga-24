@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loading from "../loading";
 import Head from "./head";
+import Header from "../header";
 
 export default function Router() {
     const slots = import.meta.glob("/src/pages/**/(?!_)*.jsx", { eager: true })
@@ -21,15 +22,14 @@ export default function Router() {
                 element={(
                     <Suspense fallback={<Loading />}>
                         {slot?.head && <Head head={slot?.head} key={location} />}
-                        {slot?.layout ? (
-                            <Layout data={slot?.layout}>
+                        <Layout>
+                            <Header/>
+                            {slot?.layout ? (
                                 <slot.default />
-                            </Layout>
-                        ) : (
-                            <Layout>
+                            ) : (
                                 <slot.default />
-                            </Layout>
-                        )}
+                            )}
+                        </Layout>
                     </Suspense>
                 )}
             />

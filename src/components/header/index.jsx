@@ -7,6 +7,7 @@ import {
   Link,
   Button,
 } from "@nextui-org/react";
+import { Image } from "@nextui-org/react";
 
 export default function Header() {
   const [isOpen, setIsOpen] = useState(false);
@@ -15,32 +16,38 @@ export default function Header() {
     setIsOpen(!isOpen);
   };
 
-  return (
-    <Navbar isBordered className="m-0 p-0" maxWidth={'full'} > 
+  return ( // you have to make navbar bigger
+    <Navbar isBordered className="m-0 p-0" maxWidth={'full'}> 
       <NavbarBrand className="m-0 p-0">
-        <p className="font-bold text-inherit">Abhisarga</p>
+        <Image
+          src="/Logos/AbhisargaLogo.png"
+          alt="Logo"
+          width={120}
+          layout="fixed"
+          className="m-0 p-0"
+        />
       </NavbarBrand>
       <NavbarContent 
         justify="end" 
         className={`m-0 px-0 md:flex ${isOpen ? 'block' : 'hidden'}`} 
       >
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" className="font-bold" href="#">
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" className="font-bold" href="#">
             About
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" className="font-bold" href="#">
             FAQ'S
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" href="#">
+          <Link color="foreground" className="font-bold" href="#">
             Accommodation
           </Link>
         </NavbarItem>

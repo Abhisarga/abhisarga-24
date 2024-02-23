@@ -8,7 +8,7 @@ import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
- 
+
 const Cards = () => {
   const ref = useRef(null);
   const MIN_SCALE_VAR = 4;
@@ -44,7 +44,7 @@ const Cards = () => {
     }
   }, [scrollPosition]);
 
-  
+    
   useGSAP(
     () => {
       const tl = gsap.timeline({

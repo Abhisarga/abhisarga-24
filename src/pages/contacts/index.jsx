@@ -3,7 +3,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { useState } from "react";
-import Header from "../../components/Header";
+import Header from "../../components/header/index";
 
 
 export default function ContactForm() {

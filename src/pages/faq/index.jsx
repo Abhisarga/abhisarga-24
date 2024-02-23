@@ -115,12 +115,14 @@ export default function Index() {
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center">
       <ImgElement />
-      <Card className="px-20 bg-color3 bg-opacity-80 w-100 mx-auto my-auto py-20">
+      <Card className="px-20 bg-color3 bg-opacity-80 mx-auto my-auto py-20 w-[1000px] relative">
         <div className="max-w-4xl mx-auto w-full">
-          <h1 className="text-3xl font-bold text-center mb-3">FAQs</h1>
-          <h1 className="text-xl font-bold text-center mb-8">
-            Have a Question
-          </h1>
+          <div className="w-100 flex flex-col items-center">
+            <h1 className="text-3xl font-bold text-center mb-3">FAQs</h1>
+            <h1 className="text-xl font-bold text-center mb-8">
+              Have a Question
+            </h1>
+          </div>
           <div className="flex flex-col md:flex-row">
             <div className="flex flex-col mr-10 md:mb-0">
               {["General", "Events", "Accommodation", "Shows", "Others"].map(

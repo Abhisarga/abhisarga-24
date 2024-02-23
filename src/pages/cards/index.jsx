@@ -44,7 +44,7 @@ const Cards = () => {
     }
   }, [scrollPosition]);
 
-
+  
   useGSAP(
     () => {
       const tl = gsap.timeline({
@@ -111,9 +111,9 @@ const Cards = () => {
       });
     },
     { scope: ref }
-  );
+  ); 
 
-  return (
+  return (   
     <div id="root" ref={ref}>
       <div
         id="cards"

@@ -13,104 +13,63 @@ export default function Index() {
   const qna = [
     {
       category: "General",
-      question: "What is Lorem Ipsum?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      question: "Is there any dress code for the event?",
+      answer: "There is no as such dress code but participants or audience are advised to wear dress conservatively."
     },
     {
       category: "General",
-      question: "Why do we use it?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      question: "What is ABHISARGA?",
+      answer: "Abhisarga is an annual techno cultural fest of IIIT Sri City, where 'Abhisarga' means 'to create/ innovate' in Sanskrit."
     },
     {
       category: "General",
-      question: "Where does it come from?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      question: "When is Abhisarga going to be held?",
+      answer: "Abhisarga'24 lasts for 3 days, starting from March 1st till March 3rd."
+    },
+    {
+      category: "General",
+      question: "What is the theme of Abhisarga?",
+      answer: "The theme of Abhisarga'24 is mythological mystique, inspired by numerous mythologies from around the world including Indian, Japanese, Chinese, Nordic, Greek, and Arabic."
+    },
+    {
+      category: "General",
+      question: "Will there be any merchandise or souvenirs available for purchase?",
+      answer: "We are planning T-shirt merchandise of premium quality at a very minimal cost. You can buy them physically at our campus."
+    },
+    {
+      category: "General",
+      question: "Will there be food and beverages available?",
+      answer: "A lot of varieties of food and beverages are arranged in stalls at minimal cost where attendees can enjoy during the fest."
+    },
+    {
+      category: "General",
+      question: "Are there any prizes for the events?",
+      answer: "There is a huge prize pool awaiting for the students & participants. It's about 8,00,000 and each individual event has a prize pool of about 40,000."
+    },
+    {
+      category: "General",
+      question: "How can attendees provide feedback or ask questions before or after the event?",
+      answer: "We are always happy to get feedback/suggestions from your side and improve our fest year by year gradually."
     },
     {
       category: "Events",
-      question: "How do I create an event?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+      question: "What would be the mode of participation?",
+      answer: "Most of the events have a first stage where it's in online mode and those who are selected to next round can attend physically during the fest dates."
     },
     {
       category: "Events",
-      question: "How do I manage attendees?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Events",
-      question: "Can I customize event notifications?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Accommodation",
-      question: "What types of accommodation are available?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Accommodation",
-      question: "How do I book accommodation?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Accommodation",
-      question: "Can I cancel my accommodation booking?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Shows",
-      question: "How do I book tickets for a show?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Shows",
-      question: "Is there a minimum age for attending shows?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Shows",
-      question: "Are there any discounts for group bookings?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Others",
-      question: "How can I cancel my subscription?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Others",
-      question: "How do I contact customer support?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-    {
-      category: "Others",
-      question: "What payment methods are accepted?",
-      answer:
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-    },
-  ];
+      question: "Who can participate in the events?",
+      answer: "Any student of any background can apply and be part of our fest. You can register for our events on the Unstop website under Abhisarga festival."
+    }
+];
+
 
   const [activeIndex, setActiveIndex] = useState(null);
-  const [category, setCategory] = useState("General");
 
   const toggleAnswer = (index) => {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
-  const faqList = qna.filter((item) => item.category === category);
 
   return (
     <div className="min-h-screen bg-gray-100 py-12 px-4 sm:px-6 lg:px-8 flex items-center">
@@ -118,28 +77,14 @@ export default function Index() {
       <Card className="px-20 bg-color3 bg-opacity-80 mx-auto my-auto py-20 w-[1000px] relative">
         <div className="max-w-4xl mx-auto w-full">
           <div className="w-100 flex flex-col items-center">
-            <h1 className="text-3xl font-bold text-center mb-3">FAQs</h1>
+            <h1 className="text-5xl font-bold text-center mb-3">FAQs</h1>
             <h1 className="text-xl font-bold text-center mb-8">
               Have a Question
             </h1>
           </div>
           <div className="flex flex-col md:flex-row">
-            <div className="flex flex-col mr-10 md:mb-0">
-              {["General", "Events", "Accommodation", "Shows", "Others"].map(
-                (cat) => (
-                  <Button
-                    key={cat}
-                    onClick={() => setCategory(cat)}
-                    color="secondary"
-                    className="px-8 font-bold mb-2"
-                  >
-                    {cat}
-                  </Button>
-                )
-              )}
-            </div>
-            <div className="md:w-3/4">
-              {faqList.map((item, index) => (
+            <div className="md:w-full">
+              {qna.map((item, index) => (
                 <motion.div
                   key={index}
                   className="bg-white rounded shadow-md p-6 mb-4 cursor-pointer"

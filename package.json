@@ -13,6 +13,7 @@
         "build-css": "npx tailwindcss -i ./src/styles/global.scss -o ./src/styles/tailwind.css --watch"
     },
     "dependencies": {
+        "@chakra-ui/icons": "^2.1.1",
         "@chakra-ui/react": "^2.8.2",
         "@emotion/react": "^11.11.3",
         "@emotion/styled": "^11.11.0",

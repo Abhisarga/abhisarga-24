@@ -926,12 +926,12 @@ video {
   margin-left: 0.5rem;
 }
 
-.ml-40 {
-  margin-left: 10rem;
+.ml-3 {
+  margin-left: 0.75rem;
 }
 
-.mr-10 {
-  margin-right: 2.5rem;
+.ml-40 {
+  margin-left: 10rem;
 }
 
 .mr-2 {
@@ -2260,6 +2260,11 @@ video {
   border-top-color: transparent;
 }
 
+.bg-\[\#dedcdc\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(222 220 220 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#eeebe5\] {
   --tw-bg-opacity: 1;
   background-color: rgb(238 235 229 / var(--tw-bg-opacity));
@@ -2824,6 +2829,11 @@ video {
   line-height: 2.5rem;
 }
 
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+
 .text-7xl {
   font-size: 4.5rem;
   line-height: 1;
@@ -2884,6 +2894,21 @@ video {
 .text-xs {
   font-size: 0.75rem;
   line-height: 1rem;
+}
+
+.text-2xl {
+  font-size: 1.5rem;
+  line-height: 2rem;
+}
+
+.text-9xl {
+  font-size: 8rem;
+  line-height: 1;
+}
+
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
 }
 
 .font-bold {
@@ -3984,6 +4009,36 @@ video {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
+}
+
+.hamburger {
+  cursor: pointer;
+}
+
+.hamburger input {
+  display: none;
+}
+
+.hamburger svg {
+  /* The size of the SVG defines the overall size */
+  height: 3em;
+  /* Define the transition for transforming the SVG */
+  transition: transform 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line {
+  fill: none;
+  stroke: white;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 3;
+  /* Define the transition for transforming the Stroke */
+  transition: stroke-dasharray 600ms cubic-bezier(0.4, 0, 0.2, 1),
+    stroke-dashoffset 600ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.line-top-bottom {
+  stroke-dasharray: 12 63;
 }
 
 .placeholder\:text-danger::-moz-placeholder {
@@ -7258,10 +7313,6 @@ video {
 }
 
 @media (min-width: 768px) {
-  .md\:mb-0 {
-    margin-bottom: 0px;
-  }
-
   .md\:flex {
     display: flex;
   }
@@ -7270,16 +7321,16 @@ video {
     display: none;
   }
 
-  .md\:w-3\/4 {
-    width: 75%;
-  }
-
-  .md\:w-4\/5 {
-    width: 80%;
+  .md\:h-\[650px\] {
+    height: 650px;
   }
 
   .md\:w-\[46\%\] {
     width: 46%;
+  }
+
+  .md\:w-full {
+    width: 100%;
   }
 
   .md\:flex-row {
@@ -7464,4 +7515,3 @@ video {
   --tw-bg-opacity: 1;
   background-color: hsl(var(--nextui-default-200) / var(--nextui-default-200-opacity, var(--tw-bg-opacity)));
 }
-

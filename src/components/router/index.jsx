@@ -4,6 +4,7 @@ import { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
 import Loading from "../loading";
 import Head from "./head";
+import MenuBar from "../landingheader";
 import Header from "../header";
 
 export default function Router() {
@@ -12,6 +13,7 @@ export default function Router() {
     for (const page in slots) {
         const slot = slots[page]
         const location = getLocation(page)
+        console.log(location)
         if (!location) {
             continue
         }
@@ -23,7 +25,9 @@ export default function Router() {
                     <Suspense fallback={<Loading />}>
                         {slot?.head && <Head head={slot?.head} key={location} />}
                         <Layout>
-                            <Header/>
+                            {
+                                location !== "/"? <Header/> : <MenuBar/>
+                            }
                             {slot?.layout ? (
                                 <slot.default />
                             ) : (

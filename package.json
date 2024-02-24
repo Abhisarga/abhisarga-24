@@ -51,6 +51,9 @@
         "type-graphql": "^1.1.1",
         "uuid4": "^2.0.3"
     },
+    "optionalDependencies": {
+        "@rollup/rollup-linux-x64-gnu" : "^4.9.2"
+    },
     "devDependencies": {
         "@types/express": "^4.17.21",
         "@types/jsonwebtoken": "^9.0.5",

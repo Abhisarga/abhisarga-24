@@ -12,6 +12,9 @@ import { Link } from "@nextui-org/react";
 import { motion } from "framer-motion";
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse , faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+import { faHotel } from "@fortawesome/free-solid-svg-icons";
 
 export default function MenuBar() {
   const {
@@ -49,37 +52,12 @@ export default function MenuBar() {
 
   console.log(clubAndEventData?.AllClubs?.data);
 
-  const clubs = [
-    {
-      name: "Club1",
-      events: [
-        {
-          name: "event1",
-        },
-        {
-          name: "event2",
-        },
-      ],
-    },
-    {
-      name: "Club2",
-      events: [
-        {
-          name: "event1",
-        },
-        {
-          name: "event2",
-        },
-      ],
-    },
-  ];
-
   return (
     <>
       <Link
         color="foreground"
         href="#"
-        className="absolute right-0 z-20 m-4 px-6 py-4 rounded-lg"
+        className="fixed right-0 z-20 m-4 px-6 py-4 rounded-lg"
         onClick={onMenuOpen}
       >
         <>
@@ -109,41 +87,41 @@ export default function MenuBar() {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}>
-          <DrawerCloseButton />
-          <DrawerHeader style={{color:"#fff"}}>Menu</DrawerHeader>
+        <DrawerContent style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' , width: '6vw' , padding:'0'}}>
 
-          <DrawerBody>
-            <div className="flex flex-col gap-3 ml-3">
+          <DrawerBody className="flex p-5 mr-30 justify-center">
+            <div className="flex flex-col gap-3 items-center">
               <Link
                 color="foreground"
                 href="#"
-                className="bg-[#dedcdc] p-2 rounded"
+                className="p-2 rounded"
               >
-                Home
+                <div className="flex flex-col gap-2">
+                <FontAwesomeIcon icon={faHouse} style={{color:"#fff"}}/>
+                <p className="text-[#fff] text-l">Home</p>
+                </div>
+              </Link>
+              <Link
+                color="foreground"
+                href="/faq"
+                className="p-2 rounded"
+              >
+                <div className="flex flex-col gap-2">
+                <FontAwesomeIcon icon={faCircleQuestion} style={{color:"#fff"}}/>
+                <p className="text-[#fff] text-l">FAQ</p>
+                </div>
               </Link>
               <Link
                 color="foreground"
                 href="#"
-                className="bg-[#dedcdc] p-2 rounded"
+                className="p-2 rounded"
               >
-                About
+                <div className="flex flex-col gap-2">
+                <FontAwesomeIcon icon={faHotel} style={{color:"#fff"}}/>
+                <p className="text-[#fff] text-xs">Accomodation</p>
+                </div>
               </Link>
-              <Link
-                color="foreground"
-                href="#"
-                className="bg-[#dedcdc] p-2 rounded"
-              >
-                FAQ'S
-              </Link>
-              <Link
-                color="foreground"
-                href="#"
-                className="bg-[#dedcdc] p-2 rounded"
-              >
-                Accommodation
-              </Link>
-              <Link
+              {/* <Link
                 color="foreground"
                 href="#"
                 className="bg-[#dedcdc] p-2 rounded"
@@ -166,72 +144,7 @@ export default function MenuBar() {
                     />
                   </svg>
                 </div>
-              </Link>
-              <Drawer
-                isOpen={isClubsOpen}
-                placement="right"
-                onClose={onClubsClose}
-                finalFocusRef={btnRef}
-              >
-                <DrawerContent>
-                  <DrawerCloseButton />
-                  <DrawerHeader>Clubs</DrawerHeader>
-                  <DrawerBody>
-                    <div className="flex flex-col gap-3 ml-3">
-                      {clubAndEventData?.AllClubs?.data.map((club, index) => (
-                        <>
-                          <Link
-                            color="foreground"
-                            href="#"
-                            className="bg-[#dedcdc] p-2 rounded"
-                            onClick={() => {
-                              onEventsOpen();
-                              setSelectedClub(index);
-                            }}
-                            key={index}
-                          >
-                            {club.name}
-                          </Link>
-                          <Drawer
-                            isOpen={isEventsOpen}
-                            placement="right"
-                            onClose={onEventsClose}
-                            finalFocusRef={btnRef}
-                          >
-                            <DrawerContent>
-                              <DrawerCloseButton />
-                              <DrawerHeader>Events</DrawerHeader>
-                              <DrawerBody>
-                                <div className="flex flex-col gap-3 ml-3">
-                                  {clubAndEventData?.AllClubs?.data[
-                                    selectedClub
-                                  ].cards.map((event, index) => (
-                                    <Link
-                                      color="foreground"
-                                      href={`event/${event._id}`}
-                                      className="bg-[#dedcdc] p-2 rounded"
-                                      key={index}
-                                    >
-                                      {event.name}
-                                    </Link>
-                                  ))}
-                                  <Link
-                                    color="foreground"
-                                    href={`details/${clubAndEventData?.AllClubs?.data[selectedClub]._id}`}
-                                    className="bg-[#dedcdc] p-2 rounded"
-                                  >
-                                    Go to Club Details
-                                  </Link>
-                                </div>
-                              </DrawerBody>
-                            </DrawerContent>
-                          </Drawer>
-                        </>
-                      ))}
-                    </div>
-                  </DrawerBody>
-                </DrawerContent>
-              </Drawer>
+              </Link> */}
             </div>
           </DrawerBody>
         </DrawerContent>

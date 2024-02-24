@@ -5,14 +5,16 @@ import { useEffect, useRef, useState } from "react";
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
 import { Link } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const MIN_SCALE_VAR = 4;
+
 const Cards = () => {
   const ref = useRef(null);
-  const MIN_SCALE_VAR = 4;
   const [scrollPosition, setScrollPosition] = useState(0);
+  const location = useLocation();
 
   const navigate = useNavigate();
   const { data: clubAndEventData, isLoading } = useGetRequest(
@@ -49,6 +51,14 @@ const Cards = () => {
       window.scrollTo(0, 0);
     }
   }, [scrollPosition]);
+
+  useEffect(() => {
+    window.onpageshow = function (event) {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    };
+  }, []);
 
   useGSAP(
     () => {
@@ -151,25 +161,7 @@ const Cards = () => {
           <source src="/the_background_-_22126 (720p).mp4" type="video/mp4" />
           Your browser does not support HTML5 video.
         </video>
-        <div
-          id="scroller"
-          className="fixed bottom-0 left-1/2 z-10 text-center text-color1"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-11 w-11 m-auto"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 15l7-7 7 7"
-            />
-          </svg>
-        </div>
+
         <div id="cards" className="min-h-screen relative">
           <div
             className="absolute h-screen w-screen flex items-center justify-center -z-10"
@@ -178,6 +170,26 @@ const Cards = () => {
             <h1 className="text-8xl font-extrabold">
               <img src="/Logos/AbhisargaLogo.png" alt="Abhisarga" />
             </h1>
+            <div
+              id="scroller"
+              className="fixed bottom-0 left-1/2 z-10 text-center text-color1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-11 w-11 m-auto"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 15l7-7 7 7"
+                />
+              </svg>
+              <p className="font-bold">Scroll up</p>
+            </div>
           </div>
           <div
             className="absolute h-screen w-screen flex items-center justify-center -z-10 opacity-0"

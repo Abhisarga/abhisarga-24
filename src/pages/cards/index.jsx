@@ -8,28 +8,29 @@ import { Link } from "@nextui-org/react";
 import { useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
- 
+
 const Cards = () => {
   const ref = useRef(null);
   const MIN_SCALE_VAR = 4;
   const [scrollPosition, setScrollPosition] = useState(0);
-  const handleScroll = () => {
-    const position = window.scrollY;
-    setScrollPosition(position);
-  };
+
   const navigate = useNavigate();
   // const { data: clubData } = useGetRequest(schema.queries.club.all);
   // const { data: eventData } = useGetRequest(schema.queries.event.all);
-  const { data: clubAndEventData , isLoading} = useGetRequest(
+  const { data: clubAndEventData, isLoading } = useGetRequest(
     schema.queries.allEventsAndClubs
   );
-  
 
   clubAndEventData?.AllClubs?.data?.forEach((club) => {
     club.cards = clubAndEventData?.AllEvents?.data?.filter(
       (event) => event.club === club._id
     );
   });
+
+  const handleScroll = () => {
+    const position = window.scrollY;
+    setScrollPosition(position);
+  };
 
   useEffect(() => {
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -43,7 +44,6 @@ const Cards = () => {
       window.scrollTo(0, 0);
     }
   }, [scrollPosition]);
-
 
   useGSAP(
     () => {
@@ -110,70 +110,72 @@ const Cards = () => {
         opacity: 1,
       });
     },
-    { scope: ref }
+    { scope: ref, dependencies: [isLoading] }
   );
 
   return (
-    <div id="root" ref={ref}>
-      <div
-        id="cards"
-        className="min-h-screen relative bg-gradient-to-b from-color1 to-color3"
-      >
+    <>
+      <div id="root" ref={ref}>
         <div
-          className="absolute h-screen w-screen flex items-center justify-center -z-10"
-          id="abhisarga"
+          id="cards"
+          className="min-h-screen relative bg-gradient-to-b from-color1 to-color3"
         >
-          <h1 className="text-white text-8xl font-extrabold">
-            <img src="/Logos/AbhisargaLogo.png" alt="Abhisarga"/>
-          </h1>
-        </div>
-        {clubAndEventData?.AllClubs?.data?.map((club, index) => (
           <div
-            key={club._id}
-            id={`club-${club._id}`}
-            className="flex items-center min-h-screen absolute opacity-0 min-w-[100vw]"
-            style={{
-              transform: "scale(0.5)",
-              zIndex: clubAndEventData?.AllClubs?.data?.length - (index + 1),
-            }}
+            className="absolute h-screen w-screen flex items-center justify-center -z-10"
+            id="abhisarga"
           >
-            <h1
-              id={`club-heading-${club._id}`}
-              className="text-7xl text-color2 font-extrabold rounded-sm py-6 px-12 m-auto z-10 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
-            >
-              {club.name}
+            <h1 className="text-8xl font-extrabold">
+              <img src="/Logos/AbhisargaLogo.png" alt="Abhisarga" />
             </h1>
-            {club?.cards?.map((card, index) => {
-              return (
-                <div
-                  key={card._id}
-                  id={`card-${card._id}`}
-                  className={`items-center justify-center w-10 h-10 absolute flex rounded-sm ${
-                    index % 2 === 0
-                      ? "left-1/3 bg-pink-500"
-                      : "right-1/3 bg-blue-500"
-                  }`}
-                  style={{
-                    transform: `scale(${
-                      (MIN_SCALE_VAR - (index + 1)) * 3 + 2
-                    })`,
-                    zIndex: club?.cards?.length - (index + 1),
-                  }}
-                >
-                  <Link onClick={()=> navigate(`/event/${card._id}`)}>
-                    <img
-                      src={`/posters/${card.poster}`}
-                      alt="img"
-                      className="p-[0.1px] rounded-sm"
-                    />
-                  </Link>
-                </div>
-              );
-            })}
           </div>
-        ))}
+          {clubAndEventData?.AllClubs?.data?.map((club, index) => (
+            <div
+              key={club._id}
+              id={`club-${club._id}`}
+              className="flex items-center min-h-screen absolute opacity-0 min-w-[100vw]"
+              style={{
+                transform: "scale(0.5)",
+                zIndex: clubAndEventData?.AllClubs?.data?.length - (index + 1),
+              }}
+            >
+              <h1
+                id={`club-heading-${club._id}`}
+                className="text-7xl text-color2 font-extrabold rounded-sm py-6 px-12 m-auto z-10 drop-shadow-[0_1.2px_1.2px_rgba(0,0,0,0.8)]"
+              >
+                {club.name}
+              </h1>
+              {club?.cards?.map((card, index) => {
+                return (
+                  <div
+                    key={card._id}
+                    id={`card-${card._id}`}
+                    className={`items-center justify-center w-10 h-10 absolute flex rounded-sm ${
+                      index % 2 === 0
+                        ? "left-1/3 bg-pink-500"
+                        : "right-1/3 bg-blue-500"
+                    }`}
+                    style={{
+                      transform: `scale(${
+                        (MIN_SCALE_VAR - (index + 1)) * 3 + 2
+                      })`,
+                      zIndex: club?.cards?.length - (index + 1),
+                    }}
+                  >
+                    <Link onClick={() => navigate(`/event/${card._id}`)}>
+                      <img
+                        src={`/posters/${card.poster}`}
+                        alt="img"
+                        className="p-[0.1px] rounded-sm"
+                      />
+                    </Link>
+                  </div>
+                );
+              })}
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

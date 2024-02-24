@@ -4,6 +4,7 @@
 
 ::-webkit-scrollbar {
   width: 5px;
+  scroll-behavior: smooth;
 }
 
 /* Handle */
@@ -15,3 +16,4 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+

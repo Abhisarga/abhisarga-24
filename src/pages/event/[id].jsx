@@ -123,7 +123,11 @@ function Event() {
                           {" "}
                           Round Description :{" "}
                         </p>
-                        <p>{round.description}</p>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: `${round?.description}`,
+                          }}
+                        />
                       </div>
                     </CardBody>
                   </Card>

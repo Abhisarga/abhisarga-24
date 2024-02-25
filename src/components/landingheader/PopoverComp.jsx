@@ -38,18 +38,38 @@ const PopoverComp = ({ club, index, selectedClub, setSelectedClub }) => {
             setSelectedClub(index);
           }}
         >
-          <p className="text-[#fff] text-xs">{club.name}</p>
+          <p className="text-white text-sm hover:text-orange-300 hover:animate-appearance-in">
+            {club.name}
+          </p>
         </div>
       </PopoverTrigger>
-      <PopoverContent bg="gray.700" color="white">
+      <PopoverContent
+        bg="gray.700"
+        color="white"
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.5)",
+          width: "150px",
+          borderRadius: "15px",
+          margin: "5px",
+        }}
+      >
         <PopoverArrow />
         <PopoverCloseButton />
-        <PopoverHeader>{club.name}</PopoverHeader>
+        <PopoverHeader
+          style={{
+            fontWeight: "bold",
+            cursor: "default",
+          }}
+        >
+          {club.name}
+        </PopoverHeader>
         <PopoverBody>
           <div className="flex flex-col gap-2">
             {club.cards.map((event, index) => (
               <Link color="foreground" href={`/event/${event._id}`} key={index}>
-                <p className="text-[#fff] text-xs">{event.name}</p>
+                <p className="text-white text-sm  hover:text-orange-300 hover:animate-appearance-in">
+                  {event.name}
+                </p>
               </Link>
             ))}
           </div>

@@ -61,7 +61,7 @@ export default function MenuBar() {
       <Link
         color="foreground"
         href="#"
-        className="fixed right-0 z-20 m-4 px-6 py-4 rounded-lg"
+        className="fixed right-0 z-20 p-6 rounded-lg"
         onClick={onMenuOpen}
       >
         <>
@@ -96,8 +96,8 @@ export default function MenuBar() {
             backgroundColor: "rgba(0, 0, 0, 0.5)",
             width: "fit-content",
             padding: "0",
-            height: "80%",
-            marginTop: "5%",
+            height: "fit-content",
+            marginTop: "185px",
             borderRadius: "60px 0 0 60px",
             borderTop: "2px solid gray",
             borderLeft: "2px solid gray",
@@ -105,28 +105,15 @@ export default function MenuBar() {
           }}
         >
           <DrawerBody className="flex justify-center" style={{ padding: 0 }}>
-            <div className="flex flex-col gap-3 items-center rounded-l-[40px] py-4">
-              <Link color="foreground" href="#" className="p-2 rounded">
+            <div className="flex flex-col gap-3 items-center rounded-l-[40px] py-10">
+              <Link
+                color="foreground"
+                href="#"
+                className="p-2 rounded hover:text-orange-300"
+              >
                 <div className="flex flex-col gap-2">
-                  <FontAwesomeIcon icon={faHouse} style={{ color: "#fff" }} />
-                  <p className="text-white text-l max-w-16 text-center">Home</p>
-                </div>
-              </Link>
-              <Link color="foreground" href="/faq" className="p-2 rounded">
-                <div className="flex flex-col gap-2">
-                  <FontAwesomeIcon
-                    icon={faCircleQuestion}
-                    style={{ color: "#fff" }}
-                  />
-                  <p className="text-white text-l max-w-16 text-center">FAQ</p>
-                </div>
-              </Link>
-              <Link color="foreground" href="#" className="p-2 rounded">
-                <div className="flex flex-col gap-2">
-                  <FontAwesomeIcon icon={faHotel} style={{ color: "#fff" }} />
-                  <p className="text-white text-l max-w-16 text-center">
-                    Accomodation
-                  </p>
+                  <FontAwesomeIcon icon={faHouse} className="text-white" />
+                  <p className="text-white max-w-16 text-center">Home</p>
                 </div>
               </Link>
               <Popover
@@ -136,13 +123,13 @@ export default function MenuBar() {
                 placement="left"
               >
                 <PopoverTrigger>
-                  <Link color="foreground" href="#" className="rounded">
+                  <Link color="foreground" className="p-2 rounded">
                     <div className="flex flex-col gap-2">
                       <FontAwesomeIcon
                         icon={faHotel}
                         style={{ color: "#fff" }}
                       />
-                      <p className="text-[#fff] text-xs">Clubs</p>
+                      <p className="text-white max-w-16 text-center">Clubs</p>
                     </div>
                   </Link>
                 </PopoverTrigger>
@@ -150,19 +137,53 @@ export default function MenuBar() {
                   bg="gray.700"
                   color="white"
                   onClick={(e) => e.stopPropagation()}
+                  style={{
+                    backgroundColor: "rgba(0, 0, 0, 0.5)",
+                    width: "150px",
+                    borderRadius: "15px",
+                    margin: "6px",
+                    outline: "none",
+                  }}
                 >
                   <PopoverArrow />
-                  <PopoverCloseButton/>
-                  <PopoverHeader>Clubs</PopoverHeader>
+                  <PopoverCloseButton />
+                  <PopoverHeader
+                    style={{ fontWeight: "bold", cursor: "default" }}
+                  >
+                    Clubs
+                  </PopoverHeader>
                   <PopoverBody>
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3 cursor-pointer">
                       {clubAndEventData?.AllClubs?.data?.map((club, index) => (
-                        <PopoverComp key={index} club={club} index={index} selectedClub={selectedClub} setSelectedClub={setSelectedClub}/>
+                        <PopoverComp
+                          key={index}
+                          club={club}
+                          index={index}
+                          selectedClub={selectedClub}
+                          setSelectedClub={setSelectedClub}
+                        />
                       ))}
                     </div>
                   </PopoverBody>
                 </PopoverContent>
               </Popover>
+              <Link color="foreground" href="/faq" className="p-2 rounded">
+                <div className="flex flex-col gap-2">
+                  <FontAwesomeIcon
+                    icon={faCircleQuestion}
+                    style={{ color: "#fff" }}
+                  />
+                  <p className="text-white max-w-16 text-center">FAQ</p>
+                </div>
+              </Link>
+              <Link color="foreground" href="#" className="p-2 rounded">
+                <div className="flex flex-col gap-2">
+                  <FontAwesomeIcon icon={faHotel} style={{ color: "#fff" }} />
+                  <p className="text-white max-w-16 text-center">
+                    Accomodation
+                  </p>
+                </div>
+              </Link>
             </div>
           </DrawerBody>
         </DrawerContent>

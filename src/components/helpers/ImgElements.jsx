@@ -20,7 +20,7 @@ const ImgElement = ({ theme }) => {
   return (
     <>
       <div className={"h-auto w-auto overflow-visible fixed top-16 left-0 max-width-25 max-height-25"}>
-        <img src={theme?topLeft : Img3} alt="" width="100%" height="100%"/>
+        <img src={theme?topLeft : Img3} alt="" width={400} height="100%"/>
       </div>
       <div className={"h-auto w-auto overflow-visible fixed bottom-0 left-0"}>
         <img src={theme? bottomLeft :Img2} alt="" width={400} />

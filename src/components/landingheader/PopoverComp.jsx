@@ -61,7 +61,11 @@ const PopoverComp = ({ club, index, selectedClub, setSelectedClub }) => {
             cursor: "default",
           }}
         >
-          {club.name}
+          <Link color="foreground" href={`/club/${club._id}`} key={index}>
+                <p className="text-white text-sm  hover:text-orange-300 hover:animate-appearance-in">
+                  {club.name}
+                </p>
+              </Link>
         </PopoverHeader>
         <PopoverBody>
           <div className="flex flex-col gap-2">

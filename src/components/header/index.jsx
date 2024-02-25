@@ -19,30 +19,32 @@ export default function Header() {
   return ( // you have to make navbar bigger
     <Navbar isBordered className="m-0 p-0" maxWidth={'full'}> 
       <NavbarBrand className="m-0 p-0">
-        <Image
-          src="/Logos/AbhisargaLogo.png"
-          alt="Logo"
-          width={120}
-          layout="fixed"
-          className="m-0 p-0"
-        />
+        <Link href={'/'}>
+          <Image
+            src="/Logos/Abhisargalogo2.png"
+            alt="Logo"
+            width={120}
+            layout="fixed"
+            className="m-0 p-0"
+            />
+          </Link>
       </NavbarBrand>
       <NavbarContent 
         justify="end" 
         className={`m-0 px-0 md:flex ${isOpen ? 'block' : 'hidden'}`} 
       >
         <NavbarItem>
-          <Link color="foreground" className="font-bold" href="#">
+          <Link color="foreground" className="font-bold" href="/">
             Home
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" className="font-bold" href="#">
+          <Link color="foreground" className="font-bold" href="/contacts">
             About
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link color="foreground" className="font-bold" href="#">
+          <Link color="foreground" className="font-bold" href="/faq">
             FAQ'S
           </Link>
         </NavbarItem>

@@ -33,12 +33,12 @@ function Details() {
         <ImgElements theme={clubDetails?.theme} />
         <Card className="px-2 bg-color3 bg-opacity-90">
           <CardBody className="w-full flex flex-col sm:flex-row gap-2">
-            <div className="w-full sm:w-1/2 flex flex-col h-[400px] sm:h-[650px] p-4">
-              <Card className="h-full mb-4">
+            <div className="w-full sm:w-1/2 flex flex-col h-[400px] sm:h-[650px] p-4 justify-center">
+              <Card className=" mb-4">
                 <CardBody className="p-0">
                   <img
                     src={`/Logos/${clubDetails?.logo}`}
-                    className="w-full h-[400px] sm:h-[650px] object-cover"
+                    className="w-full object-cover"
                   />
                 </CardBody>
               </Card>
@@ -85,7 +85,7 @@ function Details() {
                       <Image
                         src={"/images/hero-card-complete.jpeg"}
                         alt="img"
-                        className="w-12 h-12 rounded-full"
+                        className="w-12 h-12 rounded-full object-cover"
                       />
                       <div className="flex flex-col text-left align-center w-full">
                         <div className="flex justify-end">
@@ -105,7 +105,7 @@ function Details() {
                       <Image
                         src={"/images/hero-card-complete.jpeg"}
                         alt="img"
-                        className="w-12 h-12 rounded-full"
+                        className="w-12 h-12 rounded-full object-cover"
                       />
                       <div className="flex flex-col text-left align-center w-full">
                         <div className="flex justify-end">

@@ -3,7 +3,7 @@ import LinkedInIcon from '@mui/icons-material/LinkedIn';
 import XIcon from '@mui/icons-material/X';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { useState } from "react";
-import Header from "../../components/header/index";
+import ImgElements from "../../components/helpers/ImgElements";
 
 
 export default function ContactForm() {
@@ -44,23 +44,24 @@ export default function ContactForm() {
     };
 
     return (
-        <div className='bg-color1 min-h-screen'>
-            <Header />
-            <section className='mt-20 w-[80%] md:w-4/5 h-[600px] min-h-fit mx-auto flex flex-col md:flex-row gap-2 p-2  rounded-lg bg-color3 justify-center items-center'>
+        <>
+            <ImgElements />
+            <div className='bg-color1 min-h-screen'>
+            <section className='w-[80%] z-10 relative md:w-4/5 h-[600px] min-h-fit mx-auto flex flex-col md:flex-row gap-2 p-2  rounded-lg bg-color3 bg-opacity-90 justify-center items-center'>
                 <div className='w-full rounded-lg flex flex-col gap-4 justify-center items-center min-h-fit border border-black py-10 self-stretch'>
                     <h2 className='text-3xl sm:text-5xl pb-10'>Contact us anytime!</h2>
                     <p className='font-thin'>Abhisarga socials</p>
                     <div className='w-1/2 flex flex-row justify-around'>
-                        <a href="#" className="social-icon">
+                        <a href="https://www.instagram.com/abhisarga/" className="social-icon">
                             <InstagramIcon />
                         </a>
-                        <a href="#" className="social-icon">
+                        <a href="https://www.linkedin.com/company/abhisarga-iiits/" className="social-icon">
                             <LinkedInIcon />
                         </a>
-                        <a href="#" className="social-icon">
+                        <a href="https://twitter.com/abhisarga_iiits" className="social-icon">
                             <XIcon />
                         </a>
-                        <a href="#" className="social-icon">
+                        <a href="https://www.youtube.com/@abhisarga2023" className="social-icon">
                             <YouTubeIcon />
                         </a>
                     </div>
@@ -108,5 +109,6 @@ export default function ContactForm() {
 
             </section>
         </div>
+        </>
     );
 }

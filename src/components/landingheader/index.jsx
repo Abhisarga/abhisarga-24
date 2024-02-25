@@ -6,6 +6,13 @@ import {
   DrawerOverlay,
   DrawerContent,
   DrawerCloseButton,
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+  PopoverArrow,
+  PopoverCloseButton,
+  PopoverHeader,
+  PopoverBody,
 } from "@chakra-ui/react";
 import { useDisclosure } from "@chakra-ui/react";
 import { Link } from "@nextui-org/react";
@@ -13,8 +20,9 @@ import { motion } from "framer-motion";
 import { useGetRequest } from "../../hooks/fetcher";
 import schema from "../../utils/schema";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHouse , faCircleQuestion} from "@fortawesome/free-solid-svg-icons";
+import { faHouse, faCircleQuestion } from "@fortawesome/free-solid-svg-icons";
 import { faHotel } from "@fortawesome/free-solid-svg-icons";
+import PopoverComp from "./PopoverComp";
 
 export default function MenuBar() {
   const {
@@ -27,18 +35,14 @@ export default function MenuBar() {
     onOpen: onClubsOpen,
     onClose: onClubsClose,
   } = useDisclosure();
-  const {
-    isOpen: isEventsOpen,
-    onOpen: onEventsOpen,
-    onClose: onEventsClose,
-  } = useDisclosure();
   const btnRef = React.useRef();
   const [isChecked, setIsChecked] = useState(false);
-  const [selectedClub, setSelectedClub] = useState(0);
 
   const toggleCheckbox = () => {
     setIsChecked(!isChecked);
   };
+
+  const [selectedClub, setSelectedClub] = useState(0);
 
   const { data: clubAndEventData, isLoading } = useGetRequest(
     schema.queries.allEventsAndClubs
@@ -87,64 +91,70 @@ export default function MenuBar() {
         finalFocusRef={btnRef}
       >
         <DrawerOverlay />
-        <DrawerContent style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' , width: '6vw' , padding:'0'}}>
-
+        <DrawerContent
+          style={{
+            backgroundColor: "rgba(0, 0, 0, 0.5)",
+            width: "6vw",
+            padding: "0",
+          }}
+        >
           <DrawerBody className="flex p-5 mr-30 justify-center">
             <div className="flex flex-col gap-3 items-center">
-              <Link
-                color="foreground"
-                href="#"
-                className="p-2 rounded"
-              >
+              <Link color="foreground" href="#" className="p-2 rounded">
                 <div className="flex flex-col gap-2">
-                <FontAwesomeIcon icon={faHouse} style={{color:"#fff"}}/>
-                <p className="text-[#fff] text-l">Home</p>
+                  <FontAwesomeIcon icon={faHouse} style={{ color: "#fff" }} />
+                  <p className="text-[#fff] text-l">Home</p>
                 </div>
               </Link>
-              <Link
-                color="foreground"
-                href="/faq"
-                className="p-2 rounded"
-              >
+              <Link color="foreground" href="/faq" className="p-2 rounded">
                 <div className="flex flex-col gap-2">
-                <FontAwesomeIcon icon={faCircleQuestion} style={{color:"#fff"}}/>
-                <p className="text-[#fff] text-l">FAQ</p>
+                  <FontAwesomeIcon
+                    icon={faCircleQuestion}
+                    style={{ color: "#fff" }}
+                  />
+                  <p className="text-[#fff] text-l">FAQ</p>
                 </div>
               </Link>
-              <Link
-                color="foreground"
-                href="#"
-                className="p-2 rounded"
-              >
+              <Link color="foreground" href="#" className="p-2 rounded">
                 <div className="flex flex-col gap-2">
-                <FontAwesomeIcon icon={faHotel} style={{color:"#fff"}}/>
-                <p className="text-[#fff] text-xs">Accomodation</p>
+                  <FontAwesomeIcon icon={faHotel} style={{ color: "#fff" }} />
+                  <p className="text-[#fff] text-xs">Accommodation</p>
                 </div>
               </Link>
-              {/* <Link
-                color="foreground"
-                href="#"
-                className="bg-[#dedcdc] p-2 rounded"
-                onClick={onClubsOpen}
+              <Popover
+                isOpen={isClubsOpen}
+                onOpen={onClubsOpen}
+                onClose={onClubsClose}
+                placement="left"
               >
-                <div className="flex flex-row justify-between w-full">
-                  Clubs
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    className="h-6 w-6"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M19 9l-7 7-7-7"
-                    />
-                  </svg>
-                </div>
-              </Link> */}
+                <PopoverTrigger>
+                  <Link color="foreground" href="#" className="rounded">
+                    <div className="flex flex-col gap-2">
+                      <FontAwesomeIcon
+                        icon={faHotel}
+                        style={{ color: "#fff" }}
+                      />
+                      <p className="text-[#fff] text-xs">Clubs</p>
+                    </div>
+                  </Link>
+                </PopoverTrigger>
+                <PopoverContent
+                  bg="gray.700"
+                  color="white"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <PopoverArrow />
+                  <PopoverCloseButton/>
+                  <PopoverHeader>Clubs</PopoverHeader>
+                  <PopoverBody>
+                    <div className="flex flex-col gap-3">
+                      {clubAndEventData?.AllClubs?.data?.map((club, index) => (
+                        <PopoverComp key={index} club={club} index={index} selectedClub={selectedClub} setSelectedClub={setSelectedClub}/>
+                      ))}
+                    </div>
+                  </PopoverBody>
+                </PopoverContent>
+              </Popover>
             </div>
           </DrawerBody>
         </DrawerContent>

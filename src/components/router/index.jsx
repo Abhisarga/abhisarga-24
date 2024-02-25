@@ -26,7 +26,7 @@ export default function Router() {
                         {slot?.head && <Head head={slot?.head} key={location} />}
                         <Layout>
                             {
-                                location !== "/cards"? <Header/> : <MenuBar/>
+                                location !== "/"? <Header/> : <MenuBar/>
                             }
                             {slot?.layout ? (
                                 <slot.default />

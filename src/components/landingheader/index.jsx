@@ -94,16 +94,22 @@ export default function MenuBar() {
         <DrawerContent
           style={{
             backgroundColor: "rgba(0, 0, 0, 0.5)",
-            width: "6vw",
+            width: "fit-content",
             padding: "0",
+            height: "80%",
+            marginTop: "5%",
+            borderRadius: "60px 0 0 60px",
+            borderTop: "2px solid gray",
+            borderLeft: "2px solid gray",
+            borderBottom: "2px solid gray",
           }}
         >
-          <DrawerBody className="flex p-5 mr-30 justify-center">
-            <div className="flex flex-col gap-3 items-center">
+          <DrawerBody className="flex justify-center" style={{ padding: 0 }}>
+            <div className="flex flex-col gap-3 items-center rounded-l-[40px] py-4">
               <Link color="foreground" href="#" className="p-2 rounded">
                 <div className="flex flex-col gap-2">
                   <FontAwesomeIcon icon={faHouse} style={{ color: "#fff" }} />
-                  <p className="text-[#fff] text-l">Home</p>
+                  <p className="text-white text-l max-w-16 text-center">Home</p>
                 </div>
               </Link>
               <Link color="foreground" href="/faq" className="p-2 rounded">
@@ -112,13 +118,15 @@ export default function MenuBar() {
                     icon={faCircleQuestion}
                     style={{ color: "#fff" }}
                   />
-                  <p className="text-[#fff] text-l">FAQ</p>
+                  <p className="text-white text-l max-w-16 text-center">FAQ</p>
                 </div>
               </Link>
               <Link color="foreground" href="#" className="p-2 rounded">
                 <div className="flex flex-col gap-2">
                   <FontAwesomeIcon icon={faHotel} style={{ color: "#fff" }} />
-                  <p className="text-[#fff] text-xs">Accommodation</p>
+                  <p className="text-white text-l max-w-16 text-center">
+                    Accomodation
+                  </p>
                 </div>
               </Link>
               <Popover

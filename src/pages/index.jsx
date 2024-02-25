@@ -5,18 +5,18 @@ import { useEffect, useRef, useState } from "react";
 import { useGetRequest } from "../hooks/fetcher";
 import schema from "../utils/schema";
 import { Link } from "@nextui-org/react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 gsap.registerPlugin(ScrollTrigger);
 
+const MIN_SCALE_VAR = 4;
+
 const Cards = () => {
   const ref = useRef(null);
-  const MIN_SCALE_VAR = 4;
   const [scrollPosition, setScrollPosition] = useState(0);
+  const location = useLocation();
 
   const navigate = useNavigate();
-  // const { data: clubData } = useGetRequest(schema.queries.club.all);
-  // const { data: eventData } = useGetRequest(schema.queries.event.all);
   const { data: clubAndEventData, isLoading } = useGetRequest(
     schema.queries.allEventsAndClubs
   );
@@ -25,7 +25,14 @@ const Cards = () => {
     club.cards = clubAndEventData?.AllEvents?.data?.filter(
       (event) => event.club === club._id
     );
+    club.cards.push({
+      _id: club._id,
+      isClub: true,
+      poster: club.logo,
+    });
   });
+
+  console.log("data", clubAndEventData?.AllClubs?.data);
 
   const handleScroll = () => {
     const position = window.scrollY;
@@ -40,10 +47,18 @@ const Cards = () => {
   }, []);
 
   useEffect(() => {
-    if (scrollPosition > 4900) {
+    if (scrollPosition > 9900) {
       window.scrollTo(0, 0);
     }
   }, [scrollPosition]);
+
+  useEffect(() => {
+    window.onpageshow = function (event) {
+      if (event.persisted) {
+        window.location.reload();
+      }
+    };
+  }, []);
 
   useGSAP(
     () => {
@@ -51,7 +66,7 @@ const Cards = () => {
         scrollTrigger: {
           trigger: "#cards",
           start: "top top",
-          end: "+=5000",
+          end: "+=10000",
           pin: true,
           scrub: true,
         },
@@ -59,6 +74,16 @@ const Cards = () => {
 
       tl.to("#abhisarga", {
         opacity: 0,
+      });
+
+      tl.to("#events-text", {
+        opacity: 1,
+        scale: 1.5,
+      });
+
+      tl.to("#events-text", {
+        opacity: 0,
+        scale: 0,
       });
 
       clubAndEventData?.AllClubs?.data?.forEach((club, index) => {
@@ -92,6 +117,7 @@ const Cards = () => {
           tl.to(`#card-${card._id}`, {
             opacity: 0,
             scale: 20,
+            zIndex: (club?.cards?.length - (index + 1)) * -1,
             [direction]: "15%",
           });
         });
@@ -109,6 +135,15 @@ const Cards = () => {
       tl.to("#abhisarga", {
         opacity: 1,
       });
+
+      // scroller
+      gsap.to("#scroller", {
+        y: -60,
+        opacity: 0,
+        duration: 1,
+        repeat: -1,
+        repeatDelay: 3,
+      });
     },
     { scope: ref, dependencies: [isLoading] }
   );
@@ -116,10 +151,18 @@ const Cards = () => {
   return (
     <>
       <div id="root" ref={ref}>
-        <div
-          id="cards"
-          className="min-h-screen relative bg-gradient-to-b from-color1 to-color3"
+        <video
+          autoPlay
+          muted
+          loop
+          id="myVideo"
+          className="fixed right-0 top-0 w-screen bg-cover"
         >
+          <source src="/the_background_-_22126 (720p).mp4" type="video/mp4" />
+          Your browser does not support HTML5 video.
+        </video>
+
+        <div id="cards" className="min-h-screen relative">
           <div
             className="absolute h-screen w-screen flex items-center justify-center -z-10"
             id="abhisarga"
@@ -127,6 +170,32 @@ const Cards = () => {
             <h1 className="text-8xl font-extrabold">
               <img src="/Logos/AbhisargaLogo.png" alt="Abhisarga" />
             </h1>
+            <div
+              id="scroller"
+              className="fixed bottom-0 left-1/2 z-10 text-center text-color1"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                className="h-11 w-11 m-auto"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M5 15l7-7 7 7"
+                />
+              </svg>
+              <p className="font-bold">Scroll up</p>
+            </div>
+          </div>
+          <div
+            className="absolute h-screen w-screen flex items-center justify-center -z-10 opacity-0"
+            id="events-text"
+          >
+            <h1 className="text-7xl font-extrabold text-color1">EVENTS</h1>
           </div>
           {clubAndEventData?.AllClubs?.data?.map((club, index) => (
             <div
@@ -149,10 +218,10 @@ const Cards = () => {
                   <div
                     key={card._id}
                     id={`card-${card._id}`}
-                    className={`items-center justify-center w-10 h-10 absolute flex rounded-sm ${
+                    className={`items-center justify-center w-10 h-auto absolute flex rounded-sm ${
                       index % 2 === 0
-                        ? "left-1/3 bg-pink-500"
-                        : "right-1/3 bg-blue-500"
+                        ? "left-1/3 bg-orange-400"
+                        : "right-1/3 bg-yellow-300"
                     }`}
                     style={{
                       transform: `scale(${
@@ -161,9 +230,21 @@ const Cards = () => {
                       zIndex: club?.cards?.length - (index + 1),
                     }}
                   >
-                    <Link onClick={() => navigate(`/event/${card._id}`)}>
+                    <Link
+                      onClick={() =>
+                        navigate(
+                          card?.isClub
+                            ? `/details/${card._id}`
+                            : `/event/${card._id}`
+                        )
+                      }
+                    >
                       <img
-                        src={`/posters/${card.poster}`}
+                        src={
+                          card?.isClub
+                            ? `/Logos/${card.poster}`
+                            : `/posters/${card.poster}`
+                        }
                         alt="img"
                         className="p-[0.1px] rounded-sm"
                       />

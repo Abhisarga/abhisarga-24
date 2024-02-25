@@ -56,7 +56,10 @@ function Event() {
                 {/* <h3 className="text-right sm:w-2/5 text-xl sm:text-2xl font-bold">
                   {eventDetails?.prizePool}/-
                 </h3> */}
-                <Link to={eventDetails?.registrationLink} className="flex items-center">
+                <Link
+                  to={eventDetails?.registrationLink}
+                  className="flex items-center"
+                >
                   <Button color="secondary" className="px-8 font-bold">
                     Register
                   </Button>
@@ -82,7 +85,9 @@ function Event() {
                     Number of rounds
                   </CardHeader>
                   <CardBody>
-                    <p className="text-xl overflow-hidden">{eventDetails?.rounds?.length}</p>
+                    <p className="text-xl overflow-hidden">
+                      {eventDetails?.rounds?.length}
+                    </p>
                   </CardBody>
                 </Card>
 
@@ -98,7 +103,7 @@ function Event() {
                 </Card>
               </div>
 
-              <Card className="mx-4 p-4 min-h-[500px]">
+              <Card className="mx-4 p-4 min-h-[250px] overflow-scroll">
                 <p className="font-bold mb-4 text-xl">Stages and Timelines</p>
                 {eventDetails?.rounds?.map((round, index) => (
                   <Card key={index} className=" w-90 h-[200px] mb-4 p-2">

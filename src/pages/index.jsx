@@ -234,7 +234,7 @@ const Cards = () => {
                       onClick={() =>
                         navigate(
                           card?.isClub
-                            ? `/details/${card._id}`
+                            ? `/club/${card._id}`
                             : `/event/${card._id}`
                         )
                       }

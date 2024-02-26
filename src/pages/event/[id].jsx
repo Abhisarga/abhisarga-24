@@ -82,7 +82,7 @@ function Event() {
               <div className="flex flex-col sm:flex-row justify-between p-2 min-h-[150px]">
                 <Card className="w-full p-2 sm:w-1/2 m-2">
                   <CardHeader className="font-bold text-xl">
-                    Number of rounds
+                    No. of rounds
                   </CardHeader>
                   <CardBody>
                     <p className="text-xl overflow-hidden">
@@ -103,14 +103,14 @@ function Event() {
                 </Card>
               </div>
 
-              <Card className="mx-4 p-4 min-h-[250px] overflow-scroll">
+              <Card className="mx-4 p-4 h-auto min-h-[250px] overflow-scroll scrollbar-hide">
                 <p className="font-bold mb-4 text-xl">Stages and Timelines</p>
                 {eventDetails?.rounds?.map((round, index) => (
-                  <Card key={index} className=" w-90 h-[200px] mb-4 p-2">
+                  <Card key={index} className=" w-90 min-h-[200px] mb-4 p-2 scrollbar-hide">
                     <CardBody className="flex flex-row gap-2 scrollbar-hide">
                       <div
                         key={index}
-                        className="flex flex-col text-left align-center"
+                        className="flex flex-col text-left h-full align-center"
                       >
                         <h3 className="font-bold text-wrap w-full">
                           {round.name}
@@ -123,7 +123,11 @@ function Event() {
                           {" "}
                           Round Description :{" "}
                         </p>
-                        <p>{round.description}</p>
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: `${round?.description}`,
+                          }}
+                        />
                       </div>
                     </CardBody>
                   </Card>
